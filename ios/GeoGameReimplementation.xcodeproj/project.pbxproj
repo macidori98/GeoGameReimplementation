@@ -13,7 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		25B5D24AD90F90797CFC8003 /* libPods-GeoGameReimplementation-GeoGameReimplementationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C60A45CE34733328D9F6D34 /* libPods-GeoGameReimplementation-GeoGameReimplementationTests.a */; };
 		31F9460B6FA238F0EFAF3650 /* libPods-GeoGameReimplementation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5826358CD05544C881EBC6D /* libPods-GeoGameReimplementation.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		70229598270C6EBB00B9279A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,22 @@
 		4FDC8F9F4CEB9037E5E4A9BC /* Pods-GeoGameReimplementation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoGameReimplementation.debug.xcconfig"; path = "Target Support Files/Pods-GeoGameReimplementation/Pods-GeoGameReimplementation.debug.xcconfig"; sourceTree = "<group>"; };
 		5C60A45CE34733328D9F6D34 /* libPods-GeoGameReimplementation-GeoGameReimplementationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GeoGameReimplementation-GeoGameReimplementationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64643752AEDBE52044735974 /* Pods-GeoGameReimplementation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoGameReimplementation.release.xcconfig"; path = "Target Support Files/Pods-GeoGameReimplementation/Pods-GeoGameReimplementation.release.xcconfig"; sourceTree = "<group>"; };
+		70229578270C6CC600B9279A /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		70229579270C6CC600B9279A /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		7022957A270C6CC600B9279A /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		7022957B270C6CC600B9279A /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		7022957C270C6CC600B9279A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		7022957D270C6CC600B9279A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		7022957E270C6CC600B9279A /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		7022957F270C6CC600B9279A /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		70229580270C6CC600B9279A /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		70229581270C6CC600B9279A /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		70229582270C6CC600B9279A /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		70229583270C6CC600B9279A /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		70229584270C6CC600B9279A /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		70229585270C6CC600B9279A /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		70229586270C6CC600B9279A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		70229587270C6CC600B9279A /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = GeoGameReimplementation/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB15369B5B9ABBF7C22EAF14 /* Pods-GeoGameReimplementation-GeoGameReimplementationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoGameReimplementation-GeoGameReimplementationTests.release.xcconfig"; path = "Target Support Files/Pods-GeoGameReimplementation-GeoGameReimplementationTests/Pods-GeoGameReimplementation-GeoGameReimplementationTests.release.xcconfig"; sourceTree = "<group>"; };
 		D5826358CD05544C881EBC6D /* libPods-GeoGameReimplementation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GeoGameReimplementation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +102,7 @@
 		13B07FAE1A68108700A75B9A /* GeoGameReimplementation */ = {
 			isa = PBXGroup;
 			children = (
+				70229577270C6CC600B9279A /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -104,6 +121,30 @@
 				5C60A45CE34733328D9F6D34 /* libPods-GeoGameReimplementation-GeoGameReimplementationTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		70229577270C6CC600B9279A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				70229578270C6CC600B9279A /* Fontisto.ttf */,
+				70229579270C6CC600B9279A /* Octicons.ttf */,
+				7022957A270C6CC600B9279A /* Feather.ttf */,
+				7022957B270C6CC600B9279A /* Entypo.ttf */,
+				7022957C270C6CC600B9279A /* FontAwesome5_Brands.ttf */,
+				7022957D270C6CC600B9279A /* MaterialCommunityIcons.ttf */,
+				7022957E270C6CC600B9279A /* AntDesign.ttf */,
+				7022957F270C6CC600B9279A /* Foundation.ttf */,
+				70229580270C6CC600B9279A /* Ionicons.ttf */,
+				70229581270C6CC600B9279A /* FontAwesome5_Solid.ttf */,
+				70229582270C6CC600B9279A /* FontAwesome5_Regular.ttf */,
+				70229583270C6CC600B9279A /* FontAwesome.ttf */,
+				70229584270C6CC600B9279A /* Zocial.ttf */,
+				70229585270C6CC600B9279A /* EvilIcons.ttf */,
+				70229586270C6CC600B9279A /* SimpleLineIcons.ttf */,
+				70229587270C6CC600B9279A /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -145,7 +186,6 @@
 				037DC553503544C3C67E0125 /* Pods-GeoGameReimplementation-GeoGameReimplementationTests.debug.xcconfig */,
 				BB15369B5B9ABBF7C22EAF14 /* Pods-GeoGameReimplementation-GeoGameReimplementationTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,7 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				70229598270C6EBB00B9279A /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,6 +15,7 @@ export const BottomTabNavigaton = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        headerShown: false,
         tabBarInactiveTintColor: Colors.greyish,
         tabBarActiveTintColor: Colors.darkBlue,
         tabBarLabelStyle: {fontSize: FontSizes.small},

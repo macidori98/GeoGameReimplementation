@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import GameScreen from '../screens/game/GameScreen';
 import {StudyNavigation} from './StudyNavigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Colors from '../constants/Colors';
 import FontSizes from '../constants/FontSizes';
+import {GameNavigation} from './GameNavigation';
 
 /**
  * @type {CreateBottomTabNavigatorType<BottomTabBarParamList>}
@@ -51,7 +51,7 @@ export const BottomTabNavigaton = () => {
             );
           },
         }}
-        component={GameScreen}
+        component={GameNavigation}
         name="Game"
       />
     </Tab.Navigator>

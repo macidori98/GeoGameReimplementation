@@ -1,5 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {Headers} from '../constants/ConstantValues';
 import CountryListScreen from '../screens/study/CountryListScreen';
 import DetailsScreen from '../screens/study/DetailsScreen';
 import RegionListScreen from '../screens/study/RegionListScreen';
@@ -11,8 +12,13 @@ const Stack = createStackNavigator();
 
 export const StudyNavigation = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen component={RegionListScreen} name="RegionList" />
+    <Stack.Navigator>
+      <Stack.Screen
+        component={RegionListScreen}
+        name="RegionList"
+        options={{headerTitle: Headers.region}}
+        initialParams={{nextRoute: 'CountryList'}}
+      />
       <Stack.Screen component={CountryListScreen} name="CountryList" />
       <Stack.Screen component={DetailsScreen} name="Details" />
     </Stack.Navigator>

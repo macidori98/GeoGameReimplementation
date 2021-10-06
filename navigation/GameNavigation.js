@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 export const GameNavigation = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator>
       <Stack.Screen component={StatisticsScreen} name="Statistics" />
       <Stack.Screen component={GameScreen} name="Gaming" />
     </Stack.Navigator>

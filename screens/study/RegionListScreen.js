@@ -1,14 +1,37 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import SimpleCustomButton from '../../components/SimpleCustomButton';
+import {Regions} from '../../constants/ConstantValues';
 
-const RegionListScreen = props => {
+const RegionListScreen = ({navigation, route}) => {
+  const {nextRoute} = route.params;
+
   return (
-    <View>
-      <Text>RegionListScreen</Text>
+    <View style={styles.screen}>
+      <FlatList
+        data={Regions}
+        keyExtractor={(item, _) => item.name}
+        renderItem={({item}) => (
+          <SimpleCustomButton
+            item={item}
+            onPress={
+              /**@param {string} regionName*/ regionName => {
+                navigation.navigate(nextRoute, {region: regionName});
+              }
+            }
+          />
+        )}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default RegionListScreen;

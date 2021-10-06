@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const CountryListScreen = props => {
+const CountryListScreen = ({navigation, route}) => {
+  const {region} = route.params;
+
   return (
     <View>
       <Text>CountryListScreen</Text>

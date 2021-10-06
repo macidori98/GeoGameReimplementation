@@ -17,5 +17,5 @@
  */
 
 /**
- * @typedef {{RegionList: undefined, CountryList: undefined, Details: undefined}} StudyNavigationParamList
+ * @typedef {{RegionList: {nextRoute: 'CountryList'}, CountryList: undefined, Details: undefined}} StudyNavigationParamList
  */

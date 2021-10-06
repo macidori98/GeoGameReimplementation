@@ -1,9 +1,10 @@
-import axios from 'axios';
-
 const BASE_URL = 'https://restcountries.com/v2';
 
+/**
+ * @param {string} region
+ */
 export const getCountriesOfRegion = async region => {
-  const countries = await axios.get(`${BASE_URL}/continent/${region}`);
-
-  console.log(countries.data);
+  const countries = await fetch(`${BASE_URL}/continent/${region}`);
+  const resp = await countries.json();
+  console.log(resp);
 };

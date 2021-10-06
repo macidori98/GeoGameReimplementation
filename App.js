@@ -1,12 +1,12 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {BottomTabNavigaton} from './navigation/BottomNavigation';
 
 const App = () => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Icon name="car" size={32} color={'#44e400'} />
-    </View>
+    <NavigationContainer>
+      <BottomTabNavigaton />
+    </NavigationContainer>
   );
 };
 

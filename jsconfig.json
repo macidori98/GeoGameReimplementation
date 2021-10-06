@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["./api/*"]
+    },
     "checkJs": true,
     "jsx": "react-native"
   },

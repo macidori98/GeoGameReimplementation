@@ -5,6 +5,11 @@ import SimpleCustomButton from '../../components/SimpleCustomButton';
 import {Regions} from '../../constants/ConstantValues';
 import * as countryAction from '../../store/actions/countries';
 
+/**
+ *
+ * @param {{navigation: object, route: {params: {nextRoute: string}}}} param0
+ * @returns
+ */
 const RegionListScreen = ({navigation, route}) => {
   const {nextRoute} = route.params;
 

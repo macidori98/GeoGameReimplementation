@@ -11,6 +11,11 @@ import Error from '../../components/Error';
 import Colors from '../../constants/Colors';
 import * as countriesAction from '../../store/actions/countries';
 
+/**
+ *
+ * @param {{navigation: object, route: {params: {region: string}}}} param0
+ * @returns
+ */
 const CountryListScreen = ({navigation, route}) => {
   const {region} = route.params;
   /**

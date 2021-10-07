@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import Error from '../../components/Error';
 import Colors from '../../constants/Colors';
 import * as countriesAction from '../../store/actions/countries';
 
@@ -73,7 +74,7 @@ const CountryListScreen = ({navigation, route}) => {
           )}
         />
       )}
-      {error && !isLoading && <Text>error</Text>}
+      {error && !isLoading && <Error message={error} />}
     </View>
   );
 };

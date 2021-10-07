@@ -9,11 +9,12 @@ export const getCountriesOfRegion = async region => {
     const countries = await fetch(`${BASE_URL}/continent/${region}`);
     const resp = await countries.json();
 
-    //console.log(resp);
+    if (resp.status !== undefined) {
+      return {message: resp.message, typeIdentifier: 'error'};
+    }
+
     return {...resp, typeIdentifier: 'country'};
   } catch (error) {
-    console.log(error);
-
-    return {...error, typeIdentifier: 'error'};
+    return {message: error.toString(), typeIdentifier: 'error'};
   }
 };

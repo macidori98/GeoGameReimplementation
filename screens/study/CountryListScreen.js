@@ -10,11 +10,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as countriesAction from '../../store/actions/countries';
 
-/**
- * @template T
- * @typedef {[T, React.Dispatch<React.SetStateAction<T>>]} ComponentState
- */
-
 const CountryListScreen = ({navigation, route}) => {
   const {region} = route.params;
   /**
@@ -33,19 +28,19 @@ const CountryListScreen = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const countriesState = useSelector(
-    /**@param {{countries: import('../../store/reducers/countries').CountryStateObj}} state */ state =>
-      state.countries,
+    /**@param {{countries: CountryStateObj}} state */ state => state.countries,
   );
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    const temp = async () => {
+    const loadCountriesOfRegion = async () => {
       setIsLoading(true);
       await dispatch(countriesAction.fetchCountries(region));
       setIsLoading(false);
     };
 
-    temp();
+    loadCountriesOfRegion();
   }, [dispatch, region]);
 
   useEffect(() => {
@@ -59,10 +54,10 @@ const CountryListScreen = ({navigation, route}) => {
   }, [countriesState]);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.screen}>
       {isLoading && countries.length === 0 && !error && (
         <ActivityIndicator
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
+          style={styles.centeredItem}
           size="large"
           color={Colors.darkBlue}
         />
@@ -83,6 +78,15 @@ const CountryListScreen = ({navigation, route}) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+  centeredItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default CountryListScreen;

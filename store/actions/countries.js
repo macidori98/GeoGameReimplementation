@@ -1,10 +1,7 @@
 import {getCountriesOfRegion} from '../../api/Service';
 
 export const FETCH_COUNTRIES = 'FETCH_COUNTRIES';
-
-/**
- * @typedef {{type: FETCH_COUNTRIES, response: ((Country[]&Base<'country'>)|(CustomError&Base<'error'>))}} FetchCountriesAction
- */
+export const RESET_STATE = 'RESET_STATE';
 
 /**
  * @param {string} region
@@ -20,4 +17,11 @@ export const fetchCountries = region => {
       });
     } catch (error) {}
   };
+};
+
+/**
+ * @returns {ResetStateAction}
+ */
+export const deleteError = () => {
+  return {type: RESET_STATE};
 };

@@ -1,8 +1,4 @@
-/**
- * @typedef {{countries: Array<Country>, selectedCountry: Country, error: CustomError}} CountryStateObj
- */
-
-import {FETCH_COUNTRIES} from '../actions/countries';
+import {FETCH_COUNTRIES, RESET_STATE} from '../actions/countries';
 
 /**
  * @type {CountryStateObj}
@@ -17,7 +13,7 @@ const initialState = {
 
 /**
  * @param {CountryStateObj} state
- * @param {import("../actions/countries").FetchCountriesAction} action
+ * @param {FetchCountriesAction|ResetStateAction} action
  */
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -41,12 +37,12 @@ export default (state = initialState, action) => {
           }
         }
 
-        console.log('ass' + countries);
-
         return {...state, countries: countries};
       } else {
-        return {...state, error: {message: action.response.message.toString()}};
+        return {...state, error: {message: action.response.message}};
       }
+    case RESET_STATE:
+      return initialState;
     default:
       return state;
   }

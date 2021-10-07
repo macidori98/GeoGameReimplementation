@@ -13,28 +13,7 @@ export const getCountriesOfRegion = async region => {
       return {success: false, message: resp.message};
     }
 
-    /**
-     * @type {Country[]}
-     */
-    const countriesArray = [];
-
-    for (const key in resp) {
-      if (Object.hasOwnProperty.call(resp, key)) {
-        const country = resp[key];
-        countriesArray.push({
-          name: country.name,
-          alpha2Code: country.alpha2Code,
-          capital: country.capital,
-          area: country.area,
-          timezones: country.timezones,
-          flags: country.flags,
-          currencies: country.currencies,
-          population: country.population,
-        });
-      }
-    }
-
-    return {success: true, data: countriesArray};
+    return {success: true, data: resp};
   } catch (error) {
     return {success: false, message: error.toString()};
   }

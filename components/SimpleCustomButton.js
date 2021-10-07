@@ -15,6 +15,9 @@ const dimensions = Dimensions.get('screen');
 
 const SimpleCustomButton = props => {
   const {item, onPress} = props;
+  /**
+   * @type {React.ElementType}
+   */
   const TouchableItem =
     Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
 

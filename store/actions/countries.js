@@ -5,7 +5,7 @@ export const RESET_STATE = 'RESET_STATE';
 
 /**
  * @param {string} region
- * @returns {Promise<void>}
+ * @returns {() => Promise<void>}
  */
 export const fetchCountries = region => {
   return async dispatch => {

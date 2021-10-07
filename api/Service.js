@@ -2,7 +2,7 @@ const BASE_URL = 'https://restcountries.com/v2';
 
 /**
  * @param {string} region
- * @returns {Promise<(Country[]&Base<'country'>)|(CustomError&Base<'error'>)>}
+ * @returns {Promise<SuccessResponseType<Country[]>|ErrorResponseType>}
  */
 export const getCountriesOfRegion = async region => {
   try {
@@ -10,11 +10,32 @@ export const getCountriesOfRegion = async region => {
     const resp = await countries.json();
 
     if (resp.status !== undefined) {
-      return {message: resp.message, typeIdentifier: 'error'};
+      return {success: false, message: resp.message};
     }
 
-    return {...resp, typeIdentifier: 'country'};
+    /**
+     * @type {Country[]}
+     */
+    const countriesArray = [];
+
+    for (const key in resp) {
+      if (Object.hasOwnProperty.call(resp, key)) {
+        const country = resp[key];
+        countriesArray.push({
+          name: country.name,
+          alpha2Code: country.alpha2Code,
+          capital: country.capital,
+          area: country.area,
+          timezones: country.timezones,
+          flags: country.flags,
+          currencies: country.currencies,
+          population: country.population,
+        });
+      }
+    }
+
+    return {success: true, data: countriesArray};
   } catch (error) {
-    return {message: error.toString(), typeIdentifier: 'error'};
+    return {success: false, message: error.toString()};
   }
 };

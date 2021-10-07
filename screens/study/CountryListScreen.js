@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,13 +6,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {getCountriesOfRegion} from '../../api/Service';
 import Error from '../../components/Error';
 import Colors from '../../constants/Colors';
-import * as countriesAction from '../../store/actions/countries';
 
 /**
- *
  * @param {{navigation: object, route: {params: {region: string}}}} param0
  * @returns
  */
@@ -33,31 +31,22 @@ const CountryListScreen = ({navigation, route}) => {
    */
   const [isLoading, setIsLoading] = useState(false);
 
-  const countriesState = useSelector(
-    /**@param {{countries: CountryStateObj}} state */ state => state.countries,
-  );
+  const loadCountries = useCallback(async () => {
+    setIsLoading(true);
+    const result = await getCountriesOfRegion(region);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const loadCountriesOfRegion = async () => {
-      setIsLoading(true);
-      await dispatch(countriesAction.fetchCountries(region));
-      setIsLoading(false);
-    };
-
-    loadCountriesOfRegion();
-  }, [dispatch, region]);
-
-  useEffect(() => {
-    if (countriesState.countries != null) {
-      setCountries(countriesState.countries);
+    if (result.success === true) {
+      setCountries(result.data);
+    } else {
+      setError(result.message);
     }
 
-    if (countriesState.error.message != null) {
-      setError(countriesState.error.message);
-    }
-  }, [countriesState]);
+    setIsLoading(false);
+  }, [region]);
+
+  useEffect(() => {
+    loadCountries();
+  }, [loadCountries]);
 
   return (
     <View style={styles.screen}>

@@ -1,9 +1,9 @@
-import {createBottomTabNavigator} from 'node_modules/@react-navigation/bottom-tabs/lib/typescript/src/index';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FontSizes from '@/theme/FontSizes';
+import FontSizes from '~/theme/FontSizes';
 import {GameNavigation} from './GameNavigation';
-import Colors from '@/theme/Colors';
+import Colors from '~/theme/Colors';
 import {StudyNavigation} from './StudyNavigation';
 
 /**

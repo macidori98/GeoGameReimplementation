@@ -6,8 +6,8 @@ module.exports = {
       {
         paths: [
           {
-            rootPathPrefix: '@',
-            rootPathSuffix: './',
+            rootPathPrefix: '~',
+            rootPathSuffix: './src',
           },
         ],
       },
@@ -20,8 +20,8 @@ module.exports = {
         {
           paths: [
             {
-              rootPathPrefix: '@',
-              rootPathSuffix: './',
+              rootPathPrefix: '~',
+              rootPathSuffix: './src',
             },
           ],
         },

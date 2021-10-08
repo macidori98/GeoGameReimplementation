@@ -1,9 +1,9 @@
 import React from 'react';
-import {createStackNavigator} from 'node_modules/@react-navigation/stack/lib/typescript/src/index';
-import {Headers} from '../constants/ConstantValues';
-import CountryListScreen from '../screens/study/CountryListScreen';
-import DetailsScreen from '../screens/study/DetailsScreen';
-import RegionListScreen from '../screens/study/RegionListScreen';
+import {createStackNavigator} from '@react-navigation/stack';
+import {Headers} from '~/constants/ConstantValues';
+import CountryListScreen from '~/screens/study/CountryListScreen';
+import DetailsScreen from '~/screens/study/DetailsScreen';
+import RegionListScreen from '~/screens/study/RegionListScreen';
 
 /**
  * @type {CreateNativeStackNavigatorType<StudyNavigationParamList>}

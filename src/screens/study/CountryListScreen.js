@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {getCountriesOfRegion} from '@/api/Service';
-import Error from '@/components/Error';
-import LoadingIndicator from '@/components/LoadingIndicator';
-import * as CommonStyles from '@/theme/CommonStyles';
+import {getCountriesOfRegion} from '~/api/Service';
+import Error from '~/components/Error';
+import LoadingIndicator from '~/components/LoadingIndicator';
+import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
  * @param {{navigation: object, route: {params: {regionName: string, regionId: string}}}} param0

@@ -1,8 +1,8 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import SimpleCustomButton from '../../components/SimpleCustomButton';
-import {Regions} from '../../constants/ConstantValues';
-import * as CommonStyles from '../../theme/CommonStyles';
+import SimpleCustomButton from '@/components/SimpleCustomButton';
+import {Regions} from '@/constants/ConstantValues';
+import * as CommonStyles from '@/theme/CommonStyles';
 
 /**
  *

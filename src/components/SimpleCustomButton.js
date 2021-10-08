@@ -7,11 +7,11 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import Colors from '../theme/Colors';
-import Dimen from '../theme/Dimen';
-import FontSizes from '../theme/FontSizes';
-import * as CommonStyles from '../theme/CommonStyles';
+import {TouchableOpacity} from 'node_modules/react-native-gesture-handler/lib/typescript/index';
+import Colors from '@/theme/Colors';
+import Dimen from '@/theme/Dimen';
+import FontSizes from '@/theme/FontSizes';
+import * as CommonStyles from '@/theme/CommonStyles';
 
 const dimensions = Dimensions.get('screen');
 

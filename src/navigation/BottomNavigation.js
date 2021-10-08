@@ -1,10 +1,10 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from 'node_modules/@react-navigation/bottom-tabs/lib/typescript/src/index';
 import React from 'react';
-import {StudyNavigation} from './StudyNavigation';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Colors from '../theme/Colors';
-import FontSizes from '../theme/FontSizes';
+import FontSizes from '@/theme/FontSizes';
 import {GameNavigation} from './GameNavigation';
+import Colors from '@/theme/Colors';
+import {StudyNavigation} from './StudyNavigation';
 
 /**
  * @type {CreateBottomTabNavigatorType<BottomTabBarParamList>}

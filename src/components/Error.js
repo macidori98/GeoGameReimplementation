@@ -1,8 +1,8 @@
 import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import Dimen from '../theme/Dimen';
-import FontSizes from '../theme/FontSizes';
-import * as CommonStyles from '../theme/CommonStyles';
+import * as CommonStyles from 'theme/CommonStyles';
+import FontSizes from 'theme/FontSizes';
+import Dimen from '@/theme/Dimen';
 
 const Error = ({message}) => {
   return (

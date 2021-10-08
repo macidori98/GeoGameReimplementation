@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import FontSizes from '../constants/FontSizes';
+import FontSizes from '../theme/FontSizes';
 
 const Error = ({message}) => {
   return (

@@ -8,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Colors from '../constants/Colors';
-import FontSizes from '../constants/FontSizes';
+import Colors from '../theme/Colors';
+import FontSizes from '../theme/FontSizes';
 
 const dimensions = Dimensions.get('screen');
 

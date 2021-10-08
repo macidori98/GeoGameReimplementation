@@ -1,14 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {getCountriesOfRegion} from '../../api/Service';
 import Error from '../../components/Error';
-import Colors from '../../constants/Colors';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 /**
  * @param {{navigation: object, route: {params: {region: string}}}} param0
@@ -31,6 +25,10 @@ const CountryListScreen = ({navigation, route}) => {
    */
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    navigation.setOptions({title: region});
+  }, [navigation, region]);
+
   const loadCountries = useCallback(async () => {
     setIsLoading(true);
     const result = await getCountriesOfRegion(region);
@@ -50,13 +48,7 @@ const CountryListScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.screen}>
-      {isLoading && countries.length === 0 && !error && (
-        <ActivityIndicator
-          style={styles.centeredItem}
-          size="large"
-          color={Colors.darkBlue}
-        />
-      )}
+      {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
       {countries.length > 0 && !error && (
         <FlatList
           data={countries}
@@ -76,11 +68,6 @@ const CountryListScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-  },
-  centeredItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

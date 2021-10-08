@@ -4,15 +4,16 @@ import {getCountriesOfRegion} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import Error from '~/components/Error';
 import LoadingIndicator from '~/components/LoadingIndicator';
+import TouchableItem from '~/components/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
 
 /**
- * @param {{navigation: object, route: {params: {regionName: string, regionId: string}}}} param0
+ * @param {{navigation: object, route: {params: {regionName: string, regionId: string, nextRoute: string}}}} param0
  * @returns
  */
 const CountryListScreen = ({navigation, route}) => {
-  const {regionName, regionId} = route.params;
+  const {regionName, regionId, nextRoute} = route.params;
   /**
    * @type {ComponentState<Country[]>}
    */
@@ -65,7 +66,15 @@ const CountryListScreen = ({navigation, route}) => {
             style={styles.list}
             data={countries}
             keyExtractor={(item, index) => item.name + index}
-            renderItem={({item}) => <CountryCard country={item} />}
+            renderItem={({item}) => (
+              <TouchableItem
+                onPress={() => {
+                  console.log(item.name);
+                  navigation.navigate(nextRoute, {countryDetails: item});
+                }}>
+                <CountryCard country={item} />
+              </TouchableItem>
+            )}
           />
         </View>
       )}

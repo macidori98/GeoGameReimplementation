@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  Dimensions,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  View,
-} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import Colors from '~/theme/Colors';
 import Dimen from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
@@ -15,23 +7,11 @@ import * as CommonStyles from '~/theme/CommonStyles';
 
 const dimensions = Dimensions.get('screen');
 
-const SimpleCustomButton = props => {
-  const {item, onPress} = props;
-  /**
-   * @type {React.ElementType}
-   */
-  const TouchableItem =
-    Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
-
+const SimpleCustomButton = ({item}) => {
   return (
-    <TouchableItem
-      onPress={() => {
-        onPress();
-      }}>
-      <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
-        <Text style={styles.text}>{item.name}</Text>
-      </View>
-    </TouchableItem>
+    <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
+      <Text style={styles.text}>{item.name}</Text>
+    </View>
   );
 };
 

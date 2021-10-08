@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import SimpleCustomButton from '~/components/SimpleCustomButton';
+import TouchableItem from '~/components/TouchableItem';
 import {Regions} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 
@@ -17,15 +18,15 @@ const RegionListScreen = ({navigation, route}) => {
       <FlatList
         data={Regions}
         renderItem={({item}) => (
-          <SimpleCustomButton
-            item={item}
+          <TouchableItem
             onPress={() =>
               navigation.navigate(nextRoute, {
                 regionName: item.name,
                 regionId: item.id,
               })
-            }
-          />
+            }>
+            <SimpleCustomButton item={item} />
+          </TouchableItem>
         )}
       />
     </View>

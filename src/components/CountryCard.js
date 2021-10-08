@@ -5,6 +5,11 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
+/**
+ *
+ * @param {{country: Country}} param0
+ * @returns {JSX.Element}
+ */
 const CountryCard = ({country}) => {
   return (
     <View style={styles.container}>

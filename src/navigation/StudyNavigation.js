@@ -19,7 +19,11 @@ export const StudyNavigation = () => {
         options={{headerTitle: Headers.region}}
         initialParams={{nextRoute: 'CountryList'}}
       />
-      <Stack.Screen component={CountryListScreen} name="CountryList" />
+      <Stack.Screen
+        component={CountryListScreen}
+        name="CountryList"
+        initialParams={{nextRoute: 'Details'}}
+      />
       <Stack.Screen component={DetailsScreen} name="Details" />
     </Stack.Navigator>
   );

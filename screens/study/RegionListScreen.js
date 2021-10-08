@@ -16,14 +16,14 @@ const RegionListScreen = ({navigation, route}) => {
     <View style={styles.screen}>
       <FlatList
         data={Regions}
-        keyExtractor={(item, _) => item.name}
         renderItem={({item}) => (
           <SimpleCustomButton
             item={item}
-            onPress={
-              /**@param {string} regionName*/ regionName => {
-                navigation.navigate(nextRoute, {region: regionName});
-              }
+            onPress={() =>
+              navigation.navigate(nextRoute, {
+                regionName: item.name,
+                regionId: item.id,
+              })
             }
           />
         )}

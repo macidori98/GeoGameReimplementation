@@ -6,11 +6,11 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 import * as CommonStyles from '../../theme/CommonStyles';
 
 /**
- * @param {{navigation: object, route: {params: {region: string}}}} param0
+ * @param {{navigation: object, route: {params: {regionName: string, regionId: string}}}} param0
  * @returns
  */
 const CountryListScreen = ({navigation, route}) => {
-  const {region} = route.params;
+  const {regionName, regionId} = route.params;
   /**
    * @type {ComponentState<Country[]>}
    */
@@ -27,12 +27,12 @@ const CountryListScreen = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    navigation.setOptions({title: region});
-  }, [navigation, region]);
+    navigation.setOptions({title: regionName});
+  }, [navigation, regionName]);
 
   const loadCountries = useCallback(async () => {
     setIsLoading(true);
-    const result = await getCountriesOfRegion(region);
+    const result = await getCountriesOfRegion(regionId);
 
     if (result.success === true) {
       setCountries(result.data);
@@ -41,7 +41,7 @@ const CountryListScreen = ({navigation, route}) => {
     }
 
     setIsLoading(false);
-  }, [region]);
+  }, [regionId]);
 
   useEffect(() => {
     loadCountries();

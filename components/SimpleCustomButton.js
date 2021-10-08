@@ -26,7 +26,7 @@ const SimpleCustomButton = props => {
   return (
     <TouchableItem
       onPress={() => {
-        onPress(item.name);
+        onPress();
       }}>
       <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
         <Text style={styles.text}>{item.name}</Text>

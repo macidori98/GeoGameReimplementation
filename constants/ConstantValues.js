@@ -1,9 +1,9 @@
 export const Regions = [
-  {name: 'Africa'},
-  {name: 'Americas'},
-  {name: 'Asia'},
-  {name: 'Europe'},
-  {name: 'Oceania'},
+  {id: 'africa', name: 'Africa'},
+  {id: 'americas', name: 'Americas'},
+  {id: 'asia', name: 'Asia'},
+  {id: 'europe', name: 'Europe'},
+  {id: 'oceania', name: 'Oceania'},
 ];
 
 export const Headers = {region: 'Regions'};

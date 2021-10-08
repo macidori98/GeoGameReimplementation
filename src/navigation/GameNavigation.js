@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import GameScreen from '../screens/game/GameScreen';
-import StatisticsScreen from '../screens/game/StatisticsScreen';
+import GameScreen from '~/screens/game/GameScreen';
+import StatisticsScreen from '~/screens/game/StatisticsScreen';
 
 /**
  * @type {CreateNativeStackNavigatorType<GameNavigationParamList>}

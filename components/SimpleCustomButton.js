@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Colors from '../theme/Colors';
+import Dimen from '../theme/Dimen';
 import FontSizes from '../theme/FontSizes';
+import * as CommonStyles from '../theme/CommonStyles';
 
 const dimensions = Dimensions.get('screen');
 
@@ -26,7 +28,7 @@ const SimpleCustomButton = props => {
       onPress={() => {
         onPress(item.name);
       }}>
-      <View style={{...styles.myShadow, ...styles.card}}>
+      <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
         <Text style={styles.text}>{item.name}</Text>
       </View>
     </TouchableItem>
@@ -35,21 +37,14 @@ const SimpleCustomButton = props => {
 
 const styles = StyleSheet.create({
   card: {
-    height: 80,
+    height: Dimen.dim80,
     width: dimensions.width * 0.66,
-    minWidth: 100,
-    borderRadius: 20,
-    margin: 15,
+    minWidth: Dimen.dim100,
+    borderRadius: Dimen.dim20,
+    margin: Dimen.dim15,
     backgroundColor: Colors.red,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  myShadow: {
-    shadowColor: Colors.black,
-    shadowOpacity: 0.86,
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 8,
-    elevation: 8,
   },
   text: {
     fontSize: FontSizes.large,

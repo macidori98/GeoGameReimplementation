@@ -1,6 +1,8 @@
 import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import Dimen from '../theme/Dimen';
 import FontSizes from '../theme/FontSizes';
+import * as CommonStyles from '../theme/CommonStyles';
 
 const Error = ({message}) => {
   return (
@@ -14,17 +16,16 @@ const Error = ({message}) => {
 const styles = StyleSheet.create({
   errorContainer: {
     width: Dimensions.get('screen').width,
-    paddingHorizontal: 20,
-    height: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
+    paddingHorizontal: Dimen.dim20,
+    height: Dimen.dim150,
+    ...CommonStyles.styles.centered,
+    ...CommonStyles.styles.screen,
   },
   text: {
     fontSize: FontSizes.large,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 15,
+    marginBottom: Dimen.dim15,
   },
 });
 

@@ -2,6 +2,7 @@ import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import SimpleCustomButton from '../../components/SimpleCustomButton';
 import {Regions} from '../../constants/ConstantValues';
+import * as CommonStyles from '../../theme/CommonStyles';
 
 /**
  *
@@ -33,9 +34,8 @@ const RegionListScreen = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...CommonStyles.styles.screen,
+    ...CommonStyles.styles.centered,
   },
 });
 

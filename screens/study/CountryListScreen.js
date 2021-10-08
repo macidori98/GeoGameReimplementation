@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {getCountriesOfRegion} from '../../api/Service';
 import Error from '../../components/Error';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import * as CommonStyles from '../../theme/CommonStyles';
 
 /**
  * @param {{navigation: object, route: {params: {region: string}}}} param0
@@ -47,7 +48,7 @@ const CountryListScreen = ({navigation, route}) => {
   }, [loadCountries]);
 
   return (
-    <View style={styles.screen}>
+    <View style={CommonStyles.styles.screen}>
       {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
       {countries.length > 0 && !error && (
         <FlatList
@@ -65,10 +66,6 @@ const CountryListScreen = ({navigation, route}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default CountryListScreen;

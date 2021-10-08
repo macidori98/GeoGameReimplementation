@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import Colors from '../theme/Colors';
+import * as CommonStyles from '../theme/CommonStyles';
 
 const LoadingIndicator = () => {
   return (
@@ -14,9 +15,8 @@ const LoadingIndicator = () => {
 
 const styles = StyleSheet.create({
   centeredItem: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    ...CommonStyles.styles.screen,
+    ...CommonStyles.styles.centered,
   },
 });
 

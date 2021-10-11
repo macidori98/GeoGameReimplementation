@@ -24,7 +24,11 @@ export const StudyNavigation = () => {
         name="CountryList"
         initialParams={{nextRoute: 'Details'}}
       />
-      <Stack.Screen component={DetailsScreen} name="Details" />
+      <Stack.Screen
+        component={DetailsScreen}
+        name="Details"
+        initialParams={{nextRoute: 'Details'}}
+      />
     </Stack.Navigator>
   );
 };

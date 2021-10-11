@@ -17,5 +17,5 @@
  */
 
 /**
- * @typedef {{RegionList: {nextRoute: 'CountryList'}, CountryList: {nextRoute: 'Details'}, Details: undefined}} StudyNavigationParamList
+ * @typedef {{RegionList: {nextRoute: 'CountryList'}, CountryList: {nextRoute: 'Details'}, Details: {nextRoute: 'Details'}}} StudyNavigationParamList
  */

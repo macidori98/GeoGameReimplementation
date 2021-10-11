@@ -1,25 +1,21 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from 'react-native';
-import {getCountryDetailsByCode} from '~/api/Service';
+import {Dimensions, Image, StyleSheet, View, ScrollView} from 'react-native';
+import {getCountryDetailsWithBorders} from '~/api/Service';
+import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
 import Error from '~/components/Error';
+import HourList from '~/components/HourList';
 import LoadingIndicator from '~/components/LoadingIndicator';
+import TouchableItem from '~/components/TouchableItem';
 import {Headers} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
 
 const DetailsScreen = ({navigation, route}) => {
   /**
-   * @type {{countryCode: string}}
+   * @type {{countryCode: string, nextRoute: string}}
    */
-  const {countryCode} = route.params;
+  const {countryCode, nextRoute} = route.params;
 
   /**
    * @type {ComponentState<boolean>}
@@ -36,12 +32,18 @@ const DetailsScreen = ({navigation, route}) => {
    */
   const [countryDetails, setCountryDetiails] = useState();
 
+  /**
+   * @type {ComponentState<Country[]>}
+   */
+  const [borders, setBorders] = useState(null);
+
   const loadCountryData = useCallback(async () => {
     setIsLoading(true);
-    const result = await getCountryDetailsByCode(countryCode);
+    const result = await getCountryDetailsWithBorders(countryCode);
 
     if (result.success === true) {
-      setCountryDetiails(result.data);
+      setCountryDetiails(result.data.countryDetails);
+      setBorders(result.data.borders);
     } else {
       setError(result.message);
     }
@@ -91,6 +93,7 @@ const DetailsScreen = ({navigation, route}) => {
                   <CustomText text="Area:" />
                   <CustomText text="Currency:" />
                   <CustomText text="Timezones:" />
+                  <CustomText text="Neighbours:" />
                 </View>
               </View>
               <View style={CommonStyles.styles.screen}>
@@ -101,14 +104,25 @@ const DetailsScreen = ({navigation, route}) => {
                   {countryDetails.currencies.map(item => (
                     <CustomText text={item.code} />
                   ))}
-                  {countryDetails.timezones.map(item => (
-                    <CustomText text={item} />
-                  ))}
+                  <HourList timezones={countryDetails.timezones} />
                 </View>
               </View>
             </View>
             <View>
-              <Text>Neighbours</Text>
+              {borders?.length > 0 ? (
+                borders?.map(item => (
+                  <TouchableItem
+                    onPress={() => {
+                      navigation.navigate(nextRoute, {
+                        countryCode: item.alpha2Code,
+                      });
+                    }}>
+                    <CountryCard country={item} />
+                  </TouchableItem>
+                ))
+              ) : (
+                <CustomText text="No borders" />
+              )}
             </View>
           </View>
         </ScrollView>

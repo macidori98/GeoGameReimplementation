@@ -21,4 +21,5 @@
  * @property {Flags} flags
  * @property {Currency[]} currencies
  * @property {number} population
+ * @property {Array<string>} borders?
  */

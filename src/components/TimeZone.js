@@ -1,17 +1,8 @@
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
+import {currentMillisToTimezoneMillis} from '~/helpers/DateHelpers';
 import CustomText from './CustomText';
-
-const longToDate = function (millisec, time) {
-  var date = new Date(millisec);
-  var currentDate = Date();
-  var offset = currentDate.substring(
-    currentDate.length - 12,
-    currentDate.length - 9,
-  );
-  return date.setHours(date.getHours() + (time - parseInt(offset, 10)));
-};
 
 /**
  * @param {{timezones: Array<string>}} param0
@@ -35,7 +26,10 @@ const TimeZone = ({timezones}) => {
       {timezones.map(item => (
         <CustomText
           text={moment(
-            longToDate(time, parseInt(String(item).substring(3, 6), 10)),
+            currentMillisToTimezoneMillis(
+              time,
+              parseInt(String(item).substring(3, 6), 10),
+            ),
           ).format('HH:mm:ss ')}
         />
       ))}

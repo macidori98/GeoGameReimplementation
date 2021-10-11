@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "moduleResolution": "node",
     "jsx": "react-native",
     "target": "es6",
     "baseUrl": "./",

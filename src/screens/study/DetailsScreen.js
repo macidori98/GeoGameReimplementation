@@ -99,7 +99,7 @@ const DetailsScreen = ({navigation, route}) => {
             </DetailRow>
             <DetailRow label={DetailLabel.currency}>
               {countryDetails.currencies.map(item => (
-                <CustomText text={item.code} />
+                <CustomText key={item.code} text={item.code} />
               ))}
             </DetailRow>
             <DetailRow label={DetailLabel.timezones}>
@@ -112,6 +112,7 @@ const DetailsScreen = ({navigation, route}) => {
               {borders?.length > 0 ? (
                 borders?.map(item => (
                   <TouchableItem
+                    key={item.capital}
                     onPress={() => {
                       navigation.navigate(nextRoute, {
                         countryCode: item.alpha2Code,

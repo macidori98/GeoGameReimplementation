@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Image, Text, Platform} from 'react-native';
 import Colors from '~/theme/Colors';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: Dimen.dim20,
     ...CommonStyles.styles.myShadow,
     margin: Dimen.dim20,
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
   },
   textContainer: {
     margin: Dimen.dim10,

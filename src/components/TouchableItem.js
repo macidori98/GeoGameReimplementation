@@ -1,21 +1,17 @@
 import React from 'react';
-import {Platform, TouchableNativeFeedback} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Pressable} from 'react-native';
+import Dimen from '~/theme/Dimen';
 
 const TouchableItem = ({onPress, children}) => {
-  /**
-   * @type {React.ElementType}
-   */
-  const Touchable =
-    Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
-
   return (
-    <Touchable
-      onPress={() => {
-        onPress();
-      }}>
+    <Pressable
+      style={({pressed}) => [
+        {backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white'},
+        {borderRadius: Dimen.dim20},
+      ]}
+      onPress={onPress}>
       {children}
-    </Touchable>
+    </Pressable>
   );
 };
 

@@ -18,4 +18,5 @@ export const DetailLabel = {
   borders: 'Borders',
   currency: 'Currency:',
   timezones: 'Timezones:',
+  noBorder: 'No borders',
 };

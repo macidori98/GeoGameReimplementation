@@ -122,7 +122,7 @@ const DetailsScreen = ({navigation, route}) => {
                 ))
               ) : (
                 <View style={styles.borderTextContainer}>
-                  <CustomText text="No borders" />
+                  <CustomText text={DetailLabel.noBorder} />
                 </View>
               )}
             </View>

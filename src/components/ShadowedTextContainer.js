@@ -7,7 +7,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 
 const dimensions = Dimensions.get('screen');
 
-const SimpleCustomButton = ({item}) => {
+const ShadowedTextContainer = ({item}) => {
   return (
     <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
       <Text style={styles.text}>{item.name}</Text>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SimpleCustomButton;
+export default ShadowedTextContainer;

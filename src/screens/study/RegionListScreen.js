@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import SimpleCustomButton from '~/components/SimpleCustomButton';
+import ShadowedTextContainer from '~/components/ShadowedTextContainer';
 import TouchableItem from '~/components/TouchableItem';
 import {Regions} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
@@ -25,7 +25,7 @@ const RegionListScreen = ({navigation, route}) => {
                 regionId: item.id,
               })
             }>
-            <SimpleCustomButton item={item} />
+            <ShadowedTextContainer item={item} />
           </TouchableItem>
         )}
       />

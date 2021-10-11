@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import {getCountriesOfRegion} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import Error from '~/components/Error';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
-import Dimen from '~/theme/Dimen';
 
 /**
  * @param {{navigation: object, route: {params: {regionName: string, regionId: string, nextRoute: string}}}} param0
@@ -57,20 +56,16 @@ const CountryListScreen = ({navigation, route}) => {
       }}>
       {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
       {countries.length > 0 && !error && (
-        <View
-          style={{
-            ...CommonStyles.styles.centered,
-            ...CommonStyles.styles.screen,
-          }}>
+        <View>
           <FlatList
-            style={styles.list}
             data={countries}
             keyExtractor={(item, index) => item.name + index}
             renderItem={({item}) => (
               <TouchableItem
                 onPress={() => {
-                  console.log(item.name);
-                  navigation.navigate(nextRoute, {countryDetails: item});
+                  navigation.navigate(nextRoute, {
+                    countryCode: item.alpha2Code,
+                  });
                 }}>
                 <CountryCard country={item} />
               </TouchableItem>
@@ -82,12 +77,5 @@ const CountryListScreen = ({navigation, route}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  list: {
-    width: '90%',
-    padding: Dimen.dim15,
-  },
-});
 
 export default CountryListScreen;

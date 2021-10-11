@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -6,62 +6,115 @@ import {
   Text,
   View,
   ScrollView,
-  FlatList,
 } from 'react-native';
+import {getCountryDetailsByCode} from '~/api/Service';
 import CustomText from '~/components/CustomText';
+import Error from '~/components/Error';
+import LoadingIndicator from '~/components/LoadingIndicator';
+import {Headers} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
 
 const DetailsScreen = ({navigation, route}) => {
   /**
-   * @type {{countryDetails: Country}}
+   * @type {{countryCode: string}}
    */
-  const {countryDetails} = route.params;
+  const {countryCode} = route.params;
+
+  /**
+   * @type {ComponentState<boolean>}
+   */
+  const [isLoading, setIsLoading] = useState(false);
+
+  /**
+   * @type {ComponentState<string>}
+   */
+  const [error, setError] = useState();
+
+  /**
+   * @type {ComponentState<Country>}
+   */
+  const [countryDetails, setCountryDetiails] = useState();
+
+  const loadCountryData = useCallback(async () => {
+    setIsLoading(true);
+    const result = await getCountryDetailsByCode(countryCode);
+
+    if (result.success === true) {
+      setCountryDetiails(result.data);
+    } else {
+      setError(result.message);
+    }
+
+    setIsLoading(false);
+  }, [countryCode]);
+
+  useEffect(() => {
+    loadCountryData();
+  }, [loadCountryData]);
 
   useEffect(() => {
     navigation.setOptions({
-      title: `${countryDetails.name} (${countryDetails.alpha2Code})`,
+      title: countryDetails
+        ? `${countryDetails.name} (${countryDetails.alpha2Code})`
+        : Headers.loading,
     });
   }, [countryDetails, navigation]);
 
   return (
-    <ScrollView>
-      <View style={CommonStyles.styles.screen}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={CommonStyles.styles.screen}
-            source={{uri: countryDetails.flags.png}}
-          />
+    <>
+      {isLoading && !error && (
+        <View
+          style={{
+            ...CommonStyles.styles.screen,
+          }}>
+          <LoadingIndicator />
         </View>
-        <View style={styles.countryDetailsContainer}>
-          <View style={CommonStyles.styles.screen}>
-            <View style={styles.contur}>
-              <CustomText text="Capital:" />
-              <CustomText text="Population:" />
-              <CustomText text="Area:" />
-              <CustomText text="Currency:" />
-              <CustomText text="Timezones:" />
+      )}
+      {!isLoading && !error && countryDetails && (
+        <ScrollView>
+          <View
+            style={{
+              ...CommonStyles.styles.screen,
+            }}>
+            <View style={styles.imageContainer}>
+              <Image
+                style={CommonStyles.styles.screen}
+                source={{uri: countryDetails.flags.png}}
+              />
+            </View>
+            <View style={styles.countryDetailsContainer}>
+              <View style={CommonStyles.styles.screen}>
+                <View style={styles.contur}>
+                  <CustomText text="Capital:" />
+                  <CustomText text="Population:" />
+                  <CustomText text="Area:" />
+                  <CustomText text="Currency:" />
+                  <CustomText text="Timezones:" />
+                </View>
+              </View>
+              <View style={CommonStyles.styles.screen}>
+                <View style={styles.contur}>
+                  <CustomText text={countryDetails.capital} />
+                  <CustomText text={countryDetails.population} />
+                  <CustomText text={countryDetails.area} />
+                  {countryDetails.currencies.map(item => (
+                    <CustomText text={item.code} />
+                  ))}
+                  {countryDetails.timezones.map(item => (
+                    <CustomText text={item} />
+                  ))}
+                </View>
+              </View>
+            </View>
+            <View>
+              <Text>Neighbours</Text>
             </View>
           </View>
-          <View style={CommonStyles.styles.screen}>
-            <View style={styles.contur}>
-              <CustomText text={countryDetails.capital} />
-              <CustomText text={countryDetails.population} />
-              <CustomText text={countryDetails.area} />
-              {countryDetails.currencies.map(item => (
-                <CustomText text={item.code} />
-              ))}
-              {countryDetails.timezones.map(item => (
-                <CustomText text={item} />
-              ))}
-            </View>
-          </View>
-        </View>
-        <View>
-          <Text>Neighbours</Text>
-        </View>
-      </View>
-    </ScrollView>
+        </ScrollView>
+      )}
+      {!isLoading && error && <Error message={error} />}
+    </>
   );
 };
 

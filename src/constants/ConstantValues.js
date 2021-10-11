@@ -6,4 +6,7 @@ export const Regions = [
   {id: 'oceania', name: 'Oceania'},
 ];
 
-export const Headers = {region: 'Regions'};
+export const Headers = {
+  region: 'Regions',
+  loading: 'Loading...',
+};

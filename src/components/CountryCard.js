@@ -13,7 +13,11 @@ import FontSizes from '~/theme/FontSizes';
 const CountryCard = ({country}) => {
   return (
     <View style={styles.container}>
-      <View style={{...CommonStyles.styles.centered}}>
+      <View
+        style={{
+          ...CommonStyles.styles.centered,
+          ...CommonStyles.styles.screen,
+        }}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={{uri: country.flags.png}} />
         </View>
@@ -29,9 +33,10 @@ const CountryCard = ({country}) => {
 
 const styles = StyleSheet.create({
   image: {
-    ...CommonStyles.styles.screen,
     borderTopRightRadius: Dimen.dim20,
     borderTopLeftRadius: Dimen.dim20,
+    height: '100%',
+    width: '100%',
   },
   imageContainer: {
     width: '100%',
@@ -42,11 +47,11 @@ const styles = StyleSheet.create({
     marginVertical: Dimen.dim10,
     borderRadius: Dimen.dim20,
     ...CommonStyles.styles.myShadow,
-    width: '100%',
+    margin: Dimen.dim20,
   },
   textContainer: {
     margin: Dimen.dim10,
-    height: 40,
+    height: Dimen.dim40,
     ...CommonStyles.styles.centered,
   },
   text: {

@@ -1,5 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Dimensions, Image, StyleSheet, View, ScrollView} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+} from 'react-native';
 import {getCountryDetailsWithBorders} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
@@ -7,9 +14,11 @@ import Error from '~/components/Error';
 import TimeZone from '~/components/TimeZone';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
-import {Headers} from '~/constants/ConstantValues';
+import {DetailLabel, Headers} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
+import DetailRow from '~/components/DetailRow';
+import FontSizes from '~/theme/FontSizes';
 
 const DetailsScreen = ({navigation, route}) => {
   /**
@@ -65,50 +74,41 @@ const DetailsScreen = ({navigation, route}) => {
 
   return (
     <>
-      {isLoading && !error && (
-        <View
-          style={{
-            ...CommonStyles.styles.screen,
-          }}>
+      {isLoading && !error && !countryDetails && (
+        <View style={CommonStyles.styles.screen}>
           <LoadingIndicator />
         </View>
       )}
       {!isLoading && !error && countryDetails && (
         <ScrollView>
-          <View
-            style={{
-              ...CommonStyles.styles.screen,
-            }}>
+          <View style={CommonStyles.styles.screen}>
             <View style={styles.imageContainer}>
               <Image
                 style={CommonStyles.styles.screen}
                 source={{uri: countryDetails.flags.png}}
               />
             </View>
-            <View style={styles.countryDetailsContainer}>
-              <View style={CommonStyles.styles.screen}>
-                <View style={styles.contur}>
-                  <CustomText text="Capital:" />
-                  <CustomText text="Population:" />
-                  <CustomText text="Area:" />
-                  <CustomText text="Currency:" />
-                  <CustomText text="Timezones:" />
-                  <CustomText text="Neighbours:" />
-                </View>
-              </View>
-              <View style={CommonStyles.styles.screen}>
-                <View style={styles.contur}>
-                  <CustomText text={countryDetails.capital} />
-                  <CustomText text={countryDetails.population} />
-                  <CustomText text={countryDetails.area} />
-                  {countryDetails.currencies.map(item => (
-                    <CustomText text={item.code} />
-                  ))}
-                  <TimeZone timezones={countryDetails.timezones} />
-                </View>
-              </View>
-            </View>
+            <DetailRow label={DetailLabel.capital}>
+              <CustomText text={countryDetails.capital} />
+            </DetailRow>
+            <DetailRow label={DetailLabel.population}>
+              <CustomText text={countryDetails.population} />
+            </DetailRow>
+            <DetailRow label={DetailLabel.area}>
+              <CustomText text={countryDetails.area} />
+            </DetailRow>
+            <DetailRow label={DetailLabel.currency}>
+              {countryDetails.currencies.map(item => (
+                <CustomText text={item.code} />
+              ))}
+            </DetailRow>
+            <DetailRow label={DetailLabel.timezones}>
+              <TimeZone timezones={countryDetails.timezones} />
+            </DetailRow>
             <View>
+              <View style={styles.borderTextContainer}>
+                <Text style={styles.label}>Borders</Text>
+              </View>
               {borders?.length > 0 ? (
                 borders?.map(item => (
                   <TouchableItem
@@ -121,7 +121,9 @@ const DetailsScreen = ({navigation, route}) => {
                   </TouchableItem>
                 ))
               ) : (
-                <CustomText text="No borders" />
+                <View style={styles.borderTextContainer}>
+                  <CustomText text="No borders" />
+                </View>
               )}
             </View>
           </View>
@@ -140,12 +142,13 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: Dimen.dim30,
     overflow: 'hidden',
   },
-  countryDetailsContainer: {
-    marginTop: Dimen.dim30,
-    flexDirection: 'row',
+  borderTextContainer: {
+    ...CommonStyles.styles.centered,
+    marginTop: Dimen.dim20,
   },
-  contur: {
-    marginStart: 40,
+  label: {
+    fontWeight: 'bold',
+    fontSize: FontSizes.large,
   },
 });
 

@@ -10,3 +10,12 @@ export const Headers = {
   region: 'Regions',
   loading: 'Loading...',
 };
+
+export const DetailLabel = {
+  capital: 'Capital:',
+  area: 'Area:',
+  population: 'Population:',
+  borders: 'Borders',
+  currency: 'Currency:',
+  timezones: 'Timezones:',
+};

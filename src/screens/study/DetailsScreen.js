@@ -14,7 +14,7 @@ import Error from '~/components/Error';
 import TimeZone from '~/components/TimeZone';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
-import {DetailLabel, Headers} from '~/constants/ConstantValues';
+import {DetailLabel} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import Dimen from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';

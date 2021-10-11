@@ -4,7 +4,7 @@ import {getCountryDetailsWithBorders} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
 import Error from '~/components/Error';
-import HourList from '~/components/HourList';
+import TimeZone from '~/components/TimeZone';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
 import {Headers} from '~/constants/ConstantValues';
@@ -104,7 +104,7 @@ const DetailsScreen = ({navigation, route}) => {
                   {countryDetails.currencies.map(item => (
                     <CustomText text={item.code} />
                   ))}
-                  <HourList timezones={countryDetails.timezones} />
+                  <TimeZone timezones={countryDetails.timezones} />
                 </View>
               </View>
             </View>

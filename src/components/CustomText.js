@@ -4,7 +4,11 @@ import Dimen from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
 const CustomText = ({text}) => {
-  return <Text style={styles.boldText}>{text}</Text>;
+  return (
+    <>
+      <Text style={styles.boldText}>{text}</Text>
+    </>
+  );
 };
 
 const styles = StyleSheet.create({

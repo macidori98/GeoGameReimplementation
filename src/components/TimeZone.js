@@ -10,10 +10,14 @@ const longToDate = function (millisec, time) {
     currentDate.length - 12,
     currentDate.length - 9,
   );
-  return date.setHours(date.getHours() + (time - offset));
+  return date.setHours(date.getHours() + (time - parseInt(offset, 10)));
 };
 
-const HourList = ({timezones}) => {
+/**
+ * @param {{timezones: Array<string>}} param0
+ * @returns
+ */
+const TimeZone = ({timezones}) => {
   /**
    * @type {ComponentState<number>}
    */
@@ -39,4 +43,4 @@ const HourList = ({timezones}) => {
   );
 };
 
-export default HourList;
+export default TimeZone;

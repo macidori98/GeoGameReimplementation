@@ -25,6 +25,7 @@ const TimeZone = ({timezones}) => {
     <View>
       {timezones.map(item => (
         <CustomText
+          key={item}
           text={moment(
             currentMillisToTimezoneMillis(
               time,

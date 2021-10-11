@@ -17,5 +17,17 @@
  */
 
 /**
- * @typedef {{RegionList: {nextRoute: 'CountryList'}, CountryList: {nextRoute: 'Details', regionName: string, regionId: string}, Details: {nextRoute: 'Details', countryName: string}}} StudyNavigationParamList
+ * @typedef {{RegionList: undefined, CountryList: {regionName: string, regionId: string}, Details: {countryName: string, countryCode: string}}} StudyNavigationParamList
+ */
+
+/**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<StudyNavigationParamList, 'Details'>} DetailsScreenProps
+ */
+
+/**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<StudyNavigationParamList, 'CountryList'>} CountryListScreenProps
+ */
+
+/**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<StudyNavigationParamList, 'RegionList'>} RegionListScreenProps
  */

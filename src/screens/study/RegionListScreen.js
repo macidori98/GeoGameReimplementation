@@ -7,12 +7,10 @@ import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
  *
- * @param {{navigation: object, route: {params: {nextRoute: string}}}} param0
+ * @param {RegionListScreenProps} props
  * @returns
  */
-const RegionListScreen = ({navigation, route}) => {
-  const {nextRoute} = route.params;
-
+const RegionListScreen = props => {
   return (
     <View style={styles.screen}>
       <FlatList
@@ -20,7 +18,7 @@ const RegionListScreen = ({navigation, route}) => {
         renderItem={({item}) => (
           <TouchableItem
             onPress={() =>
-              navigation.navigate(nextRoute, {
+              props.navigation.navigate('CountryList', {
                 regionName: item.name,
                 regionId: item.id,
               })

@@ -20,11 +20,12 @@ import Dimen from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
 
-const DetailsScreen = ({navigation, route}) => {
-  /**
-   * @type {{countryCode: string, nextRoute: string}}
-   */
-  const {countryCode, nextRoute} = route.params;
+/**
+ * @param {DetailsScreenProps} props
+ * @returns
+ */
+const DetailsScreen = props => {
+  const {countryCode} = props.route.params;
 
   /**
    * @type {ComponentState<boolean>}
@@ -106,7 +107,8 @@ const DetailsScreen = ({navigation, route}) => {
                   <TouchableItem
                     key={item.capital}
                     onPress={() => {
-                      navigation.navigate(nextRoute, {
+                      props.navigation.navigate('Details', {
+                        countryName: item.name,
                         countryCode: item.alpha2Code,
                       });
                     }}>

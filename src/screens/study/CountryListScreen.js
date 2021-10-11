@@ -8,11 +8,10 @@ import TouchableItem from '~/components/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
- * @param {{navigation: object, route: {params: {regionName: string, regionId: string, nextRoute: string}}}} param0
- * @returns
+ * @param {CountryListScreenProps} props
  */
-const CountryListScreen = ({navigation, route}) => {
-  const {regionId, nextRoute} = route.params;
+const CountryListScreen = props => {
+  const {regionId} = props.route.params;
   /**
    * @type {ComponentState<Country[]>}
    */
@@ -46,10 +45,7 @@ const CountryListScreen = ({navigation, route}) => {
   }, [loadCountries]);
 
   return (
-    <View
-      style={{
-        ...CommonStyles.styles.screen,
-      }}>
+    <View style={CommonStyles.styles.screen}>
       {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
       {countries.length > 0 && !error && (
         <View>
@@ -59,7 +55,7 @@ const CountryListScreen = ({navigation, route}) => {
             renderItem={({item}) => (
               <TouchableItem
                 onPress={() => {
-                  navigation.navigate(nextRoute, {
+                  props.navigation.navigate('Details', {
                     countryCode: item.alpha2Code,
                     countryName: item.name,
                   });

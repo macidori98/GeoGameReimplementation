@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import * as CommonStyles from '~/theme/CommonStyles';
 import FontSizes from '~/theme/FontSizes';
 import Dimen from '~/theme/Dimen';
@@ -15,7 +15,7 @@ const Error = ({message}) => {
 
 const styles = StyleSheet.create({
   errorContainer: {
-    width: Dimensions.get('screen').width,
+    width: '100%',
     paddingHorizontal: Dimen.dim20,
     height: Dimen.dim150,
     ...CommonStyles.styles.centered,

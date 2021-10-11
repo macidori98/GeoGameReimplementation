@@ -12,7 +12,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
  * @returns
  */
 const CountryListScreen = ({navigation, route}) => {
-  const {regionName, regionId, nextRoute} = route.params;
+  const {regionId, nextRoute} = route.params;
   /**
    * @type {ComponentState<Country[]>}
    */
@@ -27,10 +27,6 @@ const CountryListScreen = ({navigation, route}) => {
    * @type {ComponentState<boolean>}
    */
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    navigation.setOptions({title: regionName});
-  }, [navigation, regionName]);
 
   const loadCountries = useCallback(async () => {
     setIsLoading(true);
@@ -65,6 +61,7 @@ const CountryListScreen = ({navigation, route}) => {
                 onPress={() => {
                   navigation.navigate(nextRoute, {
                     countryCode: item.alpha2Code,
+                    countryName: item.name,
                   });
                 }}>
                 <CountryCard country={item} />

@@ -64,14 +64,6 @@ const DetailsScreen = ({navigation, route}) => {
     loadCountryData();
   }, [loadCountryData]);
 
-  useEffect(() => {
-    navigation.setOptions({
-      title: countryDetails
-        ? `${countryDetails.name} (${countryDetails.alpha2Code})`
-        : Headers.loading,
-    });
-  }, [countryDetails, navigation]);
-
   return (
     <>
       {isLoading && !error && !countryDetails && (

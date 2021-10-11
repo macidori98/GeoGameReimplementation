@@ -22,11 +22,13 @@ export const StudyNavigation = () => {
       <Stack.Screen
         component={CountryListScreen}
         name="CountryList"
+        options={({route}) => ({title: route.params.regionName})}
         initialParams={{nextRoute: 'Details'}}
       />
       <Stack.Screen
         component={DetailsScreen}
         name="Details"
+        options={({route}) => ({title: route.params.countryName})}
         initialParams={{nextRoute: 'Details'}}
       />
     </Stack.Navigator>

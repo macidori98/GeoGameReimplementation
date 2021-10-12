@@ -1,15 +1,17 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import Colors from '~/theme/Colors';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 const LoadingIndicator = () => {
   return (
-    <ActivityIndicator
-      style={styles.centeredItem}
-      size="large"
-      color={Colors.darkBlue}
-    />
+    <View style={CommonStyles.styles.screen}>
+      <ActivityIndicator
+        style={styles.centeredItem}
+        size="large"
+        color={Colors.darkBlue}
+      />
+    </View>
   );
 };
 

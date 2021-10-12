@@ -44,28 +44,29 @@ const CountryListScreen = props => {
     loadCountries();
   }, [loadCountries]);
 
+  const showCountriesList = () => (
+    <View>
+      <FlatList
+        data={countries}
+        keyExtractor={(item, index) => item.name + index}
+        renderItem={({item}) => (
+          <TouchableItem
+            onPress={() => {
+              props.navigation.navigate('Details', {
+                countryCode: item.alpha2Code,
+                countryName: item.name,
+              });
+            }}>
+            <CountryCard country={item} />
+          </TouchableItem>
+        )}
+      />
+    </View>
+  );
   return (
     <View style={CommonStyles.styles.screen}>
       {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
-      {countries.length > 0 && !error && (
-        <View>
-          <FlatList
-            data={countries}
-            keyExtractor={(item, index) => item.name + index}
-            renderItem={({item}) => (
-              <TouchableItem
-                onPress={() => {
-                  props.navigation.navigate('Details', {
-                    countryCode: item.alpha2Code,
-                    countryName: item.name,
-                  });
-                }}>
-                <CountryCard country={item} />
-              </TouchableItem>
-            )}
-          />
-        </View>
-      )}
+      {countries.length > 0 && !error && showCountriesList()}
       {error && !isLoading && <Error message={error} />}
     </View>
   );

@@ -65,65 +65,63 @@ const DetailsScreen = props => {
     loadCountryData();
   }, [loadCountryData]);
 
+  const showCountryDetails = () => (
+    <ScrollView>
+      <View style={CommonStyles.styles.screen}>
+        <View style={styles.imageContainer}>
+          <Image
+            style={CommonStyles.styles.screen}
+            source={{uri: countryDetails.flags.png}}
+          />
+        </View>
+        <DetailRow label={DetailLabel.capital}>
+          <CustomText text={countryDetails.capital} />
+        </DetailRow>
+        <DetailRow label={DetailLabel.population}>
+          <CustomText text={countryDetails.population} />
+        </DetailRow>
+        <DetailRow label={DetailLabel.area}>
+          <CustomText text={countryDetails.area} />
+        </DetailRow>
+        <DetailRow label={DetailLabel.currency}>
+          {countryDetails.currencies.map(item => (
+            <CustomText key={item.code} text={item.code} />
+          ))}
+        </DetailRow>
+        <DetailRow label={DetailLabel.timezones}>
+          <TimeZone timezones={countryDetails.timezones} />
+        </DetailRow>
+        <View>
+          <View style={styles.borderTextContainer}>
+            <Text style={styles.label}>{DetailLabel.borders}</Text>
+          </View>
+          {borders?.length > 0 ? (
+            borders?.map(item => (
+              <TouchableItem
+                key={item.capital}
+                onPress={() => {
+                  props.navigation.navigate('Details', {
+                    countryName: item.name,
+                    countryCode: item.alpha2Code,
+                  });
+                }}>
+                <CountryCard country={item} />
+              </TouchableItem>
+            ))
+          ) : (
+            <View style={styles.borderTextContainer}>
+              <CustomText text={DetailLabel.noBorder} />
+            </View>
+          )}
+        </View>
+      </View>
+    </ScrollView>
+  );
+
   return (
     <>
-      {isLoading && !error && !countryDetails && (
-        <View style={CommonStyles.styles.screen}>
-          <LoadingIndicator />
-        </View>
-      )}
-      {!isLoading && !error && countryDetails && (
-        <ScrollView>
-          <View style={CommonStyles.styles.screen}>
-            <View style={styles.imageContainer}>
-              <Image
-                style={CommonStyles.styles.screen}
-                source={{uri: countryDetails.flags.png}}
-              />
-            </View>
-            <DetailRow label={DetailLabel.capital}>
-              <CustomText text={countryDetails.capital} />
-            </DetailRow>
-            <DetailRow label={DetailLabel.population}>
-              <CustomText text={countryDetails.population} />
-            </DetailRow>
-            <DetailRow label={DetailLabel.area}>
-              <CustomText text={countryDetails.area} />
-            </DetailRow>
-            <DetailRow label={DetailLabel.currency}>
-              {countryDetails.currencies.map(item => (
-                <CustomText key={item.code} text={item.code} />
-              ))}
-            </DetailRow>
-            <DetailRow label={DetailLabel.timezones}>
-              <TimeZone timezones={countryDetails.timezones} />
-            </DetailRow>
-            <View>
-              <View style={styles.borderTextContainer}>
-                <Text style={styles.label}>Borders</Text>
-              </View>
-              {borders?.length > 0 ? (
-                borders?.map(item => (
-                  <TouchableItem
-                    key={item.capital}
-                    onPress={() => {
-                      props.navigation.navigate('Details', {
-                        countryName: item.name,
-                        countryCode: item.alpha2Code,
-                      });
-                    }}>
-                    <CountryCard country={item} />
-                  </TouchableItem>
-                ))
-              ) : (
-                <View style={styles.borderTextContainer}>
-                  <CustomText text={DetailLabel.noBorder} />
-                </View>
-              )}
-            </View>
-          </View>
-        </ScrollView>
-      )}
+      {isLoading && !error && !countryDetails && <LoadingIndicator />}
+      {!isLoading && !error && countryDetails && showCountryDetails()}
       {!isLoading && error && <Error message={error} />}
     </>
   );

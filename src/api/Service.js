@@ -2,9 +2,9 @@ const BASE_URL = 'https://restcountries.com/v2';
 
 /**
  * @param {string} region
- * @returns {Promise<SuccessResponseType<Country[]>|ErrorResponseType>}
+ * @returns {Promise<SuccessResponseType<CountryDTO[]>|ErrorResponseType>}
  */
-export const getCountriesOfRegion = async region => {
+export const fetchCountriesOfRegion = async region => {
   try {
     const countries = await fetch(`${BASE_URL}/continent/${region}`);
     const resp = await countries.json();
@@ -21,9 +21,9 @@ export const getCountriesOfRegion = async region => {
 
 /**
  * @param {string} code
- * @returns {Promise<SuccessResponseType<Country>|ErrorResponseType>}
+ * @returns {Promise<SuccessResponseType<CountryDTO>|ErrorResponseType>}
  */
-export const getCountryDetailsByCode = async code => {
+export const fetchCountryDetailsByCode = async code => {
   try {
     const details = await fetch(`${BASE_URL}/alpha/${code}`);
     const resp = await details.json();
@@ -40,12 +40,12 @@ export const getCountryDetailsByCode = async code => {
 
 /**
  * @param {Array<string>} borders
- * @returns {Promise<SuccessResponseType<Country[]>|ErrorResponseType>}
+ * @returns {Promise<SuccessResponseType<CountryDTO[]>|ErrorResponseType>}
  */
-export const getCountryBorders = async borders => {
+export const fetchCountryBorders = async borders => {
   try {
     /**
-     * @type {Country[]}
+     * @type {CountryDTO[]}
      */
     const bordersDetails = [];
 
@@ -54,7 +54,7 @@ export const getCountryBorders = async borders => {
     }
 
     for (const item of borders) {
-      const details = await getCountryDetailsByCode(item);
+      const details = await fetchCountryDetailsByCode(item);
 
       if (details.success === true) {
         bordersDetails.push(details.data);
@@ -64,38 +64,6 @@ export const getCountryBorders = async borders => {
     }
 
     return {success: true, data: bordersDetails};
-  } catch (error) {
-    return {success: false, message: error.toString()};
-  }
-};
-
-/**
- * @param {string} code
- * @returns {Promise<SuccessResponseType<{countryDetails: Country, borders: Country[]}>|ErrorResponseType>}
- */
-export const getCountryDetailsWithBorders = async code => {
-  try {
-    const countryDetailsResult = await getCountryDetailsByCode(code);
-
-    if (countryDetailsResult.success === true) {
-      const bordersDetailsResult = await getCountryBorders(
-        countryDetailsResult.data.borders,
-      );
-
-      if (bordersDetailsResult.success === true) {
-        return {
-          success: true,
-          data: {
-            countryDetails: countryDetailsResult.data,
-            borders: bordersDetailsResult.data,
-          },
-        };
-      } else {
-        return {success: false, message: bordersDetailsResult.message};
-      }
-    } else {
-      return {success: false, message: countryDetailsResult.message};
-    }
   } catch (error) {
     return {success: false, message: error.toString()};
   }

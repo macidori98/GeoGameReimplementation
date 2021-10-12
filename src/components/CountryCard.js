@@ -24,11 +24,11 @@ const CountryCard = ({country}) => {
           ...CommonStyles.styles.screen,
         }}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{uri: country.flags.png}} />
+          <Image style={styles.image} source={{uri: country.flag}} />
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
-            {country.name} ({country.alpha2Code})
+            {country.name} ({country.code})
           </Text>
         </View>
       </View>

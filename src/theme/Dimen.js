@@ -21,6 +21,7 @@ const dimensions = {
   dim95: 95,
   dim100: 100,
   dim150: 150,
+  dim250: 250,
 };
 
 export const BorderDimension = {
@@ -68,5 +69,5 @@ export const WidthDimension = {
   small: dimensions.dim10,
   medium: dimensions.dim40,
   large: dimensions.dim100,
-  extraLarge: dimensions.dim150,
+  extraLarge: dimensions.dim250,
 };

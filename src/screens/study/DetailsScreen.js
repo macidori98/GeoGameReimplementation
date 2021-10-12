@@ -7,7 +7,6 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import {getCountryDetailsWithBorders} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
 import Error from '~/components/Error';
@@ -19,6 +18,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
+import {getCountryDetailsWithBorders} from '~/mapper/CountryMapper';
 
 /**
  * @param {DetailsScreenProps} props
@@ -71,7 +71,7 @@ const DetailsScreen = props => {
         <View style={styles.imageContainer}>
           <Image
             style={CommonStyles.styles.screen}
-            source={{uri: countryDetails.flags.png}}
+            source={{uri: countryDetails.flag}}
           />
         </View>
         <DetailRow label={DetailLabel.capital}>
@@ -85,7 +85,7 @@ const DetailsScreen = props => {
         </DetailRow>
         <DetailRow label={DetailLabel.currency}>
           {countryDetails.currencies.map(item => (
-            <CustomText key={item.code} text={item.code} />
+            <CustomText key={item} text={item} />
           ))}
         </DetailRow>
         <DetailRow label={DetailLabel.timezones}>
@@ -102,7 +102,7 @@ const DetailsScreen = props => {
                 onPress={() => {
                   props.navigation.navigate('Details', {
                     countryName: item.name,
-                    countryCode: item.alpha2Code,
+                    countryCode: item.code,
                   });
                 }}>
                 <CountryCard country={item} />

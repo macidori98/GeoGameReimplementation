@@ -26,12 +26,12 @@ const TimeZone = ({timezones}) => {
       {timezones.map(item => (
         <CustomText
           key={item}
-          text={moment(
+          text={`${item} ${moment(
             currentMillisToTimezoneMillis(
               time,
               parseInt(String(item).substring(3, 6), 10),
             ),
-          ).format('HH:mm:ss ')}
+          ).format('HH:mm:ss ')}`}
         />
       ))}
     </View>

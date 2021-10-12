@@ -12,7 +12,7 @@ const DetailRow = props => {
           <CustomText text={props.label} />
         </View>
       </View>
-      <View style={CommonStyles.styles.screen}>
+      <View style={styles.countryDetailValuesContainer}>
         <View style={styles.contur}>{props.children}</View>
       </View>
     </View>
@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
   countryDetailsContainer: {
     marginTop: MarginDimension.extraLarge,
     flexDirection: 'row',
+  },
+  countryDetailValuesContainer: {
+    flex: 2,
   },
   contur: {
     marginStart: 40,

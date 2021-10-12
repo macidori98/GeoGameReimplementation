@@ -6,7 +6,6 @@ import {Regions} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
- *
  * @param {RegionListScreenProps} props
  * @returns
  */

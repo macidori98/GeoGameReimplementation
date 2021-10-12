@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
-import {getCountriesOfRegion} from '~/api/Service';
 import CountryCard from '~/components/CountryCard';
 import Error from '~/components/Error';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
+import {getCountriesOfRegion} from '~/mapper/CountryMapper';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -53,7 +53,7 @@ const CountryListScreen = props => {
           <TouchableItem
             onPress={() => {
               props.navigation.navigate('Details', {
-                countryCode: item.alpha2Code,
+                countryCode: item.code,
                 countryName: item.name,
               });
             }}>

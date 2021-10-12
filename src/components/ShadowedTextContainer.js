@@ -23,7 +23,7 @@ const ShadowedTextContainer = ({item}) => {
 const styles = StyleSheet.create({
   card: {
     height: HeightDimension.large,
-    width: dimensions.width * 0.66,
+    width: WidthDimension.extraLarge,
     minWidth: WidthDimension.large,
     borderRadius: RadiusDimension.large,
     margin: MarginDimension.medium,

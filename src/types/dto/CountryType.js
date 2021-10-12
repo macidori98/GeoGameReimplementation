@@ -1,25 +1,25 @@
 /**
- * @typedef {object} Currency
+ * @typedef {object} CurrencyDTO
  * @property {string} code
  * @property {string} name
  * @property {string} symbol
  */
 
 /**
- * @typedef {object} Flags
+ * @typedef {object} FlagsDTO
  * @property {string} png
  * @property {string} svg
  */
 
 /**
- * @typedef {object} Country
+ * @typedef {object} CountryDTO
  * @property {string} name
  * @property {string} alpha2Code
  * @property {string} capital
  * @property {number} area
  * @property {Array<string>} timezones
- * @property {Flags} flags
- * @property {Currency[]} currencies
+ * @property {FlagsDTO} flags
+ * @property {CurrencyDTO[]} currencies
  * @property {number} population
- * @property {Array<string>} borders?
+ * @property {Array<string>} [borders]
  */

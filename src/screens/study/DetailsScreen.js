@@ -16,7 +16,7 @@ import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
 import {DetailLabel} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
-import Dimen from '~/theme/Dimen';
+import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
 
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
   imageContainer: {
     height: Dimensions.get('screen').height * 0.3,
     width: '100%',
-    borderBottomRightRadius: Dimen.dim30,
-    borderBottomLeftRadius: Dimen.dim30,
+    borderBottomRightRadius: RadiusDimension.extraLarge,
+    borderBottomLeftRadius: RadiusDimension.extraLarge,
     overflow: 'hidden',
   },
   borderTextContainer: {
     ...CommonStyles.styles.centered,
-    marginTop: Dimen.dim20,
+    marginTop: MarginDimension.medium,
   },
   label: {
     fontWeight: 'bold',

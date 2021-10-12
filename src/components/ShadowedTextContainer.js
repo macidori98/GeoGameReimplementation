@@ -1,9 +1,14 @@
 import React from 'react';
 import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import Colors from '~/theme/Colors';
-import Dimen from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 import * as CommonStyles from '~/theme/CommonStyles';
+import {
+  HeightDimension,
+  MarginDimension,
+  RadiusDimension,
+  WidthDimension,
+} from '~/theme/Dimen';
 
 const dimensions = Dimensions.get('screen');
 
@@ -17,11 +22,11 @@ const ShadowedTextContainer = ({item}) => {
 
 const styles = StyleSheet.create({
   card: {
-    height: Dimen.dim80,
+    height: HeightDimension.large,
     width: dimensions.width * 0.66,
-    minWidth: Dimen.dim100,
-    borderRadius: Dimen.dim20,
-    margin: Dimen.dim15,
+    minWidth: WidthDimension.large,
+    borderRadius: RadiusDimension.large,
+    margin: MarginDimension.medium,
     backgroundColor: Colors.red,
     alignItems: 'center',
     justifyContent: 'center',

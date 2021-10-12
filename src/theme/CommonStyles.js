@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import Colors from './Colors';
-import Dimen from './Dimen';
+import {RadiusDimension} from './Dimen';
 export const styles = StyleSheet.create({
   screen: {
     flex: 1,
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
     shadowColor: Colors.black,
     shadowOpacity: 0.86,
     shadowOffset: {width: 0, height: 2},
-    shadowRadius: Dimen.dim8,
-    elevation: Dimen.dim8,
+    shadowRadius: RadiusDimension.extraSmall,
+    elevation: RadiusDimension.extraSmall,
   },
 });

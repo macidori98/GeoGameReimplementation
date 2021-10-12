@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import Colors from '~/theme/Colors';
-import Dimen from '~/theme/Dimen';
+import {MarginDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
 const CustomText = ({text}) => {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   boldText: {
     fontWeight: 'bold',
     fontSize: FontSizes.medium,
-    marginVertical: Dimen.dim5,
+    marginVertical: MarginDimension.extraSmall,
     color: Colors.black,
   },
 });

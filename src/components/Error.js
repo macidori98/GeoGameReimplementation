@@ -1,8 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import * as CommonStyles from '~/theme/CommonStyles';
+import {
+  HeightDimension,
+  MarginDimension,
+  PaddingDimension,
+} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
-import Dimen from '~/theme/Dimen';
 
 const Error = ({message}) => {
   return (
@@ -16,8 +20,8 @@ const Error = ({message}) => {
 const styles = StyleSheet.create({
   errorContainer: {
     width: '100%',
-    paddingHorizontal: Dimen.dim20,
-    height: Dimen.dim150,
+    paddingHorizontal: PaddingDimension.large,
+    height: HeightDimension.extraLarge,
     ...CommonStyles.styles.centered,
     ...CommonStyles.styles.screen,
   },
@@ -25,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.large,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: Dimen.dim15,
+    marginBottom: MarginDimension.medium,
   },
 });
 

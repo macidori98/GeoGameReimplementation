@@ -2,7 +2,12 @@ import React from 'react';
 import {StyleSheet, View, Image, Text, Platform} from 'react-native';
 import Colors from '~/theme/Colors';
 import * as CommonStyles from '~/theme/CommonStyles';
-import Dimen from '~/theme/Dimen';
+import {
+  HeightDimension,
+  MarginDimension,
+  PaddingDimension,
+  RadiusDimension,
+} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
 /**
@@ -33,33 +38,33 @@ const CountryCard = ({country}) => {
 
 const styles = StyleSheet.create({
   image: {
-    borderTopRightRadius: Dimen.dim20,
-    borderTopLeftRadius: Dimen.dim20,
+    borderTopRightRadius: RadiusDimension.large,
+    borderTopLeftRadius: RadiusDimension.large,
     height: '100%',
     width: '100%',
   },
   imageContainer: {
     width: '100%',
-    height: Dimen.dim150,
+    height: HeightDimension.extraLarge,
   },
   container: {
     backgroundColor: Colors.white,
-    marginVertical: Dimen.dim10,
-    borderRadius: Dimen.dim20,
+    marginVertical: MarginDimension.small,
+    borderRadius: RadiusDimension.large,
     ...CommonStyles.styles.myShadow,
-    margin: Dimen.dim20,
+    margin: MarginDimension.large,
     overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
   },
   textContainer: {
-    margin: Dimen.dim10,
-    height: Dimen.dim40,
+    margin: MarginDimension.small,
+    height: HeightDimension.medium,
     ...CommonStyles.styles.centered,
   },
   text: {
     fontSize: FontSizes.medium,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingHorizontal: Dimen.dim20,
+    paddingHorizontal: PaddingDimension.large,
     color: Colors.black,
   },
 });

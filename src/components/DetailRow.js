@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import * as CommonStyles from '~/theme/CommonStyles';
-import Dimen from '~/theme/Dimen';
+import {MarginDimension} from '~/theme/Dimen';
 import CustomText from './CustomText';
 
 const DetailRow = props => {
@@ -21,7 +21,7 @@ const DetailRow = props => {
 
 const styles = StyleSheet.create({
   countryDetailsContainer: {
-    marginTop: Dimen.dim30,
+    marginTop: MarginDimension.extraLarge,
     flexDirection: 'row',
   },
   contur: {

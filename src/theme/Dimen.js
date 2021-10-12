@@ -1,4 +1,4 @@
-export default {
+const dimensions = {
   dim5: 5,
   dim8: 8,
   dim10: 10,
@@ -21,4 +21,52 @@ export default {
   dim95: 95,
   dim100: 100,
   dim150: 150,
+};
+
+export const BorderDimension = {
+  extraSmall: dimensions.dim5,
+  small: dimensions.dim10,
+  medium: dimensions.dim15,
+  large: dimensions.dim20,
+  extraLarge: dimensions.dim25,
+};
+
+export const RadiusDimension = {
+  extraSmall: dimensions.dim8,
+  small: dimensions.dim10,
+  medium: dimensions.dim15,
+  large: dimensions.dim20,
+  extraLarge: dimensions.dim30,
+};
+
+export const PaddingDimension = {
+  extraSmall: dimensions.dim5,
+  small: dimensions.dim10,
+  medium: dimensions.dim15,
+  large: dimensions.dim20,
+  extraLarge: dimensions.dim25,
+};
+
+export const MarginDimension = {
+  extraSmall: dimensions.dim5,
+  small: dimensions.dim10,
+  medium: dimensions.dim15,
+  large: dimensions.dim20,
+  extraLarge: dimensions.dim30,
+};
+
+export const HeightDimension = {
+  extraSmall: dimensions.dim5,
+  small: dimensions.dim10,
+  medium: dimensions.dim40,
+  large: dimensions.dim80,
+  extraLarge: dimensions.dim150,
+};
+
+export const WidthDimension = {
+  extraSmall: dimensions.dim5,
+  small: dimensions.dim10,
+  medium: dimensions.dim40,
+  large: dimensions.dim100,
+  extraLarge: dimensions.dim150,
 };

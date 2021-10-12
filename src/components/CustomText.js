@@ -4,10 +4,14 @@ import Colors from '~/theme/Colors';
 import {MarginDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
-const CustomText = ({text}) => {
+/**
+ * @param {CustomTextProps} props
+ * @returns {JSX.Element}
+ */
+const CustomText = props => {
   return (
     <>
-      <Text style={styles.boldText}>{text}</Text>
+      <Text style={styles.boldText}>{props.text}</Text>
     </>
   );
 };

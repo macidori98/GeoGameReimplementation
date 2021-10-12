@@ -4,6 +4,10 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension} from '~/theme/Dimen';
 import CustomText from './CustomText';
 
+/**
+ * @param {DetailRowProps} props
+ * @returns {JSX.Element}
+ */
 const DetailRow = props => {
   return (
     <View style={styles.countryDetailsContainer}>

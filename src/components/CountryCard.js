@@ -11,11 +11,10 @@ import {
 import FontSizes from '~/theme/FontSizes';
 
 /**
- *
- * @param {{country: Country}} param0
+ * @param {CountryCardProps} props
  * @returns {JSX.Element}
  */
-const CountryCard = ({country}) => {
+const CountryCard = props => {
   return (
     <View style={styles.container}>
       <View
@@ -24,11 +23,11 @@ const CountryCard = ({country}) => {
           ...CommonStyles.styles.screen,
         }}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{uri: country.flag}} />
+          <Image style={styles.image} source={{uri: props.country.flag}} />
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
-            {country.name} ({country.code})
+            {props.country.name} ({props.country.code})
           </Text>
         </View>
       </View>

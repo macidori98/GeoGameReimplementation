@@ -26,7 +26,9 @@ export const StudyNavigation = () => {
       <Stack.Screen
         component={DetailsScreen}
         name="Details"
-        options={({route}) => ({title: route.params.countryName})}
+        options={({route}) => ({
+          title: `${route.params.countryName} (${route.params.countryCode})`,
+        })}
       />
     </Stack.Navigator>
   );

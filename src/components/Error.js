@@ -8,11 +8,15 @@ import {
 } from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
-const Error = ({message}) => {
+/**
+ * @param {ErrorProps} props
+ * @returns {JSX.Element}
+ */
+const Error = props => {
   return (
     <View style={styles.errorContainer}>
       <Text style={styles.text}>Something went wrong! Sorryyy </Text>
-      <Text style={styles.text}>{message}</Text>
+      <Text style={styles.text}>{props.message}</Text>
     </View>
   );
 };

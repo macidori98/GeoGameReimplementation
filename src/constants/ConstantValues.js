@@ -1,3 +1,6 @@
+/**
+ * @type {Region[]}
+ */
 export const Regions = [
   {id: 'africa', name: 'Africa'},
   {id: 'americas', name: 'Americas'},

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import Colors from '~/theme/Colors';
 import FontSizes from '~/theme/FontSizes';
 import * as CommonStyles from '~/theme/CommonStyles';
@@ -10,12 +10,14 @@ import {
   WidthDimension,
 } from '~/theme/Dimen';
 
-const dimensions = Dimensions.get('screen');
-
-const ShadowedTextContainer = ({item}) => {
+/**
+ * @param {ShadowedTextContainerProps} props
+ * @returns {JSX.Element}
+ */
+const ShadowedTextContainer = props => {
   return (
     <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
-      <Text style={styles.text}>{item.name}</Text>
+      <Text style={styles.text}>{props.item.name}</Text>
     </View>
   );
 };

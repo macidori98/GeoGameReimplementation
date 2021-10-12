@@ -5,10 +5,10 @@ import {currentMillisToTimezoneMillis} from '~/helpers/DateHelpers';
 import CustomText from './CustomText';
 
 /**
- * @param {{timezones: Array<string>}} param0
- * @returns
+ * @param {TimeZoneProps} props
+ * @returns {JSX.Element}
  */
-const TimeZone = ({timezones}) => {
+const TimeZone = props => {
   /**
    * @type {ComponentState<number>}
    */
@@ -23,7 +23,7 @@ const TimeZone = ({timezones}) => {
 
   return (
     <View>
-      {timezones.map(item => (
+      {props.timezones.map(item => (
         <CustomText
           key={item}
           text={`${item} ${moment(

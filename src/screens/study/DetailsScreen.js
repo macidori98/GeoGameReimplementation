@@ -120,7 +120,7 @@ const DetailsScreen = props => {
 
   return (
     <>
-      {isLoading && !error && !countryDetails && <LoadingIndicator />}
+      {isLoading && !error && <LoadingIndicator />}
       {!isLoading && !error && countryDetails && showCountryDetails()}
       {!isLoading && error && <Error message={error} />}
     </>

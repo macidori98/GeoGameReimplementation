@@ -1,6 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
+/**
+ * @param {GameScreenProps} props
+ */
 const GameScreen = props => {
   return (
     <View>

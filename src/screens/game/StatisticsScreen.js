@@ -3,6 +3,9 @@ import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
 import StatisticsItem from '~/components/StatisticsItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 
+/**
+ * @param {StatisticsScreenProps} props
+ */
 const StatisticsScreen = props => {
   return (
     <View style={CommonStyles.styles.centered}>

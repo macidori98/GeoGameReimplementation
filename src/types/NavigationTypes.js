@@ -12,6 +12,14 @@
  */
 
 /**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'Statistics'>} StatisticsScreenProps
+ */
+
+/**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'Gaming'>} GameScreenProps
+ */
+
+/**
  * @template T
  * @typedef {import('@react-navigation/native').TypedNavigator<T, import('@react-navigation/native').StackNavigationState<import('@react-navigation/native').ParamListBase>,  import('@react-navigation/stack').StackNavigationOptions, import('@react-navigation/stack/lib/typescript/src/types').StackNavigationEventMap, ({ initialRouteName, children, screenListeners, screenOptions, ...rest}: import('@react-navigation/core').DefaultNavigatorOptions<import('@react-navigation/routers').ParamListBase, import('@react-navigation/routers').StackNavigationState<import('@react-navigation/routers').ParamListBase>, import('@react-navigation/stack').StackNavigationOptions, import('@react-navigation/stack/lib/typescript/src/types').StackNavigationEventMap> & import('@react-navigation/routers').StackRouterOptions & import('@react-navigation/stack/lib/typescript/src/types').StackNavigationConfig) => JSX.Element>} CreateNativeStackNavigatorType
  */

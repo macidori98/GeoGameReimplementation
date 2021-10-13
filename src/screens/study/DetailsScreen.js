@@ -20,7 +20,7 @@ import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
 import {getCountryDetailsWithBorders} from '~/mapper/CountryMapper';
-import {getCurrenciesComparedToLocalCurrencies} from '~/api/Service';
+import {getCurrenciesComparedToLocalCurrencies} from '~/mapper/ExchangeMapper';
 
 /**
  * @param {DetailsScreenProps} props
@@ -69,17 +69,17 @@ const DetailsScreen = props => {
   }, [countryCode]);
 
   const loadCurrencyRates = useCallback(async () => {
-    const rates = await getCurrenciesComparedToLocalCurrencies(
+    const result = await getCurrenciesComparedToLocalCurrencies(
       countryDetails.currencies[0],
       RNLocalize.getCurrencies()[0],
     );
 
-    if (rates.success === true) {
+    if (result.success === true) {
       setRate(
         '1 ' +
           countryDetails.currencies[0] +
           ' = ' +
-          `${rates.data} ` +
+          `${result.data} ` +
           RNLocalize.getCurrencies()[0],
       );
     }

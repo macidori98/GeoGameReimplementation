@@ -86,44 +86,16 @@ export const fetchAllRegionsCountries = async () => {
 };
 
 /**
- * @param {string} countryCurrency
- * @param {string} localCurrency
+ * @param {string} currency
  * @returns {Promise<SuccessResponseType<number>|ErrorResponseType>}
  */
-export const getCurrenciesComparedToLocalCurrencies = async (
-  countryCurrency,
-  localCurrency,
-) => {
-  try {
-    const URL = `${EXCHANGE_BASE_URL}${countryCurrency}`;
-    const respCountryCurrency = await fetch(`${URL}`);
-    const countryCurrenciesValues = await respCountryCurrency.json();
+export const fetchCurrencyData = async currency => {
+  const resp = await fetch(`${EXCHANGE_BASE_URL}${currency}`);
+  const currencyData = await resp.json();
 
-    if (countryCurrenciesValues.status !== undefined) {
-      return {success: false, message: countryCurrenciesValues.message};
-    }
-
-    const URL2 = `${EXCHANGE_BASE_URL}${localCurrency}`;
-    const respLocalCurrency = await fetch(`${URL2}`);
-    const localCurrenciesValues = await respLocalCurrency.json();
-
-    if (localCurrenciesValues.status !== undefined) {
-      return {success: false, message: localCurrenciesValues.message};
-    }
-
-    //country
-    const valueCountry = countryCurrenciesValues.rates[countryCurrency];
-    const harmasSzabalyResultCountry = 1 / valueCountry;
-
-    //local
-    const valueLocal = localCurrenciesValues.rates[localCurrency];
-    const harmasSzabalyResultLocal = valueLocal * harmasSzabalyResultCountry;
-
-    return {
-      success: true,
-      data: parseFloat(harmasSzabalyResultLocal.toFixed(4)),
-    };
-  } catch (error) {
-    return {success: false, message: error.toString()};
+  if (currencyData.status !== undefined) {
+    return {success: false, message: currencyData.message};
   }
+
+  return {success: true, data: currencyData.rates[currency]};
 };

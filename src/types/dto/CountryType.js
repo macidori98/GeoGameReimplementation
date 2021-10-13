@@ -19,6 +19,7 @@
  * @property {number} area
  * @property {Array<string>} timezones
  * @property {FlagsDTO} flags
+ * @property {string} region
  * @property {CurrencyDTO[]} currencies
  * @property {number} population
  * @property {Array<string>} [borders]

@@ -11,7 +11,6 @@ export const Regions = [
 
 export const Headers = {
   region: 'Regions',
-  loading: 'Loading...',
 };
 
 export const DetailLabel = {
@@ -22,4 +21,5 @@ export const DetailLabel = {
   currency: 'Currency:',
   timezones: 'Timezones:',
   noBorder: 'No borders',
+  loading: 'Loading...',
 };

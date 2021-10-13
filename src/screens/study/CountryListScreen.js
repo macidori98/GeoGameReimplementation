@@ -4,7 +4,7 @@ import CountryCard from '~/components/CountryCard';
 import Error from '~/components/Error';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
-import {getCountriesOfRegion} from '~/mapper/CountryMapper';
+import {getCountriesOfRegion, getRegionCountries} from '~/mapper/CountryMapper';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -29,7 +29,9 @@ const CountryListScreen = props => {
 
   const loadCountries = useCallback(async () => {
     setIsLoading(true);
-    const result = await getCountriesOfRegion(regionId);
+
+    const result = await getRegionCountries(regionId);
+    //const result = await getCountriesOfRegion(regionId);
 
     if (result.success === true) {
       setCountries(result.data);

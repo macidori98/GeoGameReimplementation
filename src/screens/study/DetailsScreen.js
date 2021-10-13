@@ -7,6 +7,7 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
+import * as RNLocalize from 'react-native-localize';
 import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
 import Error from '~/components/Error';
@@ -19,6 +20,7 @@ import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
 import {getCountryDetailsWithBorders} from '~/mapper/CountryMapper';
+import {getCurrenciesComparedToLocalCurrencies} from '~/api/Service';
 
 /**
  * @param {DetailsScreenProps} props
@@ -40,12 +42,17 @@ const DetailsScreen = props => {
   /**
    * @type {ComponentState<Country>}
    */
-  const [countryDetails, setCountryDetiails] = useState();
+  const [countryDetails, setCountryDetiails] = useState(null);
 
   /**
    * @type {ComponentState<Country[]>}
    */
   const [borders, setBorders] = useState(null);
+
+  /**
+   * @type {ComponentState<string>}
+   */
+  const [rate, setRate] = useState();
 
   const loadCountryData = useCallback(async () => {
     setIsLoading(true);
@@ -60,6 +67,29 @@ const DetailsScreen = props => {
 
     setIsLoading(false);
   }, [countryCode]);
+
+  const loadCurrencyRates = useCallback(async () => {
+    const rates = await getCurrenciesComparedToLocalCurrencies(
+      countryDetails.currencies[0],
+      RNLocalize.getCurrencies()[0],
+    );
+
+    if (rates.success === true) {
+      setRate(
+        '1 ' +
+          countryDetails.currencies[0] +
+          ' = ' +
+          `${rates.data} ` +
+          RNLocalize.getCurrencies()[0],
+      );
+    }
+  }, [countryDetails]);
+
+  useEffect(() => {
+    if (countryDetails) {
+      loadCurrencyRates();
+    }
+  }, [countryDetails, loadCurrencyRates]);
 
   useEffect(() => {
     loadCountryData();
@@ -84,10 +114,12 @@ const DetailsScreen = props => {
           <CustomText text={countryDetails.area} />
         </DetailRow>
         <DetailRow label={DetailLabel.currency}>
-          {countryDetails.currencies.map(item => (
-            <CustomText key={item} text={item} />
-          ))}
+          {!rate && (
+            <CustomText key={DetailLabel.loading} text={DetailLabel.loading} />
+          )}
+          {rate && <CustomText key={rate} text={rate} />}
         </DetailRow>
+
         <DetailRow label={DetailLabel.timezones}>
           <TimeZone timezones={countryDetails.timezones} />
         </DetailRow>
@@ -100,6 +132,7 @@ const DetailsScreen = props => {
               <TouchableItem
                 key={item.capital}
                 onPress={() => {
+                  setRate(null);
                   props.navigation.navigate('Details', {
                     countryName: item.name,
                     countryCode: item.code,

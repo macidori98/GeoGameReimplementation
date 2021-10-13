@@ -1,4 +1,5 @@
 import {
+  fetchAllRegionsCountries,
   fetchCountriesOfRegion,
   fetchCountryBorders,
   fetchCountryDetailsByCode,
@@ -50,6 +51,28 @@ export const getCountryDetailsWithBorders = async code => {
     }
   } catch (error) {
     return {success: false, message: error.toString()};
+  }
+};
+
+/**
+ * @param {string} regionId
+ * @returns {Promise<SuccessResponseType<Country[]>|ErrorResponseType>}
+ */
+export const getRegionCountries = async regionId => {
+  const regionsCountriesResult = await fetchAllRegionsCountries();
+
+  if (regionsCountriesResult.success === true) {
+    const selectedRegionCountries = regionsCountriesResult.data.filter(
+      item => item.region.toLowerCase() === regionId,
+    );
+
+    const mappedRegionCountries = selectedRegionCountries.map(item =>
+      countryMapper(item),
+    );
+
+    return {success: true, data: mappedRegionCountries};
+  } else {
+    return {success: false, message: regionsCountriesResult.message};
   }
 };
 

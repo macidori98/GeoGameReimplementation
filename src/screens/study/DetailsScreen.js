@@ -95,7 +95,7 @@ const DetailsScreen = props => {
     loadCountryData();
   }, [loadCountryData]);
 
-  const showCountryDetails = () => (
+  const createCountryDetails = () => (
     <ScrollView>
       <View style={CommonStyles.styles.screen}>
         <View style={styles.imageContainer}>
@@ -154,7 +154,7 @@ const DetailsScreen = props => {
   return (
     <>
       {isLoading && !error && <LoadingIndicator />}
-      {!isLoading && !error && countryDetails && showCountryDetails()}
+      {!isLoading && !error && countryDetails && createCountryDetails()}
       {!isLoading && error && <Error message={error} />}
     </>
   );

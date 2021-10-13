@@ -46,7 +46,7 @@ const CountryListScreen = props => {
     loadCountries();
   }, [loadCountries]);
 
-  const showCountriesList = () => (
+  const createCountriesList = () => (
     <View>
       <FlatList
         data={countries}
@@ -68,7 +68,7 @@ const CountryListScreen = props => {
   return (
     <View style={CommonStyles.styles.screen}>
       {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
-      {countries.length > 0 && !error && showCountriesList()}
+      {countries.length > 0 && !error && createCountriesList()}
       {error && !isLoading && <Error message={error} />}
     </View>
   );

@@ -1,3 +1,4 @@
+import {resolvePlugin} from '@babel/core';
 import {
   fetchAllRegionsCountries,
   fetchCountriesOfRegion,
@@ -31,23 +32,20 @@ export const getCountryDetailsWithBordersAndCurrency = async (
   code,
   localCurrency,
 ) => {
-  try {
-    const countryDetailsResult = await fetchCountryDetailsByCode(code);
+  const countryDetailsResult = await fetchCountryDetailsByCode(code);
 
-    if (countryDetailsResult.success === true) {
-      const bordersDetailsResult = await fetchCountryBorders(
-        countryDetailsResult.data.borders,
-      );
+  if (countryDetailsResult.success === true) {
+    const bordersDetailsResult = await fetchCountryBorders(
+      countryDetailsResult.data.borders,
+    );
 
-      const rateResult = await getCurrenciesComparedToLocalCurrencies(
-        countryDetailsResult.data.currencies[0].code,
-        localCurrency,
-      );
+    const rateResult = await getCurrenciesComparedToLocalCurrencies(
+      countryDetailsResult.data.currencies[0].code,
+      localCurrency,
+    );
 
-      if (
-        bordersDetailsResult.success === true &&
-        rateResult.success === true
-      ) {
+    if (bordersDetailsResult.success === true) {
+      if (rateResult.success === true) {
         return {
           success: true,
           data: {
@@ -61,17 +59,13 @@ export const getCountryDetailsWithBordersAndCurrency = async (
           },
         };
       } else {
-        return bordersDetailsResult.success === false
-          ? {success: false, message: bordersDetailsResult.message}
-          : rateResult.success === false
-          ? {success: false, message: rateResult.message}
-          : null;
+        return {success: false, message: rateResult.message};
       }
     } else {
-      return {success: false, message: countryDetailsResult.message};
+      return {success: false, message: bordersDetailsResult.message};
     }
-  } catch (error) {
-    return {success: false, message: error.toString()};
+  } else {
+    return {success: false, message: countryDetailsResult.message};
   }
 };
 

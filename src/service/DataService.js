@@ -1,4 +1,3 @@
-import {resolvePlugin} from '@babel/core';
 import {
   fetchAllRegionsCountries,
   fetchCountriesOfRegion,

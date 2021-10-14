@@ -49,7 +49,7 @@ const DetailsScreen = props => {
   const [borders, setBorders] = useState(null);
 
   /**
-   * @type {ComponentState<string>}
+   * @type {ComponentState<Exchange[]>}
    */
   const [rate, setRate] = useState();
 
@@ -57,19 +57,13 @@ const DetailsScreen = props => {
     setIsLoading(true);
     const result = await getCountryDetailsWithBordersAndCurrency(
       countryCode,
-      RNLocalize.getCurrencies()[0],
+      RNLocalize.getCurrencies(),
     );
 
     if (result.success === true) {
       setCountryDetiails(result.data.countryDetails);
       setBorders(result.data.borders);
-      setRate(
-        '1 ' +
-          result.data.countryDetails.currencies[0] +
-          ' = ' +
-          `${result.data.exchangeRate} ` +
-          RNLocalize.getCurrencies()[0],
-      );
+      setRate(result.data.exchangeRates);
     } else {
       setError(result.message);
     }
@@ -100,10 +94,12 @@ const DetailsScreen = props => {
           <CustomText text={countryDetails.area} />
         </DetailRow>
         <DetailRow label={DetailLabel.currency}>
-          {!rate && (
-            <CustomText key={DetailLabel.loading} text={DetailLabel.loading} />
-          )}
-          {rate && <CustomText key={rate} text={rate} />}
+          {rate.map(item => (
+            <CustomText
+              key={item.from + item.to}
+              text={'1 ' + item.from + ' = ' + item.value + ' ' + item.to}
+            />
+          ))}
         </DetailRow>
 
         <DetailRow label={DetailLabel.timezones}>

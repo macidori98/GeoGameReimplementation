@@ -1,3 +1,3 @@
 /**
- * @typedef {{countryDetails: Country, borders: Neighbour[], exchangeRate: number}} CountryDetailsType
+ * @typedef {{countryDetails: Country, borders: Neighbour[], exchangeRates: Exchange[]}} CountryDetailsType
  */

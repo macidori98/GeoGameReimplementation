@@ -24,12 +24,12 @@ export const getCountriesOfRegion = async region => {
 
 /**
  * @param {string} code
- * @param {string} localCurrency
+ * @param {Array<string>} localCurrencies
  * @returns {Promise<SuccessResponseType<CountryDetailsType>|ErrorResponseType>}
  */
 export const getCountryDetailsWithBordersAndCurrency = async (
   code,
-  localCurrency,
+  localCurrencies,
 ) => {
   const countryDetailsResult = await fetchCountryDetailsByCode(code);
 
@@ -39,8 +39,8 @@ export const getCountryDetailsWithBordersAndCurrency = async (
     );
 
     const rateResult = await getCurrenciesComparedToLocalCurrencies(
-      countryDetailsResult.data.currencies[0].code,
-      localCurrency,
+      countryDetailsResult.data.currencies.map(item => item.code),
+      localCurrencies,
     );
 
     if (bordersDetailsResult.success === true) {
@@ -54,7 +54,7 @@ export const getCountryDetailsWithBordersAndCurrency = async (
 
               return data;
             }),
-            exchangeRate: rateResult.data,
+            exchangeRates: rateResult.data,
           },
         };
       } else {
@@ -91,43 +91,58 @@ export const getRegionCountries = async regionId => {
 };
 
 /**
- * @param {string} countryCurrency
- * @param {string} localCurrency
- * @returns {Promise<SuccessResponseType<number>|ErrorResponseType>}
+ * @param {Array<string>} countryCurrencies
+ * @param {Array<string>} localCurrencies
+ * @returns {Promise<SuccessResponseType<Exchange[]>|ErrorResponseType>}
  */
 export const getCurrenciesComparedToLocalCurrencies = async (
-  countryCurrency,
-  localCurrency,
+  countryCurrencies,
+  localCurrencies,
 ) => {
   /**
-   * @type {number}
+   * @type {Exchange[]}
    */
-  var resultCountry;
+  const result = [];
 
-  /**
-   * @type {number}
-   */
-  var resultLocal;
+  for (const countryCurrency of countryCurrencies) {
+    for (const localCurrency of localCurrencies) {
+      /**
+       * @type {number}
+       */
+      var resultCountry;
 
-  //country
-  const valueCountry = await fetchCurrencyData(countryCurrency);
-  if (valueCountry.success === true) {
-    resultCountry = 1 / exchangeMapper(valueCountry.data, countryCurrency);
-  } else {
-    return valueCountry;
+      /**
+       * @type {number}
+       */
+      var resultLocal;
+
+      //country
+      const valueCountryResult = await fetchCurrencyData(countryCurrency);
+      if (valueCountryResult.success === true) {
+        resultCountry =
+          1 / exchangeMapper(valueCountryResult.data, countryCurrency);
+      } else {
+        return valueCountryResult;
+      }
+
+      //local
+      const valueLocalResult = await fetchCurrencyData(localCurrency);
+      if (valueLocalResult.success === true) {
+        resultLocal =
+          exchangeMapper(valueLocalResult.data, localCurrency) * resultCountry;
+      } else {
+        return valueLocalResult;
+      }
+
+      result.push({
+        from: countryCurrency,
+        to: localCurrency,
+        value: parseFloat(resultLocal.toFixed(4)),
+      });
+    }
   }
 
-  //local
-  const valueLocal = await fetchCurrencyData(localCurrency);
-  if (valueLocal.success === true) {
-    resultLocal =
-      exchangeMapper(valueLocal.data, localCurrency) * resultCountry;
-  } else {
-    return valueLocal;
-  }
+  console.log(result);
 
-  return {
-    success: true,
-    data: parseFloat(resultLocal.toFixed(4)),
-  };
+  return {success: true, data: result};
 };

@@ -10,3 +10,10 @@
  * @property {number} population
  * @property {Array<string>} [borders]
  */
+
+/**
+ * @typedef {object} Neighbour
+ * @property {string} name
+ * @property {string} code
+ * @property {string} flag
+ */

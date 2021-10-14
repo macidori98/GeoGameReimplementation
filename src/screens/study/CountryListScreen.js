@@ -4,7 +4,7 @@ import CountryCard from '~/components/CountryCard';
 import Error from '~/components/Error';
 import LoadingIndicator from '~/components/LoadingIndicator';
 import TouchableItem from '~/components/TouchableItem';
-import {getCountriesOfRegion, getRegionCountries} from '~/mapper/CountryMapper';
+import {getRegionCountries} from '~/service/DataService';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -35,6 +35,9 @@ const CountryListScreen = props => {
 
     if (result.success === true) {
       setCountries(result.data);
+      result.data.map(item => {
+        console.log(item.name + ' ' + item.currencies.length);
+      });
     } else {
       setError(result.message);
     }

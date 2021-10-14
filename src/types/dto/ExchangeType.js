@@ -1,5 +1,5 @@
 /**
- * @typedef {object} RatesDTO
+ * @typedef {Object<string, number>} RatesDTO
  */
 
 /**

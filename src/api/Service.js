@@ -87,7 +87,7 @@ export const fetchAllRegionsCountries = async () => {
 
 /**
  * @param {string} currency
- * @returns {Promise<SuccessResponseType<number>|ErrorResponseType>}
+ * @returns {Promise<SuccessResponseType<ExchangeDTO>|ErrorResponseType>}
  */
 export const fetchCurrencyData = async currency => {
   const resp = await fetch(`${EXCHANGE_BASE_URL}${currency}`);
@@ -97,5 +97,5 @@ export const fetchCurrencyData = async currency => {
     return {success: false, message: currencyData.message};
   }
 
-  return {success: true, data: currencyData.rates[currency]};
+  return {success: true, data: currencyData};
 };

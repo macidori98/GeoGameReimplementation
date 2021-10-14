@@ -19,8 +19,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
-import {getCountryDetailsWithBorders} from '~/mapper/CountryMapper';
-import {getCurrenciesComparedToLocalCurrencies} from '~/mapper/ExchangeMapper';
+import {getCountryDetailsWithBordersAndCurrency} from '~/service/DataService';
 
 /**
  * @param {DetailsScreenProps} props
@@ -45,7 +44,7 @@ const DetailsScreen = props => {
   const [countryDetails, setCountryDetiails] = useState(null);
 
   /**
-   * @type {ComponentState<Country[]>}
+   * @type {ComponentState<Neighbour[]>}
    */
   const [borders, setBorders] = useState(null);
 
@@ -56,40 +55,27 @@ const DetailsScreen = props => {
 
   const loadCountryData = useCallback(async () => {
     setIsLoading(true);
-    const result = await getCountryDetailsWithBorders(countryCode);
+    const result = await getCountryDetailsWithBordersAndCurrency(
+      countryCode,
+      RNLocalize.getCurrencies()[0],
+    );
 
     if (result.success === true) {
       setCountryDetiails(result.data.countryDetails);
       setBorders(result.data.borders);
+      setRate(
+        '1 ' +
+          result.data.countryDetails.currencies[0] +
+          ' = ' +
+          `${result.data.exchangeRate} ` +
+          RNLocalize.getCurrencies()[0],
+      );
     } else {
       setError(result.message);
     }
 
     setIsLoading(false);
   }, [countryCode]);
-
-  const loadCurrencyRates = useCallback(async () => {
-    const result = await getCurrenciesComparedToLocalCurrencies(
-      countryDetails.currencies[0],
-      RNLocalize.getCurrencies()[0],
-    );
-
-    if (result.success === true) {
-      setRate(
-        '1 ' +
-          countryDetails.currencies[0] +
-          ' = ' +
-          `${result.data} ` +
-          RNLocalize.getCurrencies()[0],
-      );
-    }
-  }, [countryDetails]);
-
-  useEffect(() => {
-    if (countryDetails) {
-      loadCurrencyRates();
-    }
-  }, [countryDetails, loadCurrencyRates]);
 
   useEffect(() => {
     loadCountryData();
@@ -130,7 +116,7 @@ const DetailsScreen = props => {
           {borders?.length > 0 ? (
             borders?.map(item => (
               <TouchableItem
-                key={item.capital}
+                key={item.code}
                 onPress={() => {
                   setRate(null);
                   props.navigation.navigate('Details', {

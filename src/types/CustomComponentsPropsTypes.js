@@ -1,5 +1,5 @@
 /**
- * @typedef {{country: Country}} CountryCardProps
+ * @typedef {{country: Neighbour}} CountryCardProps
  */
 
 /**

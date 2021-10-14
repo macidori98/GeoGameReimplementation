@@ -58,13 +58,13 @@ export const getCountryDetailsWithBordersAndCurrency = async (
           },
         };
       } else {
-        return {success: false, message: rateResult.message};
+        return rateResult;
       }
     } else {
-      return {success: false, message: bordersDetailsResult.message};
+      return bordersDetailsResult;
     }
   } else {
-    return {success: false, message: countryDetailsResult.message};
+    return countryDetailsResult;
   }
 };
 
@@ -141,8 +141,6 @@ export const getCurrenciesComparedToLocalCurrencies = async (
       });
     }
   }
-
-  console.log(result);
 
   return {success: true, data: result};
 };

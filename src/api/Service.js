@@ -1,5 +1,6 @@
 const COUNTRY_BASE_URL = 'https://restcountries.com/v2';
-const API_KEY = 'e176dcf7d2cd08934e3cdc35c4078b8c';
+//const API_KEY = '35d3c7f5c33a4161d407d57941adcc03'; 250
+const API_KEY = '0171184a9bd90227681df29dc0a4bb44';
 const EXCHANGE_BASE_URL = `http://api.exchangeratesapi.io/v1/latest?access_key=${API_KEY}&format=1&symbols=`;
 
 /**

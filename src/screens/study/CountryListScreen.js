@@ -1,8 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {FlatList, View} from 'react-native';
 import CountryCard from '~/components/CountryCard';
-import Error from '~/components/Error';
-import LoadingIndicator from '~/components/LoadingIndicator';
+import GenericComponent from '~/components/GenericComponent';
 import TouchableItem from '~/components/TouchableItem';
 import {getRegionCountries} from '~/service/DataService';
 import * as CommonStyles from '~/theme/CommonStyles';
@@ -15,39 +14,12 @@ const CountryListScreen = props => {
   /**
    * @type {ComponentState<Country[]>}
    */
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState();
 
-  /**
-   * @type {ComponentState<string>}
-   */
-  const [error, setError] = useState();
-
-  /**
-   * @type {ComponentState<boolean>}
-   */
-  const [isLoading, setIsLoading] = useState(false);
-
-  const loadCountries = useCallback(async () => {
-    setIsLoading(true);
-
-    const result = await getRegionCountries(regionId);
+  const loadCountriesForGenericComponent = useCallback(async () => {
+    return await getRegionCountries(regionId);
     //const result = await getCountriesOfRegion(regionId);
-
-    if (result.success === true) {
-      setCountries(result.data);
-      result.data.map(item => {
-        console.log(item.name + ' ' + item.currencies.length);
-      });
-    } else {
-      setError(result.message);
-    }
-
-    setIsLoading(false);
   }, [regionId]);
-
-  useEffect(() => {
-    loadCountries();
-  }, [loadCountries]);
 
   const createCountriesList = () => (
     <View>
@@ -68,11 +40,20 @@ const CountryListScreen = props => {
       />
     </View>
   );
+
   return (
     <View style={CommonStyles.styles.screen}>
-      {isLoading && countries.length === 0 && !error && <LoadingIndicator />}
-      {countries.length > 0 && !error && createCountriesList()}
-      {error && !isLoading && <Error message={error} />}
+      {!countries && (
+        <GenericComponent
+          onDataRecieved={
+            /**@param {Country[]} data */ data => {
+              setCountries(data);
+            }
+          }
+          loadData={loadCountriesForGenericComponent}
+        />
+      )}
+      {countries && createCountriesList()}
     </View>
   );
 };

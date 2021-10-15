@@ -82,6 +82,7 @@ const DetailsScreen = props => {
               <TouchableItem
                 key={item.code}
                 onPress={() => {
+                  setDetails(null);
                   props.navigation.navigate('Details', {
                     countryName: item.name,
                     countryCode: item.code,

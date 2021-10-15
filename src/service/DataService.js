@@ -31,40 +31,21 @@ export const getCountryDetailsWithBordersAndCurrency = async (
   code,
   localCurrencies,
 ) => {
-  const countryDetailsResult = await fetchCountryDetailsByCode(code);
+  try {
+    const countryDetails = await getCountryDetailsByCode(code);
+    const borders = await getCountryBorders(countryDetails.borders);
+    const rates = await getRates(countryDetails.currencies, localCurrencies);
 
-  if (countryDetailsResult.success === true) {
-    const bordersDetailsResult = await fetchCountryBorders(
-      countryDetailsResult.data.borders,
-    );
-
-    const rateResult = await getCurrenciesComparedToLocalCurrencies(
-      countryDetailsResult.data.currencies.map(item => item.code),
-      localCurrencies,
-    );
-
-    if (bordersDetailsResult.success === true) {
-      if (rateResult.success === true) {
-        return {
-          success: true,
-          data: {
-            countryDetails: countryMapper(countryDetailsResult.data),
-            borders: bordersDetailsResult.data.map(item => {
-              const data = neighbourMapper(item);
-
-              return data;
-            }),
-            exchangeRates: rateResult.data,
-          },
-        };
-      } else {
-        return rateResult;
-      }
-    } else {
-      return bordersDetailsResult;
-    }
-  } else {
-    return countryDetailsResult;
+    return {
+      success: true,
+      data: {
+        countryDetails: countryDetails,
+        borders: borders,
+        exchangeRates: rates,
+      },
+    };
+  } catch (error) {
+    return {success: false, message: error.toString()};
   }
 };
 
@@ -143,4 +124,52 @@ export const getCurrenciesComparedToLocalCurrencies = async (
   }
 
   return {success: true, data: result};
+};
+
+/**
+ * @param {string} code
+ * @returns {Promise<Country>}
+ */
+const getCountryDetailsByCode = async code => {
+  const countryDetailsResult = await fetchCountryDetailsByCode(code);
+
+  if (countryDetailsResult.success === true) {
+    return countryMapper(countryDetailsResult.data);
+  } else {
+    throw new Error(countryDetailsResult.message);
+  }
+};
+
+/**
+ * @param {string[]} borders
+ * @returns {Promise<Neighbour[]>}
+ */
+const getCountryBorders = async borders => {
+  const bordersDetailsResult = await fetchCountryBorders(borders);
+
+  if (bordersDetailsResult.success === true) {
+    return bordersDetailsResult.data.map(item => {
+      return neighbourMapper(item);
+    });
+  } else {
+    throw new Error(bordersDetailsResult.message);
+  }
+};
+
+/**
+ * @param {Array<string>} countryCurrencies
+ * @param {Array<string>} localCurrencies
+ * @returns {Promise<Exchange[]>}
+ */
+const getRates = async (countryCurrencies, localCurrencies) => {
+  const ratesResult = await getCurrenciesComparedToLocalCurrencies(
+    countryCurrencies,
+    localCurrencies,
+  );
+
+  if (ratesResult.success === true) {
+    return ratesResult.data;
+  } else {
+    throw new Error(ratesResult.message);
+  }
 };

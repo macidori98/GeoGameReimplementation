@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import {View} from 'react-native';
 import Error from './Error';
 import LoadingIndicator from './LoadingIndicator';
 
@@ -11,7 +12,7 @@ const GenericComponent = props => {
   /**
    * @type {ComponentState<string>}
    */
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
 
   /**
    * @type {ComponentState<boolean>}
@@ -37,6 +38,7 @@ const GenericComponent = props => {
 
   return (
     <>
+      {!isLoading && !error && <View></View>}
       {isLoading && !error && <LoadingIndicator />}
       {error && !isLoading && <Error message={error} />}
     </>

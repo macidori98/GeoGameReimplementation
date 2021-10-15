@@ -29,6 +29,7 @@ const CountryListScreen = props => {
         renderItem={({item}) => (
           <TouchableItem
             onPress={() => {
+              setCountries(null);
               props.navigation.navigate('Details', {
                 countryCode: item.code,
                 countryName: item.name,

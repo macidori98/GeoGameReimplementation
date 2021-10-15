@@ -38,7 +38,6 @@ const GenericComponent = props => {
 
   return (
     <>
-      {!isLoading && !error && <View></View>}
       {isLoading && !error && <LoadingIndicator />}
       {error && !isLoading && <Error message={error} />}
     </>

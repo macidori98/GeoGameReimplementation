@@ -50,23 +50,36 @@ const DetailsScreen = props => {
   if (details) {
     DATA = [
       {
+        title: '',
+        data: [
+          <View style={styles.imageContainer}>
+            <Image
+              style={CommonStyles.styles.screen}
+              source={{uri: details.countryDetails.flag}}
+            />
+          </View>,
+        ],
+      },
+      {
         title: DetailLabel.capital,
-        data: [details.countryDetails.capital],
+        data: [<CustomText text={details.countryDetails.capital} />],
       },
       {
         title: DetailLabel.population,
-        data: [details.countryDetails.population],
+        data: [<CustomText text={details.countryDetails.population} />],
       },
       {
         title: DetailLabel.area,
-        data: [details.countryDetails.area],
+        data: [<CustomText text={details.countryDetails.area} />],
       },
       {
         title: DetailLabel.currency,
         data: [
-          details.exchangeRates.map(
-            item => '1 ' + item.from + ' = ' + item.value + ' ' + item.to,
-          ),
+          details.exchangeRates.map(item => (
+            <CustomText
+              text={'1 ' + item.from + ' = ' + item.value + ' ' + item.to}
+            />
+          )),
         ],
       },
       {
@@ -78,19 +91,17 @@ const DetailsScreen = props => {
         data: [
           details.borders?.length > 0 ? (
             details.borders?.map(item => (
-              <View key={item.code} style={{height: 400}}>
-                <TouchableItem
-                  key={item.code}
-                  onPress={() => {
-                    setDetails(null);
-                    props.navigation.navigate('Details', {
-                      countryName: item.name,
-                      countryCode: item.code,
-                    });
-                  }}>
-                  <CountryCard country={item} />
-                </TouchableItem>
-              </View>
+              <TouchableItem
+                key={item.code}
+                onPress={() => {
+                  setDetails(null);
+                  props.navigation.navigate('Details', {
+                    countryName: item.name,
+                    countryCode: item.code,
+                  });
+                }}>
+                <CountryCard country={item} />
+              </TouchableItem>
             ))
           ) : (
             <View style={styles.borderTextContainer}>
@@ -104,18 +115,16 @@ const DetailsScreen = props => {
 
   const createCountryDetailsSectionList = () => (
     <View style={CommonStyles.styles.screen}>
-      <View style={styles.imageContainer}>
-        <Image
-          style={CommonStyles.styles.screen}
-          source={{uri: details.countryDetails.flag}}
-        />
-      </View>
       <SectionList
         sections={DATA}
         keyExtractor={(item, index) => item + index}
-        renderItem={({item}) => <CustomText text={item} />}
+        renderItem={({item}) => item}
         renderSectionHeader={({section: {title}}) => (
-          <CustomText text={title} size={FontSizes.large} />
+          <View style={{backgroundColor: 'white', padding: 10}}>
+            <View style={{alignItems: 'center'}}>
+              <CustomText text={title} size={FontSizes.large} />
+            </View>
+          </View>
         )}
       />
     </View>

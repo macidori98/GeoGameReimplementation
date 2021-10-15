@@ -3,7 +3,7 @@
  */
 
 /**
- * @typedef {{text: string|number}} CustomTextProps
+ * @typedef {{text: string|number, size?: number}} CustomTextProps
  */
 
 /**

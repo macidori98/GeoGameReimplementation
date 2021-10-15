@@ -1,5 +1,4 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {View} from 'react-native';
 import Error from './Error';
 import LoadingIndicator from './LoadingIndicator';
 

@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Text,
+  SectionList,
 } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import CountryCard from '~/components/CountryCard';
@@ -19,6 +20,7 @@ import DetailRow from '~/components/DetailRow';
 import FontSizes from '~/theme/FontSizes';
 import {getCountryDetailsWithBordersAndCurrency} from '~/service/DataService';
 import GenericComponent from '~/components/GenericComponent';
+import {createSelectorHook} from 'react-redux';
 
 /**
  * @param {DetailsScreenProps} props
@@ -42,6 +44,82 @@ const DetailsScreen = props => {
   useEffect(() => {
     loadCountryData();
   }, [loadCountryData]);
+
+  var DATA = [];
+
+  if (details) {
+    DATA = [
+      {
+        title: DetailLabel.capital,
+        data: [details.countryDetails.capital],
+      },
+      {
+        title: DetailLabel.population,
+        data: [details.countryDetails.population],
+      },
+      {
+        title: DetailLabel.area,
+        data: [details.countryDetails.area],
+      },
+      {
+        title: DetailLabel.currency,
+        data: [
+          details.exchangeRates.map(
+            item => '1 ' + item.from + ' = ' + item.value + ' ' + item.to,
+          ),
+        ],
+      },
+      {
+        title: DetailLabel.timezones,
+        data: [<TimeZone timezones={details.countryDetails.timezones} />],
+      },
+      {
+        title: DetailLabel.borders,
+        data: [
+          details.borders?.length > 0 ? (
+            details.borders?.map(item => (
+              <View key={item.code} style={{height: 400}}>
+                <TouchableItem
+                  key={item.code}
+                  onPress={() => {
+                    setDetails(null);
+                    props.navigation.navigate('Details', {
+                      countryName: item.name,
+                      countryCode: item.code,
+                    });
+                  }}>
+                  <CountryCard country={item} />
+                </TouchableItem>
+              </View>
+            ))
+          ) : (
+            <View style={styles.borderTextContainer}>
+              <CustomText text={DetailLabel.noBorder} />
+            </View>
+          ),
+        ],
+      },
+    ];
+  }
+
+  const createCountryDetailsSectionList = () => (
+    <View style={CommonStyles.styles.screen}>
+      <View style={styles.imageContainer}>
+        <Image
+          style={CommonStyles.styles.screen}
+          source={{uri: details.countryDetails.flag}}
+        />
+      </View>
+      <SectionList
+        sections={DATA}
+        keyExtractor={(item, index) => item + index}
+        renderItem={({item}) => <CustomText text={item} />}
+        renderSectionHeader={({section: {title}}) => (
+          <CustomText text={title} size={FontSizes.large} />
+        )}
+      />
+    </View>
+  );
 
   const createCountryDetails = () => (
     <ScrollView>
@@ -113,7 +191,7 @@ const DetailsScreen = props => {
           loadData={loadCountryData}
         />
       )}
-      {details && createCountryDetails()}
+      {details && createCountryDetailsSectionList()}
     </>
   );
 };

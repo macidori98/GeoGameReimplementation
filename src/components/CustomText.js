@@ -11,7 +11,9 @@ import FontSizes from '~/theme/FontSizes';
 const CustomText = props => {
   return (
     <>
-      <Text style={styles.boldText}>{props.text}</Text>
+      <Text style={{...styles.boldText, fontSize: props.size}}>
+        {props.text}
+      </Text>
     </>
   );
 };

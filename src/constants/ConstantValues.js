@@ -14,6 +14,7 @@ export const Headers = {
 };
 
 export const DetailLabel = {
+  flag: 'Flag:',
   capital: 'Capital:',
   area: 'Area:',
   population: 'Population:',

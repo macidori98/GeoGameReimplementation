@@ -4,5 +4,5 @@
  * @returns {number}
  */
 export const exchangeMapper = (exchange, key) => {
-  return exchange.rates[key];
+  return 123; //exchange.rates[key];
 };

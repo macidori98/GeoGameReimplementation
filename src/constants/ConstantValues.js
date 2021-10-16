@@ -14,13 +14,13 @@ export const Headers = {
 };
 
 export const DetailLabel = {
-  flag: 'Flag:',
-  capital: 'Capital:',
-  area: 'Area:',
-  population: 'Population:',
+  flag: 'Flag',
+  capital: 'Capital',
+  area: 'Area',
+  population: 'Population',
   borders: 'Borders',
-  currency: 'Currency:',
-  timezones: 'Timezones:',
+  currency: 'Currency',
+  timezones: 'Timezones',
   noBorder: 'No borders',
   loading: 'Loading...',
 };

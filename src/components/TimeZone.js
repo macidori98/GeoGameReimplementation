@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {currentMillisToTimezoneMillis} from '~/helpers/DateHelpers';
 import CustomText from './CustomText';
+import * as CommonStyles from '~/theme/CommonStyles';
+import FontSizes from '~/theme/FontSizes';
 
 /**
  * @param {TimeZoneProps} props
@@ -22,7 +24,7 @@ const TimeZone = props => {
   }, []);
 
   return (
-    <View>
+    <View style={{...CommonStyles.styles.centered}}>
       {props.timezones.map(item => (
         <CustomText
           key={item}
@@ -32,6 +34,7 @@ const TimeZone = props => {
               parseInt(String(item).substring(3, 6), 10),
             ),
           ).format('HH:mm:ss ')}`}
+          size={FontSizes.medium}
         />
       ))}
     </View>

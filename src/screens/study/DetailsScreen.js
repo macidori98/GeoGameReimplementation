@@ -19,7 +19,6 @@ import FontSizes from '~/theme/FontSizes';
 import {getCountryDetailsWithBordersAndCurrency} from '~/service/DataService';
 import GenericComponent from '~/components/GenericComponent';
 import {convertDataForSectionList} from '~/helpers/DataConverter';
-import Colors from '~/theme/Colors';
 
 /**
  * @param {DetailsScreenProps} props
@@ -69,13 +68,20 @@ const DetailsScreen = props => {
                 </View>
               );
             case 'text':
-              return <CustomText text={item.text} />;
+              return (
+                <View style={{...CommonStyles.styles.centered}}>
+                  <CustomText text={item.text} size={FontSizes.medium} />
+                </View>
+              );
             case 'exchnage':
               return item.exchanges.map(i => (
-                <CustomText
-                  key={i.from + i.to}
-                  text={`1 ${i.from} = ${i.value} ${i.to}`}
-                />
+                <View style={{...CommonStyles.styles.centered}}>
+                  <CustomText
+                    key={i.from + i.to}
+                    text={`1 ${i.from} = ${i.value} ${i.to}`}
+                    size={FontSizes.medium}
+                  />
+                </View>
               ));
             case 'timezones':
               return <TimeZone timezones={item.timezones} />;
@@ -96,7 +102,10 @@ const DetailsScreen = props => {
                 ))
               ) : (
                 <View style={styles.borderTextContainer}>
-                  <CustomText text={DetailLabel.noBorder} />
+                  <CustomText
+                    text={DetailLabel.noBorder}
+                    size={FontSizes.medium}
+                  />
                 </View>
               );
             default:
@@ -135,6 +144,8 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomRightRadius: RadiusDimension.extraLarge,
     borderBottomLeftRadius: RadiusDimension.extraLarge,
+    borderTopRightRadius: RadiusDimension.extraLarge,
+    borderTopLeftRadius: RadiusDimension.extraLarge,
     overflow: 'hidden',
   },
   borderTextContainer: {
@@ -146,7 +157,6 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.large,
   },
   titleContainer: {
-    backgroundColor: Colors.white,
     padding: 10,
     alignItems: 'center',
   },

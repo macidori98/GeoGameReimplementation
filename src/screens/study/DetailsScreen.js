@@ -60,7 +60,7 @@ const DetailsScreen = props => {
           switch (item.typeIdentifier) {
             case 'flag':
               return (
-                <View style={styles.imageContainer}>
+                <View key={item.typeIdentifier} style={styles.imageContainer}>
                   <Image
                     style={CommonStyles.styles.screen}
                     source={{uri: item.png}}
@@ -69,13 +69,17 @@ const DetailsScreen = props => {
               );
             case 'text':
               return (
-                <View style={{...CommonStyles.styles.centered}}>
+                <View
+                  key={item.typeIdentifier}
+                  style={{...CommonStyles.styles.centered}}>
                   <CustomText text={item.text} size={FontSizes.medium} />
                 </View>
               );
             case 'exchnage':
               return item.exchanges.map(i => (
-                <View style={{...CommonStyles.styles.centered}}>
+                <View
+                  key={item.typeIdentifier}
+                  style={{...CommonStyles.styles.centered}}>
                   <CustomText
                     key={i.from + i.to}
                     text={`1 ${i.from} = ${i.value} ${i.to}`}
@@ -101,15 +105,15 @@ const DetailsScreen = props => {
                   </TouchableItem>
                 ))
               ) : (
-                <View style={styles.borderTextContainer}>
+                <View
+                  key={item.typeIdentifier}
+                  style={styles.borderTextContainer}>
                   <CustomText
                     text={DetailLabel.noBorder}
                     size={FontSizes.medium}
                   />
                 </View>
               );
-            default:
-              return <Text>123</Text>;
           }
         }}
         renderSectionHeader={({section: {title}}) => (

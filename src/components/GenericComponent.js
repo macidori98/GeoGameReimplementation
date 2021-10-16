@@ -3,11 +3,12 @@ import Error from './Error';
 import LoadingIndicator from './LoadingIndicator';
 
 /**
- *
  * @param {{onDataRecieved: Function, loadData: () => Promise<SuccessResponseType<*>|ErrorResponseType>}} props
  * @returns
  */
 const GenericComponent = props => {
+  const {onDataRecieved, loadData} = props;
+
   /**
    * @type {ComponentState<string>}
    */
@@ -20,16 +21,16 @@ const GenericComponent = props => {
 
   const loadComponentData = useCallback(async () => {
     setIsLoading(true);
-    const result = await props.loadData();
+    const result = await loadData();
 
     if (result.success === true) {
-      props.onDataRecieved(result.data);
+      onDataRecieved(result.data);
     } else {
       setError(result.message);
     }
 
     setIsLoading(false);
-  }, [props]);
+  }, [loadData, onDataRecieved]);
 
   useEffect(() => {
     loadComponentData();

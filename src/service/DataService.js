@@ -33,15 +33,17 @@ export const getCountryDetailsWithBordersAndCurrency = async (
 ) => {
   try {
     const countryDetails = await getCountryDetailsByCode(code);
-    const borders = await getCountryBorders(countryDetails.borders);
-    const rates = await getRates(countryDetails.currencies, localCurrencies);
+    const resp = await Promise.all([
+      getCountryBorders(countryDetails.borders),
+      getRates(countryDetails.currencies, localCurrencies),
+    ]);
 
     return {
       success: true,
       data: {
         countryDetails: countryDetails,
-        borders: borders,
-        exchangeRates: rates,
+        borders: resp[0],
+        exchangeRates: resp[1],
       },
     };
   } catch (error) {

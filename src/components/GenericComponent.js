@@ -3,7 +3,7 @@ import Error from './Error';
 import LoadingIndicator from './LoadingIndicator';
 
 /**
- * @param {{onDataRecieved: Function, loadData: () => Promise<SuccessResponseType<*>|ErrorResponseType>}} props
+ * @param {{onDataRecieved: (data: any) => JSX.Element, loadData: () => Promise<SuccessResponseType<*>|ErrorResponseType>}} props
  * @returns
  */
 const GenericComponent = props => {
@@ -19,12 +19,22 @@ const GenericComponent = props => {
    */
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+   * @type {ComponentState<JSX.Element>}
+   */
+  const [showingElement, setShowingElement] = useState();
+
+  const createShowingElement = () => {
+    return showingElement;
+  };
+
   const loadComponentData = useCallback(async () => {
     setIsLoading(true);
     const result = await loadData();
 
     if (result.success === true) {
-      onDataRecieved(result.data);
+      const resp = onDataRecieved(result.data);
+      setShowingElement(resp);
     } else {
       setError(result.message);
     }
@@ -40,6 +50,7 @@ const GenericComponent = props => {
     <>
       {isLoading && !error && <LoadingIndicator />}
       {error && !isLoading && <Error message={error} />}
+      {showingElement !== undefined && createShowingElement()}
     </>
   );
 };

@@ -1,12 +1,5 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  SectionList,
-} from 'react-native';
+import React, {useCallback, useEffect} from 'react';
+import {Dimensions, Image, StyleSheet, View, SectionList} from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import CountryCard from '~/components/CountryCard';
 import CustomText from '~/components/CustomText';
@@ -27,11 +20,6 @@ import {convertDataForSectionList} from '~/helpers/DataConverter';
 const DetailsScreen = props => {
   const {countryCode} = props.route.params;
 
-  /**
-   * @type {ComponentState<CountryDetailsType>}
-   */
-  const [details, setDetails] = useState(null);
-
   const loadCountryData = useCallback(async () => {
     return await getCountryDetailsWithBordersAndCurrency(
       countryCode,
@@ -44,18 +32,13 @@ const DetailsScreen = props => {
   }, [loadCountryData]);
 
   /**
-   * @type {SectionListDataType}
+   * @param {SectionListDataType} data
+   * @returns {JSX.Element}
    */
-  var DATA = [];
-
-  if (details) {
-    DATA = convertDataForSectionList(details);
-  }
-
-  const createCountryDetailsSectionList = () => (
+  const createCountryDetailsSectionList = data => (
     <View style={CommonStyles.styles.screen}>
       <SectionList
-        sections={DATA}
+        sections={data}
         renderItem={({item}) => {
           switch (item.typeIdentifier) {
             case 'flag':
@@ -95,7 +78,6 @@ const DetailsScreen = props => {
                   <TouchableItem
                     key={i.code}
                     onPress={() => {
-                      setDetails(null);
                       props.navigation.navigate('Details', {
                         countryName: i.name,
                         countryCode: i.code,
@@ -126,19 +108,15 @@ const DetailsScreen = props => {
   );
 
   return (
-    <>
-      {!details && (
-        <GenericComponent
-          onDataRecieved={
-            /**@param {CountryDetailsType} data */ data => {
-              setDetails(data);
-            }
-          }
-          loadData={loadCountryData}
-        />
-      )}
-      {details && createCountryDetailsSectionList()}
-    </>
+    <GenericComponent
+      onDataRecieved={
+        /**@param {CountryDetailsType} data */ data => {
+          const convertedData = convertDataForSectionList(data);
+          return createCountryDetailsSectionList(convertedData);
+        }
+      }
+      loadData={loadCountryData}
+    />
   );
 };
 

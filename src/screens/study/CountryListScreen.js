@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 import {FlatList, View} from 'react-native';
 import CountryCard from '~/components/CountryCard';
 import GenericComponent from '~/components/GenericComponent';
@@ -11,17 +11,17 @@ import * as CommonStyles from '~/theme/CommonStyles';
  */
 const CountryListScreen = props => {
   const {regionId} = props.route.params;
-  /**
-   * @type {ComponentState<Country[]>}
-   */
-  const [countries, setCountries] = useState();
 
   const loadCountriesForGenericComponent = useCallback(async () => {
     return await getRegionCountries(regionId);
     //const result = await getCountriesOfRegion(regionId);
   }, [regionId]);
 
-  const createCountriesList = () => (
+  /**
+   * @param {Country[]} countries
+   * @returns {JSX.Element}
+   */
+  const createCountriesList = countries => (
     <View>
       <FlatList
         data={countries}
@@ -29,7 +29,6 @@ const CountryListScreen = props => {
         renderItem={({item}) => (
           <TouchableItem
             onPress={() => {
-              setCountries(null);
               props.navigation.navigate('Details', {
                 countryCode: item.code,
                 countryName: item.name,
@@ -44,17 +43,14 @@ const CountryListScreen = props => {
 
   return (
     <View style={CommonStyles.styles.screen}>
-      {!countries && (
-        <GenericComponent
-          onDataRecieved={
-            /**@param {Country[]} data */ data => {
-              setCountries(data);
-            }
+      <GenericComponent
+        onDataRecieved={
+          /**@param {Country[]} data */ data => {
+            return createCountriesList(data);
           }
-          loadData={loadCountriesForGenericComponent}
-        />
-      )}
-      {countries && createCountriesList()}
+        }
+        loadData={loadCountriesForGenericComponent}
+      />
     </View>
   );
 };

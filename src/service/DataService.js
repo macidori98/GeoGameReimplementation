@@ -164,10 +164,13 @@ const getCountryBorders = async borders => {
  * @returns {Promise<Exchange[]>}
  */
 const getRates = async (countryCurrencies, localCurrencies) => {
-  const ratesResult = await getCurrenciesComparedToLocalCurrencies(
+  const ratesResult = {
+    success: true,
+    data: [{from: 'MOCKDATA', to: 'RON', value: 123}],
+  }; /*await getCurrenciesComparedToLocalCurrencies(
     countryCurrencies,
     localCurrencies,
-  );
+  );*/
 
   if (ratesResult.success === true) {
     return ratesResult.data;

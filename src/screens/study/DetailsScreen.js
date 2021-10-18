@@ -61,7 +61,7 @@ const DetailsScreen = props => {
             case 'exchnage':
               return item.exchanges.map(i => (
                 <View
-                  key={item.typeIdentifier}
+                  key={item.typeIdentifier + i.from}
                   style={{...CommonStyles.styles.centered}}>
                   <CustomText
                     key={i.from + i.to}

@@ -1,7 +1,4 @@
-const COUNTRY_BASE_URL = 'https://restcountries.com/v2';
-//const API_KEY = '35d3c7f5c33a4161d407d57941adcc03'; 250
-const API_KEY = '0171184a9bd90227681df29dc0a4bb44';
-const EXCHANGE_BASE_URL = `http://api.exchangeratesapi.io/v1/latest?access_key=${API_KEY}&format=1&symbols=`;
+import Config from 'react-native-config';
 
 /**
  * @param {string} region
@@ -9,7 +6,9 @@ const EXCHANGE_BASE_URL = `http://api.exchangeratesapi.io/v1/latest?access_key=$
  */
 export const fetchCountriesOfRegion = async region => {
   try {
-    const countries = await fetch(`${COUNTRY_BASE_URL}/continent/${region}`);
+    const countries = await fetch(
+      `${Config.COUNTRY_BASE_URL}/continent/${region}`,
+    );
     const resp = await countries.json();
 
     if (resp.status !== undefined) {
@@ -28,7 +27,7 @@ export const fetchCountriesOfRegion = async region => {
  */
 export const fetchCountryDetailsByCode = async code => {
   try {
-    const details = await fetch(`${COUNTRY_BASE_URL}/alpha/${code}`);
+    const details = await fetch(`${Config.COUNTRY_BASE_URL}/alpha/${code}`);
     const resp = await details.json();
 
     if (resp.status !== undefined) {
@@ -77,7 +76,7 @@ export const fetchCountryBorders = async borders => {
  */
 export const fetchAllRegionsCountries = async () => {
   try {
-    const resp = await fetch(`${COUNTRY_BASE_URL}/all`);
+    const resp = await fetch(`${Config.COUNTRY_BASE_URL}/all`);
     const countries = await resp.json();
 
     return {success: true, data: countries};
@@ -91,7 +90,9 @@ export const fetchAllRegionsCountries = async () => {
  * @returns {Promise<SuccessResponseType<ExchangeDTO>|ErrorResponseType>}
  */
 export const fetchCurrencyData = async currency => {
-  const resp = await fetch(`${EXCHANGE_BASE_URL}${currency}`);
+  const resp = await fetch(
+    `${Config.EXCHANGE_BASE_URL}/latest?access_key=${Config.API_KEY}&format=1&symbols=${currency}`,
+  );
   const currencyData = await resp.json();
 
   if (currencyData.status !== undefined) {

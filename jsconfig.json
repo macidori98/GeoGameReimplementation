@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "checkJs": true,
-    "jsx": "react-native"
+    "moduleResolution": "node",
+    "jsx": "react-native",
+    "target": "es6",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules"]
 }

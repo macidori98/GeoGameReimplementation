@@ -17,7 +17,7 @@ import {
 const ShadowedTextContainer = props => {
   return (
     <View style={{...CommonStyles.styles.myShadow, ...styles.card}}>
-      <Text style={styles.text}>{props.item.name}</Text>
+      <Text style={styles.text}>{props.title}</Text>
     </View>
   );
 };

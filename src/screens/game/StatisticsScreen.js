@@ -1,6 +1,8 @@
 import React from 'react';
-import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
+import ShadowedTextContainer from '~/components/ShadowedTextContainer';
 import StatisticsItem from '~/components/StatisticsItem';
+import TouchableItem from '~/components/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -9,8 +11,10 @@ import * as CommonStyles from '~/theme/CommonStyles';
 const StatisticsScreen = props => {
   return (
     <View style={CommonStyles.styles.centered}>
-      <View style={{backgroundColor: 'black'}}>
-        <Button title="Play game" onPress={() => {}} />
+      <View>
+        <TouchableItem onPress={() => {}}>
+          <ShadowedTextContainer title="Play game" />
+        </TouchableItem>
       </View>
       <FlatList
         data={['egyszer', 'ketszer', 'haromszor']}

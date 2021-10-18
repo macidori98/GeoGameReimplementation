@@ -22,7 +22,7 @@ const RegionListScreen = props => {
                 regionId: item.id,
               })
             }>
-            <ShadowedTextContainer item={item} />
+            <ShadowedTextContainer title={item.name} />
           </TouchableItem>
         )}
       />

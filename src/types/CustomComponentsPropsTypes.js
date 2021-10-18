@@ -15,7 +15,7 @@
  */
 
 /**
- * @typedef {{item: Region}} ShadowedTextContainerProps
+ * @typedef {{title: string}} ShadowedTextContainerProps
  */
 
 /**

@@ -11,7 +11,7 @@
  */
 
 /**
- * @typedef {{message: string}} ErrorProps
+ * @typedef {{message: string, onRetry: Function}} ErrorProps
  */
 
 /**

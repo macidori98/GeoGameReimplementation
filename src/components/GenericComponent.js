@@ -29,6 +29,7 @@ const GenericComponent = props => {
   };
 
   const loadComponentData = useCallback(async () => {
+    setError(null);
     setIsLoading(true);
     const result = await loadData();
 
@@ -49,7 +50,9 @@ const GenericComponent = props => {
   return (
     <>
       {isLoading && !error && <LoadingIndicator />}
-      {error && !isLoading && <Error message={error} />}
+      {error && !isLoading && (
+        <Error message={error} onRetry={loadComponentData} />
+      )}
       {showingElement !== undefined && createShowingElement()}
     </>
   );

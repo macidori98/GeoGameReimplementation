@@ -11,7 +11,7 @@ export const fetchCountriesOfRegion = async region => {
     );
     const resp = await countries.json();
 
-    if (resp.status !== undefined) {
+    if (resp.message !== undefined) {
       return {success: false, message: resp.message};
     }
 
@@ -30,7 +30,7 @@ export const fetchCountryDetailsByCode = async code => {
     const details = await fetch(`${Config.COUNTRY_BASE_URL}/alpha/${code}`);
     const resp = await details.json();
 
-    if (resp.status !== undefined) {
+    if (resp.message !== undefined) {
       return {success: false, message: resp.message};
     }
 
@@ -79,7 +79,11 @@ export const fetchAllRegionsCountries = async () => {
     const resp = await fetch(`${Config.COUNTRY_BASE_URL}/all`);
     const countries = await resp.json();
 
-    return {success: true, data: countries};
+    if (countries.message === undefined) {
+      return {success: true, data: countries};
+    }
+
+    return {success: false, message: countries.message};
   } catch (error) {
     return {success: false, message: error.toString()};
   }

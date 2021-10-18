@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {
   HeightDimension,
@@ -17,6 +17,12 @@ const Error = props => {
     <View style={styles.errorContainer}>
       <Text style={styles.text}>Something went wrong! Sorryyy </Text>
       <Text style={styles.text}>{props.message}</Text>
+      <Button
+        title="Retry"
+        onPress={() => {
+          props.onRetry();
+        }}
+      />
     </View>
   );
 };

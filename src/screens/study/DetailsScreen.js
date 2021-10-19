@@ -59,42 +59,50 @@ const DetailsScreen = props => {
                 </View>
               );
             case 'exchnage':
-              return item.exchanges.map(i => (
-                <View
-                  key={item.typeIdentifier + i.from}
-                  style={{...CommonStyles.styles.centered}}>
-                  <CustomText
-                    key={i.from + i.to}
-                    text={`1 ${i.from} = ${i.value} ${i.to}`}
-                    size={FontSizes.medium}
-                  />
-                </View>
-              ));
+              return (
+                <>
+                  {item.exchanges.map(i => (
+                    <View
+                      key={item.typeIdentifier + i.from}
+                      style={{...CommonStyles.styles.centered}}>
+                      <CustomText
+                        key={i.from + i.to}
+                        text={`1 ${i.from} = ${i.value} ${i.to}`}
+                        size={FontSizes.medium}
+                      />
+                    </View>
+                  ))}
+                </>
+              );
             case 'timezones':
               return <TimeZone timezones={item.timezones} />;
             case 'neighbour':
-              return item.borders.length > 0 ? (
-                item.borders.map(i => (
-                  <TouchableItem
-                    key={i.code}
-                    onPress={() => {
-                      props.navigation.navigate('Details', {
-                        countryName: i.name,
-                        countryCode: i.code,
-                      });
-                    }}>
-                    <CountryCard country={i} />
-                  </TouchableItem>
-                ))
-              ) : (
-                <View
-                  key={item.typeIdentifier}
-                  style={styles.borderTextContainer}>
-                  <CustomText
-                    text={DetailLabel.noBorder}
-                    size={FontSizes.medium}
-                  />
-                </View>
+              return (
+                <>
+                  {item.borders.length > 0 ? (
+                    item.borders.map(i => (
+                      <TouchableItem
+                        key={i.code}
+                        onPress={() => {
+                          props.navigation.navigate('Details', {
+                            countryName: i.name,
+                            countryCode: i.code,
+                          });
+                        }}>
+                        <CountryCard country={i} />
+                      </TouchableItem>
+                    ))
+                  ) : (
+                    <View
+                      key={item.typeIdentifier}
+                      style={styles.borderTextContainer}>
+                      <CustomText
+                        text={DetailLabel.noBorder}
+                        size={FontSizes.medium}
+                      />
+                    </View>
+                  )}
+                </>
               );
           }
         }}

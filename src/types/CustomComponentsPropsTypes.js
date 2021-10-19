@@ -29,3 +29,7 @@
 /**
  * @typedef {{data: StatisticsData}} StatisticsItemProps
  */
+
+/**
+ * @typedef {{label: string, onPress: (buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void, radioButtons: import('react-native-radio-buttons-group').RadioButtonProps[]}} GameConfigElementProps
+ */

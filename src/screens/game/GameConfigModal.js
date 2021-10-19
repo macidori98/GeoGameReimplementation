@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
   ConfigLabels,
@@ -8,18 +8,20 @@ import {
   Regions,
 } from '~/constants/ConstantValues';
 import {MarginDimension} from '~/theme/Dimen';
-import TouchableItem from '../common/TouchableItem';
-import GameConfigElement from './GameConfigElement';
+import TouchableItem from '../../components/common/TouchableItem';
+import GameConfigElement from '../../components/game/GameConfigElement';
 import * as CommonStyles from '~/theme/CommonStyles';
-import ShadowedTextContainer from '../common/ShadowedTextContainer';
+import ShadowedTextContainer from '../../components/common/ShadowedTextContainer';
 
 /**
  *
- * @param {GameConfigModalProps} props
+ * @param {GameConfigProps} props
  * @returns {JSX.Element}
  */
 const GameConfigModal = props => {
-  const {onStartGame, onClose} = props;
+  const {onStartGame} = props.route.params;
+
+  console.log(onStartGame);
 
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
@@ -113,53 +115,44 @@ const GameConfigModal = props => {
   ];
 
   return (
-    <SafeAreaView>
-      <Modal animationType="fade">
-        <SafeAreaView>
-          <ScrollView>
-            <View style={styles.container}>
-              {isButtonVisible && (
-                <View style={styles.centeredButton}>
-                  <TouchableItem
-                    onPress={() => {
-                      onStartGame({
-                        gameType: selectedGameTypeRadioButtons.find(
-                          item => item.selected === true,
-                        ).id,
-                        numOfQuestions: parseInt(
-                          selectedNumOfQuestionsRadioButtons.find(
-                            item => item.selected === true,
-                          ).id,
-                          10,
-                        ),
-                        region: selectedRegionRadioButtons.find(
-                          item => item.selected === true,
-                        ).id,
-                      });
-                    }}>
-                    <ShadowedTextContainer title={ConfigLabels.startGame} />
-                  </TouchableItem>
-                </View>
-              )}
-
-              {configurationData.map(item => (
-                <GameConfigElement
-                  key={item.text}
-                  radioButtons={item.buttons}
-                  label={item.text}
-                  onPress={item.onPress}
-                />
-              ))}
-            </View>
+    <View style={{flex: 1}}>
+      <ScrollView>
+        <View style={styles.container}>
+          {isButtonVisible && (
             <View style={styles.centeredButton}>
-              <TouchableItem onPress={onClose}>
-                <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
+              <TouchableItem
+                onPress={() => {
+                  onStartGame({
+                    gameType: selectedGameTypeRadioButtons.find(
+                      item => item.selected === true,
+                    ).id,
+                    numOfQuestions: parseInt(
+                      selectedNumOfQuestionsRadioButtons.find(
+                        item => item.selected === true,
+                      ).id,
+                      10,
+                    ),
+                    region: selectedRegionRadioButtons.find(
+                      item => item.selected === true,
+                    ).id,
+                  });
+                }}>
+                <ShadowedTextContainer title={ConfigLabels.startGame} />
               </TouchableItem>
             </View>
-          </ScrollView>
-        </SafeAreaView>
-      </Modal>
-    </SafeAreaView>
+          )}
+
+          {configurationData.map(item => (
+            <GameConfigElement
+              key={item.text}
+              radioButtons={item.buttons}
+              label={item.text}
+              onPress={item.onPress}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

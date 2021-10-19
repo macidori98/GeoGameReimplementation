@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {
+  ConfigLabels,
   GameTypes,
   NumberOfQuestions,
   Regions,
@@ -13,11 +14,11 @@ import ShadowedTextContainer from '../common/ShadowedTextContainer';
 
 /**
  *
- * @param {{onStartGame: (data: {region: string, numOfQuestions: number, gameType: string}) => void}} props
+ * @param {GameConfigModalProps} props
  * @returns {JSX.Element}
  */
 const GameConfigModal = props => {
-  const {onStartGame} = props;
+  const {onStartGame, onClose} = props;
 
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
@@ -99,14 +100,14 @@ const GameConfigModal = props => {
                         ).id,
                       });
                     }}>
-                    <ShadowedTextContainer title="Start game" />
+                    <ShadowedTextContainer title={ConfigLabels.startGame} />
                   </TouchableItem>
                 </View>
               )}
 
               <GameConfigElement
                 radioButtons={selectedRegionRadioButtons}
-                label="Select Region"
+                label={ConfigLabels.region}
                 onPress={buttons => {
                   setSelectedRegionRadioButtons(buttons);
                   areAllDataSelected();
@@ -115,7 +116,7 @@ const GameConfigModal = props => {
 
               <GameConfigElement
                 radioButtons={selectedGameTypeRadioButtons}
-                label="Select Game Type"
+                label={ConfigLabels.gameType}
                 onPress={buttons => {
                   setSelectedGameTyoeRadioButtons(buttons);
                   areAllDataSelected();
@@ -124,12 +125,17 @@ const GameConfigModal = props => {
 
               <GameConfigElement
                 radioButtons={selectedNumOfQuestionsRadioButtons}
-                label="Select Number Of Questions"
+                label={ConfigLabels.numberOfQuestions}
                 onPress={buttons => {
                   setSelectedNumOfQuestionsRadioButtons(buttons);
                   areAllDataSelected();
                 }}
               />
+            </View>
+            <View style={styles.centeredButton}>
+              <TouchableItem onPress={onClose}>
+                <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
+              </TouchableItem>
             </View>
           </ScrollView>
         </SafeAreaView>

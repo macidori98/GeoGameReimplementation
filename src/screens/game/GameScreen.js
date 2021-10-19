@@ -8,7 +8,7 @@ import {StyleSheet, Text, View} from 'react-native';
 const GameScreen = props => {
   return (
     <View>
-      <Text>GameScreen</Text>
+      <Text>{props.route.params.data.gameType}</Text>
     </View>
   );
 };

@@ -8,7 +8,7 @@
  */
 
 /**
- * @typedef {{Statistics: undefined, Gaming: undefined, StatDetails: {data: StatisticsData}}} GameNavigationParamList
+ * @typedef {{Statistics: undefined, Gaming: {data: GameData}, StatDetails: {data: StatisticsData}}} GameNavigationParamList
  */
 
 /**

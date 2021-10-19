@@ -33,3 +33,11 @@
 /**
  * @typedef {{label: string, onPress: (buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void, radioButtons: import('react-native-radio-buttons-group').RadioButtonProps[]}} GameConfigElementProps
  */
+
+/**
+ * @typedef {{region: string, numOfQuestions: number, gameType: string}} GameData
+ */
+
+/**
+ * @typedef {{onStartGame: (data: GameData) => void, onClose: () => void}} GameConfigModalProps
+ */

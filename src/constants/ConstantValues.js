@@ -37,3 +37,12 @@ export const NumberOfQuestions = [
   {id: '10', name: '10'},
   {id: '15', name: '15'},
 ];
+
+export const ConfigLabels = {
+  region: 'Select region',
+  gameType: 'Select game type',
+  numberOfQuestions: 'Select number of questions',
+  startGame: 'Start game',
+  configGame: 'Config game',
+  closeConfigGame: 'Close',
+};

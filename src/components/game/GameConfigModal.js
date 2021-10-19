@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {
+  CommonRadioButtonProps,
   ConfigLabels,
   GameTypes,
   NumberOfQuestions,
@@ -25,7 +26,12 @@ const GameConfigModal = props => {
    */
   const [selectedRegionRadioButtons, setSelectedRegionRadioButtons] = useState(
     Regions.map(reg => {
-      return {id: reg.id, label: reg.name, value: reg.id, selected: false};
+      return {
+        ...CommonRadioButtonProps,
+        id: reg.id,
+        label: reg.name,
+        value: reg.id,
+      };
     }),
   );
 
@@ -35,7 +41,12 @@ const GameConfigModal = props => {
   const [selectedGameTypeRadioButtons, setSelectedGameTyoeRadioButtons] =
     useState(
       GameTypes.map(reg => {
-        return {id: reg.id, label: reg.name, value: reg.id, selected: false};
+        return {
+          ...CommonRadioButtonProps,
+          id: reg.id,
+          label: reg.name,
+          value: reg.id,
+        };
       }),
     );
 
@@ -48,10 +59,10 @@ const GameConfigModal = props => {
   ] = useState(
     NumberOfQuestions.map(reg => {
       return {
+        ...CommonRadioButtonProps,
         id: reg.id,
         label: reg.name,
         value: reg.id,
-        selected: false,
       };
     }),
   );

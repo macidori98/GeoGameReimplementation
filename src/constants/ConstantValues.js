@@ -1,3 +1,5 @@
+import Colors from '~/theme/Colors';
+
 /**
  * @type {Region[]}
  */
@@ -45,4 +47,9 @@ export const ConfigLabels = {
   startGame: 'Start game',
   configGame: 'Config game',
   closeConfigGame: 'Close',
+};
+
+export const CommonRadioButtonProps = {
+  selected: false,
+  labelStyle: {color: Colors.black},
 };

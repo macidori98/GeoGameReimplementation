@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 
 /**
  * @param {GameScreenProps} props
+ * @returns {JSX.Element}
  */
 const GameScreen = props => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
-import ShadowedTextContainer from '~/components/ShadowedTextContainer';
-import TouchableItem from '~/components/TouchableItem';
+import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
+import TouchableItem from '~/components/common/TouchableItem';
 import {Regions} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 

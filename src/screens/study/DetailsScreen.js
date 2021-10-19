@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect} from 'react';
 import {Dimensions, Image, StyleSheet, View, SectionList} from 'react-native';
 import * as RNLocalize from 'react-native-localize';
-import CountryCard from '~/components/CountryCard';
-import CustomText from '~/components/CustomText';
-import TimeZone from '~/components/TimeZone';
-import TouchableItem from '~/components/TouchableItem';
+import TimeZone from '~/components/study/TimeZone';
+import TouchableItem from '~/components/common/TouchableItem';
 import {DetailLabel} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension, RadiusDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 import {getCountryDetailsWithBordersAndCurrency} from '~/service/DataService';
-import GenericComponent from '~/components/GenericComponent';
+import GenericComponent from '~/components/common/GenericComponent';
 import {convertDataForSectionList} from '~/helpers/DataConverter';
+import CustomText from '~/components/common/CustomText';
+import CountryCard from '~/components/study/CountryCard';
 
 /**
  * @param {DetailsScreenProps} props

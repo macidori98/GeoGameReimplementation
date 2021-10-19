@@ -5,19 +5,20 @@ import {
   PaddingDimension,
   RadiusDimension,
 } from '~/theme/Dimen';
-import CustomText from './CustomText';
+import CustomText from '../common/CustomText';
 
 /**
  * @param {StatisticsItemProps} props
  * @returns {JSX.Element}
  */
 const StatisticsItem = props => {
+  const {data} = props;
   return (
     <View style={styles.container}>
-      <CustomText text="Number of correct answers: 2" />
-      <CustomText text="Date: 2021-10-18" />
-      <CustomText text="Time: 12:13" />
-      <CustomText text="Duration: 1:20" />
+      <CustomText text={`Correct answers number: ${data.correctAns}`} />
+      <CustomText text={`Date: ${data.date}`} />
+      <CustomText text={`Time: ${data.time}`} />
+      <CustomText text={`Duration: ${data.duration}`} />
     </View>
   );
 };

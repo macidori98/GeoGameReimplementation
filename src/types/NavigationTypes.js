@@ -8,11 +8,15 @@
  */
 
 /**
- * @typedef {{Statistics: undefined, Gaming: undefined}} GameNavigationParamList
+ * @typedef {{Statistics: undefined, Gaming: undefined, StatDetails: {data: StatisticsData}}} GameNavigationParamList
  */
 
 /**
  * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'Statistics'>} StatisticsScreenProps
+ */
+
+/**
+ * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'StatDetails'>} StatisticDetailsScreenProps
  */
 
 /**

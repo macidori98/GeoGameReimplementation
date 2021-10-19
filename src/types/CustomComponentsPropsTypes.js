@@ -27,5 +27,5 @@
  */
 
 /**
- * @typedef {{data: string}} StatisticsItemProps
+ * @typedef {{data: StatisticsData}} StatisticsItemProps
  */

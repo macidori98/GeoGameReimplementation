@@ -2,9 +2,9 @@ import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {currentMillisToTimezoneMillis} from '~/helpers/DateHelpers';
-import CustomText from './CustomText';
 import * as CommonStyles from '~/theme/CommonStyles';
 import FontSizes from '~/theme/FontSizes';
+import CustomText from '../common/CustomText';
 
 /**
  * @param {TimeZoneProps} props

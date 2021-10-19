@@ -30,6 +30,7 @@ const GenericComponent = props => {
 
   const loadComponentData = useCallback(async () => {
     setError(null);
+    setShowingElement(null);
     setIsLoading(true);
     const result = await loadData();
 

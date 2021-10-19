@@ -1,8 +1,8 @@
 import React, {useCallback} from 'react';
 import {FlatList, View} from 'react-native';
-import CountryCard from '~/components/CountryCard';
-import GenericComponent from '~/components/GenericComponent';
-import TouchableItem from '~/components/TouchableItem';
+import GenericComponent from '~/components/common/GenericComponent';
+import TouchableItem from '~/components/common/TouchableItem';
+import CountryCard from '~/components/study/CountryCard';
 import {getRegionCountries} from '~/service/DataService';
 import * as CommonStyles from '~/theme/CommonStyles';
 

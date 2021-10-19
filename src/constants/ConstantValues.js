@@ -11,6 +11,7 @@ export const Regions = [
 
 export const Headers = {
   region: 'Regions',
+  details: 'Details',
 };
 
 export const DetailLabel = {
@@ -24,3 +25,15 @@ export const DetailLabel = {
   noBorder: 'No borders',
   loading: 'Loading...',
 };
+
+export const GameTypes = [
+  {id: 'guessTheCapital', name: 'Guess the capital'},
+  {id: 'guessTheNeighbour', name: 'Guess the neighbor'},
+  {id: 'guessTheFlag', name: 'Guess the flag'},
+];
+
+export const NumberOfQuestions = [
+  {id: '5', name: '5'},
+  {id: '10', name: '10'},
+  {id: '15', name: '15'},
+];

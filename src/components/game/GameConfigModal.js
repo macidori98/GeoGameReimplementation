@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
@@ -24,31 +24,14 @@ const GameConfigModal = props => {
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
    */
-  const [selectedRegionRadioButtons, setSelectedRegionRadioButtons] = useState(
-    Regions.map(reg => {
-      return {
-        ...CommonRadioButtonProps,
-        id: reg.id,
-        label: reg.name,
-        value: reg.id,
-      };
-    }),
-  );
+  const [selectedRegionRadioButtons, setSelectedRegionRadioButtons] =
+    useState(null);
 
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
    */
   const [selectedGameTypeRadioButtons, setSelectedGameTypeRadioButtons] =
-    useState(
-      GameTypes.map(reg => {
-        return {
-          ...CommonRadioButtonProps,
-          id: reg.id,
-          label: reg.name,
-          value: reg.id,
-        };
-      }),
-    );
+    useState(null);
 
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
@@ -56,16 +39,7 @@ const GameConfigModal = props => {
   const [
     selectedNumOfQuestionsRadioButtons,
     setSelectedNumOfQuestionsRadioButtons,
-  ] = useState(
-    NumberOfQuestions.map(reg => {
-      return {
-        ...CommonRadioButtonProps,
-        id: reg.id,
-        label: reg.name,
-        value: reg.id,
-      };
-    }),
-  );
+  ] = useState(null);
 
   /**
    * @type {ComponentState<boolean>}
@@ -74,15 +48,10 @@ const GameConfigModal = props => {
 
   useEffect(() => {
     const areAllDataSelected = () => {
-      console.log('asdasdsadsadsadas');
       if (
-        selectedNumOfQuestionsRadioButtons.findIndex(
-          item => item.selected === true,
-        ) > -1 &&
-        selectedRegionRadioButtons.findIndex(item => item.selected === true) >
-          -1 &&
-        selectedGameTypeRadioButtons.findIndex(item => item.selected === true) >
-          -1
+        selectedNumOfQuestionsRadioButtons &&
+        selectedRegionRadioButtons &&
+        selectedGameTypeRadioButtons
       ) {
         setIsButtonVisible(true);
       }
@@ -96,31 +65,47 @@ const GameConfigModal = props => {
   ]);
 
   /**
-   * @typedef {Object} GameConfigElementModel
-   * @property {import('react-native-radio-buttons-group').RadioButtonProps[]} buttons
-   * @property {string} text
-   * @property {(buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void} onPress
+   * @type {GameConfigElementModel[]}
    */
-
-  /** @type {GameConfigElementModel[]} */
-  const elements = [
+  const configurationData = [
     {
       text: ConfigLabels.region,
-      buttons: selectedRegionRadioButtons,
+      buttons: Regions.map(reg => {
+        return {
+          ...CommonRadioButtonProps,
+          id: reg.id,
+          label: reg.name,
+          value: reg.id,
+        };
+      }),
       onPress: buttons => {
         setSelectedRegionRadioButtons(buttons);
       },
     },
     {
       text: ConfigLabels.gameType,
-      buttons: selectedGameTypeRadioButtons,
+      buttons: GameTypes.map(reg => {
+        return {
+          ...CommonRadioButtonProps,
+          id: reg.id,
+          label: reg.name,
+          value: reg.id,
+        };
+      }),
       onPress: buttons => {
         setSelectedGameTypeRadioButtons(buttons);
       },
     },
     {
       text: ConfigLabels.numberOfQuestions,
-      buttons: selectedNumOfQuestionsRadioButtons,
+      buttons: NumberOfQuestions.map(reg => {
+        return {
+          ...CommonRadioButtonProps,
+          id: reg.id,
+          label: reg.name,
+          value: reg.id,
+        };
+      }),
       onPress: buttons => {
         setSelectedNumOfQuestionsRadioButtons(buttons);
       },
@@ -157,7 +142,7 @@ const GameConfigModal = props => {
                 </View>
               )}
 
-              {elements.map(item => (
+              {configurationData.map(item => (
                 <GameConfigElement
                   key={item.text}
                   radioButtons={item.buttons}

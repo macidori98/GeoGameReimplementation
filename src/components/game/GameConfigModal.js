@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Modal, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
@@ -38,7 +38,7 @@ const GameConfigModal = props => {
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
    */
-  const [selectedGameTypeRadioButtons, setSelectedGameTyoeRadioButtons] =
+  const [selectedGameTypeRadioButtons, setSelectedGameTypeRadioButtons] =
     useState(
       GameTypes.map(reg => {
         return {
@@ -72,19 +72,60 @@ const GameConfigModal = props => {
    */
   const [isButtonVisible, setIsButtonVisible] = useState(false);
 
-  const areAllDataSelected = () => {
-    if (
-      selectedNumOfQuestionsRadioButtons.findIndex(
-        item => item.selected === true,
-      ) > -1 &&
-      selectedRegionRadioButtons.findIndex(item => item.selected === true) >
-        -1 &&
-      selectedGameTypeRadioButtons.findIndex(item => item.selected === true) >
-        -1
-    ) {
-      setIsButtonVisible(true);
-    }
-  };
+  useEffect(() => {
+    const areAllDataSelected = () => {
+      console.log('asdasdsadsadsadas');
+      if (
+        selectedNumOfQuestionsRadioButtons.findIndex(
+          item => item.selected === true,
+        ) > -1 &&
+        selectedRegionRadioButtons.findIndex(item => item.selected === true) >
+          -1 &&
+        selectedGameTypeRadioButtons.findIndex(item => item.selected === true) >
+          -1
+      ) {
+        setIsButtonVisible(true);
+      }
+    };
+
+    areAllDataSelected();
+  }, [
+    selectedGameTypeRadioButtons,
+    selectedNumOfQuestionsRadioButtons,
+    selectedRegionRadioButtons,
+  ]);
+
+  /**
+   * @typedef {Object} GameConfigElementModel
+   * @property {import('react-native-radio-buttons-group').RadioButtonProps[]} buttons
+   * @property {string} text
+   * @property {(buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void} onPress
+   */
+
+  /** @type {GameConfigElementModel[]} */
+  const elements = [
+    {
+      text: ConfigLabels.region,
+      buttons: selectedRegionRadioButtons,
+      onPress: buttons => {
+        setSelectedRegionRadioButtons(buttons);
+      },
+    },
+    {
+      text: ConfigLabels.gameType,
+      buttons: selectedGameTypeRadioButtons,
+      onPress: buttons => {
+        setSelectedGameTypeRadioButtons(buttons);
+      },
+    },
+    {
+      text: ConfigLabels.numberOfQuestions,
+      buttons: selectedNumOfQuestionsRadioButtons,
+      onPress: buttons => {
+        setSelectedNumOfQuestionsRadioButtons(buttons);
+      },
+    },
+  ];
 
   return (
     <SafeAreaView>
@@ -116,32 +157,14 @@ const GameConfigModal = props => {
                 </View>
               )}
 
-              <GameConfigElement
-                radioButtons={selectedRegionRadioButtons}
-                label={ConfigLabels.region}
-                onPress={buttons => {
-                  setSelectedRegionRadioButtons(buttons);
-                  areAllDataSelected();
-                }}
-              />
-
-              <GameConfigElement
-                radioButtons={selectedGameTypeRadioButtons}
-                label={ConfigLabels.gameType}
-                onPress={buttons => {
-                  setSelectedGameTyoeRadioButtons(buttons);
-                  areAllDataSelected();
-                }}
-              />
-
-              <GameConfigElement
-                radioButtons={selectedNumOfQuestionsRadioButtons}
-                label={ConfigLabels.numberOfQuestions}
-                onPress={buttons => {
-                  setSelectedNumOfQuestionsRadioButtons(buttons);
-                  areAllDataSelected();
-                }}
-              />
+              {elements.map(item => (
+                <GameConfigElement
+                  key={item.text}
+                  radioButtons={item.buttons}
+                  label={item.text}
+                  onPress={item.onPress}
+                />
+              ))}
             </View>
             <View style={styles.centeredButton}>
               <TouchableItem onPress={onClose}>

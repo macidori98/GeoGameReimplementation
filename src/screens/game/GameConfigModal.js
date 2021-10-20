@@ -21,8 +21,6 @@ import ShadowedTextContainer from '../../components/common/ShadowedTextContainer
 const GameConfigModal = props => {
   const {onStartGame} = props.route.params;
 
-  console.log(onStartGame);
-
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
    */

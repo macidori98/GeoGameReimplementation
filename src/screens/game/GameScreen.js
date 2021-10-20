@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
 import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
@@ -17,18 +17,16 @@ const GameScreen = props => {
     <View
       style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
       {data.gameType === GameTypes.guessTheCapital && (
-        <GuessTheCapitalGame data={data} />
+        <GuessTheCapitalGame data={data} onItemSelected={() => {}} />
       )}
       {data.gameType === GameTypes.guessTheFlag && (
-        <GuessTheFlagGame data={data} />
+        <GuessTheFlagGame data={data} onItemSelected={() => {}} />
       )}
       {data.gameType === GameTypes.guessTheNeighbour && (
-        <GuessTheNeighbourGame data={data} />
+        <GuessTheNeighbourGame data={data} onItemSelected={() => {}} />
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default GameScreen;

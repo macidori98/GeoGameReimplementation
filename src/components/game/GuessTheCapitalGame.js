@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {GameTypesObjects} from '~/constants/ConstantValues';
 import {generateGuessCapitalQuestions} from '~/gamelogic/GenerateGuessTheCapitalQuestions';
 import Colors from '~/theme/Colors';
-
-var ans = 0;
 
 /**
  * @param {GuessGameProps} props
@@ -25,17 +23,22 @@ const GuessTheCapitalGame = props => {
   const [questions, setQuestions] = useState();
 
   /**
+   * @type {React.MutableRefObject<number>}
+   */
+  const numberOfCorrectAnswers = useRef(0);
+
+  /**
    * @param {string} item
    */
   const onItemSelected = item => {
     if (item === questions[currentIndex].correctAnswer) {
-      ans++;
+      numberOfCorrectAnswers.current++;
     }
 
     if (currentIndex + 1 !== data.numOfQuestions) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      Alert.alert(ans.toString());
+      Alert.alert(numberOfCorrectAnswers.current.toString());
     }
   };
 

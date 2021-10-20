@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {GameTypesObjects} from '~/constants/ConstantValues';
-import {generateGuessCapitalQuestions} from '~/gamelogic/GenerateGuessTheCapitalQuestions';
+import {generateGuessCapitalQuestionsAndAnswers} from '~/service/GenerateGuessTheCapitalQuestions';
 import Colors from '~/theme/Colors';
 
 /**
@@ -46,7 +46,7 @@ const GuessTheCapitalGame = props => {
 
   useEffect(() => {
     const getData = async () => {
-      const questionResult = await generateGuessCapitalQuestions(
+      const questionResult = await generateGuessCapitalQuestionsAndAnswers(
         data.region,
         data.numOfQuestions,
       );

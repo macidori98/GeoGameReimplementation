@@ -28,11 +28,17 @@ export const DetailLabel = {
   loading: 'Loading...',
 };
 
-export const GameTypes = [
+export const GameTypesObjects = [
   {id: 'guessTheCapital', name: 'Guess the capital'},
   {id: 'guessTheNeighbour', name: 'Guess the neighbor'},
   {id: 'guessTheFlag', name: 'Guess the flag'},
 ];
+
+export const GameTypes = {
+  guessTheCapital: 'guessTheCapital',
+  guessTheNeighbour: 'guessTheNeighbour',
+  guessTheFlag: 'guessTheFlag',
+};
 
 export const NumberOfQuestions = [
   {id: '5', name: '5'},

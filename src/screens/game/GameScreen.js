@@ -1,6 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
+import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
+import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
 import {GameTypes} from '~/constants/ConstantValues';
+import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
  * @param {GameScreenProps} props
@@ -9,7 +13,16 @@ import {GameTypes} from '~/constants/ConstantValues';
 const GameScreen = props => {
   const {data} = props.route.params;
 
-  return <View></View>;
+  return (
+    <View
+      style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
+      {data.gameType === GameTypes.guessTheCapital && <GuessTheCapitalGame />}
+      {data.gameType === GameTypes.guessTheFlag && <GuessTheFlagGame />}
+      {data.gameType === GameTypes.guessTheNeighbour && (
+        <GuessTheNeighbourGame />
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({});

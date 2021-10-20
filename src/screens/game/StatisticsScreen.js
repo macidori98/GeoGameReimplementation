@@ -19,6 +19,7 @@ const StatisticsScreen = props => {
           onPress={() => {
             props.navigation.navigate('GameConfig', {
               onStartGame: /**@param {GameData} data*/ data => {
+                props.navigation.goBack();
                 props.navigation.navigate('Gaming', {data: data});
               },
             });

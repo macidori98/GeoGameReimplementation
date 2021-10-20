@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
   ConfigLabels,
-  GameTypes,
+  GameTypesObjects,
   NumberOfQuestions,
   Regions,
 } from '~/constants/ConstantValues';
@@ -86,7 +86,7 @@ const GameConfigModal = props => {
     },
     {
       text: ConfigLabels.gameType,
-      buttons: GameTypes.map(reg => {
+      buttons: GameTypesObjects.map(reg => {
         return {
           ...CommonRadioButtonProps,
           id: reg.id,
@@ -115,7 +115,7 @@ const GameConfigModal = props => {
   ];
 
   return (
-    <View style={{flex: 1}}>
+    <View style={CommonStyles.styles.screen}>
       <ScrollView>
         <View style={styles.container}>
           {isButtonVisible && (
@@ -150,6 +150,13 @@ const GameConfigModal = props => {
               onPress={item.onPress}
             />
           ))}
+
+          <TouchableItem
+            onPress={() => {
+              props.navigation.goBack();
+            }}>
+            <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
+          </TouchableItem>
         </View>
       </ScrollView>
     </View>

@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {BottomTabNavigaton} from '~/navigation/BottomNavigation';
+import {MainNavigation} from '~/navigation/MainNavigation';
 import Colors from '~/theme/Colors';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
           notification: Colors.white,
         },
       }}>
-      <BottomTabNavigaton />
+      <MainNavigation />
     </NavigationContainer>
   );
 };

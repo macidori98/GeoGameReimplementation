@@ -51,3 +51,7 @@
 /**
  * @typedef {import("@react-navigation/stack").StackScreenProps<StudyNavigationParamList, 'RegionList'>} RegionListScreenProps
  */
+
+/**
+ * @typedef {{MainScreens: undefined, Modal: undefined}} MainNavigationParamList
+ */

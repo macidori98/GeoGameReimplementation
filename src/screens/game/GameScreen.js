@@ -16,10 +16,14 @@ const GameScreen = props => {
   return (
     <View
       style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
-      {data.gameType === GameTypes.guessTheCapital && <GuessTheCapitalGame />}
-      {data.gameType === GameTypes.guessTheFlag && <GuessTheFlagGame />}
+      {data.gameType === GameTypes.guessTheCapital && (
+        <GuessTheCapitalGame data={data} />
+      )}
+      {data.gameType === GameTypes.guessTheFlag && (
+        <GuessTheFlagGame data={data} />
+      )}
       {data.gameType === GameTypes.guessTheNeighbour && (
-        <GuessTheNeighbourGame />
+        <GuessTheNeighbourGame data={data} />
       )}
     </View>
   );

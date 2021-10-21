@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     width: WidthDimension.extraLarge,
     height: HeightDimension.extraLarge,
     marginTop: MarginDimension.large,
+    borderRadius: RadiusDimension.large,
   },
   list: {
     flexDirection: 'row',

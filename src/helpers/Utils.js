@@ -32,6 +32,5 @@ export const getDurationString = seconds => {
   var minutesString =
     minutes.toString().length === 2 ? `${minutes}` : `0${minutes}`;
 
-  console.log(`${minutesString}:${stringSec}`);
   return `${minutesString}:${stringSec}`;
 };

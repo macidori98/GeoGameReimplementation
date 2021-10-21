@@ -1,5 +1,5 @@
 /**
- * @typedef {{country: string, correctAnswer: string, options: string[]}} Questions
+ * @typedef {{question: string, correctAnswer: string, options: string[]}} Questions
  */
 
 /**

@@ -1,10 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
+import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
 import {GameTypes} from '~/constants/ConstantValues';
 import {getDurationString} from '~/helpers/Utils';
-import {generateGuessCapitalQuestionsAndAnswers} from '~/service/GenerateGuessTheCapitalQuestions';
+import {generateQuestionsAndAnswers} from '~/service/GenerateQuestionsAndAnswers';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -20,7 +21,7 @@ const GameScreen = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   /**
-   * @type {ComponentState<{country: string, correctAnswer: string, options: string[]}[]>}
+   * @type {ComponentState<Questions[]>}
    */
   const [questions, setQuestions] = useState();
 
@@ -66,21 +67,43 @@ const GameScreen = props => {
     }
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      setIsLoading(true);
-      const questionResult = await generateGuessCapitalQuestionsAndAnswers(
-        data.region,
-        data.numOfQuestions,
-      );
+  const getData = useCallback(async () => {
+    setIsLoading(true);
+    var questionResult;
+    switch (data.gameType) {
+      case GameTypes.guessTheCapital:
+        questionResult = await generateQuestionsAndAnswers(
+          data.region,
+          data.numOfQuestions,
+          'name',
+        );
+        break;
+      case GameTypes.guessTheFlag:
+        questionResult = await generateQuestionsAndAnswers(
+          data.region,
+          data.numOfQuestions,
+          'flag',
+        );
+        break;
+      case GameTypes.guessTheNeighbour:
+        questionResult = await generateQuestionsAndAnswers(
+          data.region,
+          data.numOfQuestions,
+          'name',
+        );
+        break;
+      default:
+        break;
+    }
 
-      setQuestions(questionResult);
-      setIsLoading(false);
-      gameStartTime.current = new Date();
-    };
-
-    getData();
+    setQuestions(questionResult);
+    setIsLoading(false);
+    gameStartTime.current = new Date();
   }, [data]);
+
+  useEffect(() => {
+    getData();
+  }, [data, getData]);
 
   return (
     <View
@@ -90,7 +113,16 @@ const GameScreen = props => {
         <GuessTheCapitalGame
           data={{
             options: questions[currentIndex].options,
-            question: questions[currentIndex].country,
+            question: questions[currentIndex].question,
+          }}
+          onItemSelected={onItemSelected}
+        />
+      )}
+      {data.gameType === GameTypes.guessTheFlag && questions && (
+        <GuessTheFlagGame
+          data={{
+            options: questions[currentIndex].options,
+            question: questions[currentIndex].question,
           }}
           onItemSelected={onItemSelected}
         />

@@ -3,6 +3,7 @@ import {View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import {GameTypes} from '~/constants/ConstantValues';
+import {getDurationString} from '~/helpers/Utils';
 import {generateGuessCapitalQuestionsAndAnswers} from '~/service/GenerateGuessTheCapitalQuestions';
 import * as CommonStyles from '~/theme/CommonStyles';
 
@@ -51,15 +52,15 @@ const GameScreen = props => {
     } else {
       const gameEndTime = new Date();
 
+      const seconds =
+        (gameEndTime.getTime() - gameStartTime.current.getTime()) / 1000;
+
       props.navigation.replace('StatDetails', {
         data: {
           correctAns: numberOfCorrectAnswers.current,
           date: gameStartTime.current.toDateString(),
           time: gameStartTime.current.toTimeString().substr(0, 8),
-          duration: (
-            (gameEndTime.getTime() - gameStartTime.current.getTime()) /
-            1000
-          ).toString(),
+          duration: getDurationString(seconds),
         },
       });
     }

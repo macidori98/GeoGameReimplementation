@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
+import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import {GameTypes} from '~/constants/ConstantValues';
 import {generateGuessCapitalQuestionsAndAnswers} from '~/service/GenerateGuessTheCapitalQuestions';
@@ -23,6 +24,16 @@ const GameScreen = props => {
   const [questions, setQuestions] = useState();
 
   /**
+   * @type {ComponentState<boolean>}
+   */
+  const [isLoading, setIsLoading] = useState(false);
+
+  /**
+   * @type {React.MutableRefObject<Date>}
+   */
+  const gameStartTime = useRef();
+
+  /**
    * @type {React.MutableRefObject<number>}
    */
   const numberOfCorrectAnswers = useRef(0);
@@ -38,18 +49,33 @@ const GameScreen = props => {
     if (currentIndex + 1 !== data.numOfQuestions) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      Alert.alert(numberOfCorrectAnswers.current.toString());
+      const gameEndTime = new Date();
+
+      props.navigation.replace('StatDetails', {
+        data: {
+          correctAns: numberOfCorrectAnswers.current,
+          date: gameStartTime.current.toDateString(),
+          time: gameStartTime.current.toTimeString().substr(0, 8),
+          duration: (
+            (gameEndTime.getTime() - gameStartTime.current.getTime()) /
+            1000
+          ).toString(),
+        },
+      });
     }
   };
 
   useEffect(() => {
     const getData = async () => {
+      setIsLoading(true);
       const questionResult = await generateGuessCapitalQuestionsAndAnswers(
         data.region,
         data.numOfQuestions,
       );
 
       setQuestions(questionResult);
+      setIsLoading(false);
+      gameStartTime.current = new Date();
     };
 
     getData();
@@ -58,6 +84,7 @@ const GameScreen = props => {
   return (
     <View
       style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
+      {isLoading && !questions && <LoadingIndicator />}
       {data.gameType === GameTypes.guessTheCapital && questions && (
         <GuessTheCapitalGame
           data={{

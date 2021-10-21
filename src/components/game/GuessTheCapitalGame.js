@@ -1,15 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {GameTypes, GameTypesObjects} from '~/constants/ConstantValues';
-import Colors from '~/theme/Colors';
-import {
-  HeightDimension,
-  MarginDimension,
-  RadiusDimension,
-  WidthDimension,
-} from '~/theme/Dimen';
-import FontSizes from '~/theme/FontSizes';
+import {gameComponentStyles} from '~/theme/CommonStyles';
 
 /**
  * @param {GuessGameProps} props
@@ -46,32 +39,6 @@ const GuessTheCapitalGame = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  question: {
-    margin: MarginDimension.large,
-    fontWeight: 'bold',
-    fontSize: FontSizes.large,
-    textAlign: 'center',
-  },
-  list: {
-    flexDirection: 'row',
-  },
-  listItem: {
-    width: WidthDimension.extraLarge,
-    height: HeightDimension.large,
-    backgroundColor: Colors.darkPink,
-    margin: MarginDimension.small,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderBottomLeftRadius: RadiusDimension.large,
-    borderBottomRightRadius: RadiusDimension.large,
-  },
-  centeredText: {
-    textAlign: 'center',
-    color: Colors.white,
-    fontSize: FontSizes.medium,
-    fontWeight: 'bold',
-  },
-});
+const styles = gameComponentStyles;
 
 export default GuessTheCapitalGame;

@@ -1,15 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {GameTypes, GameTypesObjects} from '~/constants/ConstantValues';
-import Colors from '~/theme/Colors';
-import {
-  HeightDimension,
-  MarginDimension,
-  RadiusDimension,
-  WidthDimension,
-} from '~/theme/Dimen';
-import FontSizes from '~/theme/FontSizes';
+import {gameComponentStyles} from '~/theme/CommonStyles';
 
 /**
  * @param {GuessGameProps} props
@@ -47,39 +40,6 @@ const GuessTheFlagGame = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  question: {
-    margin: MarginDimension.large,
-    fontWeight: 'bold',
-    fontSize: FontSizes.large,
-    textAlign: 'center',
-  },
-  image: {
-    alignSelf: 'center',
-    width: WidthDimension.extraLarge,
-    height: HeightDimension.extraLarge,
-    marginTop: MarginDimension.large,
-    borderRadius: RadiusDimension.large,
-  },
-  list: {
-    flexDirection: 'row',
-  },
-  listItem: {
-    width: WidthDimension.extraLarge,
-    height: HeightDimension.large,
-    backgroundColor: Colors.darkPink,
-    margin: MarginDimension.small,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderBottomLeftRadius: RadiusDimension.large,
-    borderBottomRightRadius: RadiusDimension.large,
-  },
-  centeredText: {
-    textAlign: 'center',
-    color: Colors.white,
-    fontSize: FontSizes.medium,
-    fontWeight: 'bold',
-  },
-});
+const styles = gameComponentStyles;
 
 export default GuessTheFlagGame;

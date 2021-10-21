@@ -75,6 +75,7 @@ const GameScreen = props => {
         questionResult = await generateQuestionsAndAnswers(
           data.region,
           data.numOfQuestions,
+          'capital',
           'name',
         );
         break;
@@ -82,6 +83,7 @@ const GameScreen = props => {
         questionResult = await generateQuestionsAndAnswers(
           data.region,
           data.numOfQuestions,
+          'name',
           'flag',
         );
         break;
@@ -90,6 +92,7 @@ const GameScreen = props => {
           data.region,
           data.numOfQuestions,
           'name',
+          'flag',
         );
         break;
       default:

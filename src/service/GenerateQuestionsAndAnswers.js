@@ -5,13 +5,15 @@ import {getRandomPickedCountries} from './Utils';
 /**
  * @param {string} region
  * @param {number} questionNumber
- * @param {string} property
+ * @param {string} answerProperty
+ * @param {string} questionProperty
  * @returns {Promise<Questions[]>}
  */
 export const generateQuestionsAndAnswers = async (
   region,
   questionNumber,
-  property,
+  answerProperty,
+  questionProperty,
 ) => {
   const countriesOfRegionResult = await getRegionCountries(region);
   if (countriesOfRegionResult.success) {
@@ -26,7 +28,7 @@ export const generateQuestionsAndAnswers = async (
     const questions = [];
 
     for (const countryCorrectAnswer of randomPickedCountriesCorrectAnswers) {
-      let correctAnswer = countryCorrectAnswer.name;
+      let correctAnswer = countryCorrectAnswer[answerProperty];
       let countriesOfRegion = countriesOfRegionResult.data;
 
       const index = countriesOfRegion.findIndex(
@@ -38,7 +40,7 @@ export const generateQuestionsAndAnswers = async (
        * @type {Questions}
        */
       const question = {
-        question: countryCorrectAnswer[property],
+        question: countryCorrectAnswer[questionProperty],
         correctAnswer: correctAnswer,
         options: [correctAnswer],
       };
@@ -47,7 +49,7 @@ export const generateQuestionsAndAnswers = async (
         getRandomPickedCountries(countriesOfRegion);
 
       for (const countryWrongAnswer of randomPickedCountriesWrongAnswers) {
-        question.options.push(countryWrongAnswer.name);
+        question.options.push(countryWrongAnswer[answerProperty]);
       }
 
       shuffle(question.options);

@@ -58,7 +58,7 @@ const DetailsScreen = props => {
                   <CustomText text={item.text} size={FontSizes.medium} />
                 </View>
               );
-            case 'exchnage':
+            case 'exchange':
               return (
                 <>
                   {item.exchanges.map(i => (

@@ -53,8 +53,8 @@ export const convertDataForSectionList = details => {
   /**
    * @type {BaseExchangeCombined}
    */
-  const exchnageData = {
-    typeIdentifier: 'exchnage',
+  const exchangeData = {
+    typeIdentifier: 'exchange',
     exchanges: details.exchangeRates,
   };
 
@@ -63,7 +63,7 @@ export const convertDataForSectionList = details => {
     {title: DetailLabel.capital, data: [capitalData]},
     {title: DetailLabel.area, data: [areaData]},
     {title: DetailLabel.population, data: [populationData]},
-    {title: DetailLabel.currency, data: [exchnageData]},
+    {title: DetailLabel.currency, data: [exchangeData]},
     {title: DetailLabel.timezones, data: [timezonesData]},
     {title: DetailLabel.borders, data: [neighbourData]},
   ];

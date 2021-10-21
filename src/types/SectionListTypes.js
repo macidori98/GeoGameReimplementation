@@ -40,7 +40,7 @@
  */
 
 /**
- * @typedef {Base<'exchnage'> & exchangeRates} BaseExchangeCombined
+ * @typedef {Base<'exchange'> & exchangeRates} BaseExchangeCombined
  */
 
 /**

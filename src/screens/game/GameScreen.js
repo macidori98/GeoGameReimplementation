@@ -3,9 +3,13 @@ import {View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
+import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
 import {GameTypes} from '~/constants/ConstantValues';
 import {getDurationString} from '~/helpers/Utils';
-import {generateQuestionsAndAnswers} from '~/service/GenerateQuestionsAndAnswers';
+import {
+  generateGuessTheNeighbourQuestions,
+  generateQuestionsAndAnswers,
+} from '~/service/GenerateQuestionsAndAnswers';
 import * as CommonStyles from '~/theme/CommonStyles';
 
 /**
@@ -88,11 +92,9 @@ const GameScreen = props => {
         );
         break;
       case GameTypes.guessTheNeighbour:
-        questionResult = await generateQuestionsAndAnswers(
+        questionResult = await generateGuessTheNeighbourQuestions(
           data.region,
           data.numOfQuestions,
-          'name',
-          'flag',
         );
         break;
       default:
@@ -123,6 +125,15 @@ const GameScreen = props => {
       )}
       {data.gameType === GameTypes.guessTheFlag && questions && (
         <GuessTheFlagGame
+          data={{
+            options: questions[currentIndex].options,
+            question: questions[currentIndex].question,
+          }}
+          onItemSelected={onItemSelected}
+        />
+      )}
+      {data.gameType === GameTypes.guessTheNeighbour && questions && (
+        <GuessTheNeighbourGame
           data={{
             options: questions[currentIndex].options,
             question: questions[currentIndex].question,

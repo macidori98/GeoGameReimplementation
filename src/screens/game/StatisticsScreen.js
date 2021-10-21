@@ -8,7 +8,12 @@ import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
 import {ConfigLabels} from '~/constants/ConstantValues';
 
 /**
- * @param {StatisticsScreenProps} props
+ * @param {import('@react-navigation/core').CompositeScreenProps<
+ *            import('@react-navigation/native-stack').NativeStackScreenProps<GameNavigationParamList, 'Statistics'>,
+ *            import('@react-navigation/core').CompositeScreenProps<
+ *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<import('@react-navigation/bottom-tabs').BottomTabBarProps>,
+ *                import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>>
+ *        >} props
  * @returns {JSX.Element}
  */
 const StatisticsScreen = props => {
@@ -18,7 +23,7 @@ const StatisticsScreen = props => {
         <TouchableItem
           onPress={() => {
             props.navigation.navigate('Modal', {
-              onStartGame: /**@param {GameData} data*/ data => {
+              onStartGame: data => {
                 props.navigation.goBack();
                 props.navigation.navigate('Gaming', {data: data});
               },

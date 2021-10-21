@@ -16,9 +16,7 @@ export const getRandomPickedCountries = (
     const length = countriesOfRegion.length - 1;
     var index = Math.floor(Math.random() * length);
 
-    questions.push(countriesOfRegion[index]);
-
-    countriesOfRegion.splice(index, 1);
+    questions.push(countriesOfRegion.splice(index, 1)[0]);
   }
 
   return questions;

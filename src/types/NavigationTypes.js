@@ -53,5 +53,5 @@
  */
 
 /**
- * @typedef {{MainScreens: undefined, Modal: undefined}} MainNavigationParamList
+ * @typedef {{MainScreens: undefined, Modal: {onStartGame: (data: GameData) => void}}} MainNavigationParamList
  */

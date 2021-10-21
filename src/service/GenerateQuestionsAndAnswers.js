@@ -9,15 +9,15 @@ import {getRandomPickedCountries} from './Utils';
 /**
  * @param {string} region
  * @param {number} questionNumber
- * @param {string} answerProperty
- * @param {string} questionProperty
+ * @param {(c: Country) => string} getAnswerValue
+ * @param {(c: Country) => string} getQuestionValue
  * @returns {Promise<Questions[]>}
  */
 export const generateQuestionsAndAnswers = async (
   region,
   questionNumber,
-  answerProperty,
-  questionProperty,
+  getAnswerValue,
+  getQuestionValue,
 ) => {
   const countriesOfRegionResult = await getRegionCountries(region);
   if (countriesOfRegionResult.success) {
@@ -32,7 +32,7 @@ export const generateQuestionsAndAnswers = async (
     const questions = [];
 
     for (const countryCorrectAnswer of randomPickedCountriesCorrectAnswers) {
-      let correctAnswer = countryCorrectAnswer[answerProperty];
+      let correctAnswer = getAnswerValue(countryCorrectAnswer);
       let countriesOfRegion = [...countriesOfRegionResult.data];
 
       const index = countriesOfRegion.findIndex(
@@ -44,7 +44,7 @@ export const generateQuestionsAndAnswers = async (
        * @type {Questions}
        */
       const question = {
-        question: countryCorrectAnswer[questionProperty],
+        question: getQuestionValue(countryCorrectAnswer),
         correctAnswer: correctAnswer,
         options: [correctAnswer],
       };
@@ -53,7 +53,7 @@ export const generateQuestionsAndAnswers = async (
         getRandomPickedCountries(countriesOfRegion);
 
       for (const countryWrongAnswer of randomPickedCountriesWrongAnswers) {
-        question.options.push(countryWrongAnswer[answerProperty]);
+        question.options.push(getAnswerValue(countryWrongAnswer));
       }
 
       shuffle(question.options);

@@ -79,16 +79,16 @@ const GameScreen = props => {
         questionResult = await generateQuestionsAndAnswers(
           data.region,
           data.numOfQuestions,
-          'capital',
-          'name',
+          c => c.capital,
+          c => c.name,
         );
         break;
       case GameTypes.guessTheFlag:
         questionResult = await generateQuestionsAndAnswers(
           data.region,
           data.numOfQuestions,
-          'name',
-          'flag',
+          c => c.name,
+          c => c.flag,
         );
         break;
       case GameTypes.guessTheNeighbour:

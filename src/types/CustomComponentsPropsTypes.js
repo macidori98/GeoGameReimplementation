@@ -43,5 +43,5 @@
  */
 
 /**
- * @typedef {{data: GameData, onItemSelected: Function}} GuessGameProps
+ * @typedef {{data: CurrentQuestion, onItemSelected: Function}} GuessGameProps
  */

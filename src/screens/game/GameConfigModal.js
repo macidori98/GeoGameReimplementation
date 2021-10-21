@@ -116,6 +116,15 @@ const GameConfigModal = props => {
     <View style={CommonStyles.styles.screen}>
       <ScrollView>
         <View style={styles.container}>
+          {configurationData.map(item => (
+            <GameConfigElement
+              key={item.text}
+              radioButtons={item.buttons}
+              label={item.text}
+              onPress={item.onPress}
+            />
+          ))}
+
           {isButtonVisible && (
             <View style={styles.centeredButton}>
               <TouchableItem
@@ -140,21 +149,14 @@ const GameConfigModal = props => {
             </View>
           )}
 
-          {configurationData.map(item => (
-            <GameConfigElement
-              key={item.text}
-              radioButtons={item.buttons}
-              label={item.text}
-              onPress={item.onPress}
-            />
-          ))}
-
-          <TouchableItem
-            onPress={() => {
-              props.navigation.goBack();
-            }}>
-            <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
-          </TouchableItem>
+          <View style={styles.centeredButton}>
+            <TouchableItem
+              onPress={() => {
+                props.navigation.goBack();
+              }}>
+              <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
+            </TouchableItem>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -166,6 +168,7 @@ const styles = StyleSheet.create({
     marginHorizontal: MarginDimension.large,
   },
   centeredButton: {
+    flex: 1,
     ...CommonStyles.styles.centered,
   },
 });

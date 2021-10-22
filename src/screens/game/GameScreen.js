@@ -11,6 +11,8 @@ import {
   generateQuestionsAndAnswers,
 } from '~/service/GenerateQuestionsAndAnswers';
 import * as CommonStyles from '~/theme/CommonStyles';
+import * as statisticsActions from '~/store/actions/statistics';
+import {useDispatch} from 'react-redux';
 
 /**
  * @param {GameScreenProps} props
@@ -44,6 +46,8 @@ const GameScreen = props => {
    */
   const numberOfCorrectAnswers = useRef(0);
 
+  const dispatch = useDispatch();
+
   /**
    * @param {string} item
    */
@@ -60,13 +64,17 @@ const GameScreen = props => {
       const seconds =
         (gameEndTime.getTime() - gameStartTime.current.getTime()) / 1000;
 
+      const gameData = {
+        correctAns: numberOfCorrectAnswers.current,
+        date: gameStartTime.current.toDateString(),
+        time: gameStartTime.current.toTimeString().substr(0, 8),
+        duration: getDurationString(seconds),
+      };
+
+      dispatch(statisticsActions.savePlayedGameData(gameData));
+
       props.navigation.replace('StatDetails', {
-        data: {
-          correctAns: numberOfCorrectAnswers.current,
-          date: gameStartTime.current.toDateString(),
-          time: gameStartTime.current.toTimeString().substr(0, 8),
-          duration: getDurationString(seconds),
-        },
+        data: gameData,
       });
     }
   };

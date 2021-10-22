@@ -8,6 +8,8 @@ import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
 import {ConfigLabels} from '~/constants/ConstantValues';
 import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch, useSelector} from 'react-redux';
+import CustomText from '~/components/common/CustomText';
+import FontSizes from '~/theme/FontSizes';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -28,7 +30,7 @@ const StatisticsScreen = props => {
   /**
    * @type {ComponentState<StatisticsData[]>}
    */
-  const [datas, setData] = useState();
+  const [datas, setData] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -61,7 +63,7 @@ const StatisticsScreen = props => {
           <ShadowedTextContainer title={ConfigLabels.configGame} />
         </TouchableItem>
       </View>
-      {datas &&
+      {datas.length > 0 &&
         datas.map((item, index) => (
           <View style={styles.itemContainer} key={item.date + index}>
             <TouchableItem
@@ -72,6 +74,12 @@ const StatisticsScreen = props => {
             </TouchableItem>
           </View>
         ))}
+      {datas.length === 0 && (
+        <View style={CommonStyles.styles.centered}>
+          <CustomText text="No game pleyed yet." size={FontSizes.large} />
+          <CustomText text="Let's play one!" size={FontSizes.large} />
+        </View>
+      )}
     </ScrollView>
   );
 

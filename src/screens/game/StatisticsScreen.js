@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import StatisticsItem from '~/components/game/StatisticsItem';
 import TouchableItem from '~/components/common/TouchableItem';
@@ -6,6 +6,8 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension} from '~/theme/Dimen';
 import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
 import {ConfigLabels} from '~/constants/ConstantValues';
+import * as statisticsActions from '~/store/actions/statistics';
+import {useDispatch, useSelector} from 'react-redux';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -17,6 +19,33 @@ import {ConfigLabels} from '~/constants/ConstantValues';
  * @returns {JSX.Element}
  */
 const StatisticsScreen = props => {
+  const statisticsState = useSelector(
+    /**@param {{statistics: StatisticsStateObj}} state*/ state => {
+      return state.statistics;
+    },
+  );
+
+  /**
+   * @type {ComponentState<StatisticsData[]>}
+   */
+  const [datas, setData] = useState();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getData = async () => {
+      await dispatch(statisticsActions.getPlayedGamesData());
+    };
+
+    getData();
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (statisticsState.games.length !== 0) {
+      setData(statisticsState.games);
+    }
+  }, [statisticsState.games]);
+
   const createStatisticsView = () => (
     <ScrollView>
       <View style={CommonStyles.styles.centered}>
@@ -32,24 +61,17 @@ const StatisticsScreen = props => {
           <ShadowedTextContainer title={ConfigLabels.configGame} />
         </TouchableItem>
       </View>
-      {[
-        {
-          //data will come from redux
-          correctAns: 3,
-          date: 'datee',
-          time: 'timee',
-          duration: 'duratioon',
-        },
-      ].map((item, index) => (
-        <View style={styles.itemContainer} key={item.date + index}>
-          <TouchableItem
-            onPress={() => {
-              props.navigation.navigate('StatDetails', {data: item});
-            }}>
-            <StatisticsItem data={item} />
-          </TouchableItem>
-        </View>
-      ))}
+      {datas &&
+        datas.map((item, index) => (
+          <View style={styles.itemContainer} key={item.date + index}>
+            <TouchableItem
+              onPress={() => {
+                props.navigation.navigate('StatDetails', {data: item});
+              }}>
+              <StatisticsItem data={item} />
+            </TouchableItem>
+          </View>
+        ))}
     </ScrollView>
   );
 

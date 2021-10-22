@@ -11,7 +11,7 @@ import {ConfigLabels} from '~/constants/ConstantValues';
  * @param {import('@react-navigation/core').CompositeScreenProps<
  *            import('@react-navigation/native-stack').NativeStackScreenProps<GameNavigationParamList, 'Statistics'>,
  *            import('@react-navigation/core').CompositeScreenProps<
- *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<import('@react-navigation/bottom-tabs').BottomTabBarProps>,
+ *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<BottomTabBarParamList>,
  *                import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>>
  *        >} props
  * @returns {JSX.Element}

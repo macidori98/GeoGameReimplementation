@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useRef} from 'react';
 import {View} from 'react-native';
-import LoadingIndicator from '~/components/common/LoadingIndicator';
+import GenericComponent from '~/components/common/GenericComponent';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
 import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
@@ -20,19 +20,14 @@ const GameScreen = props => {
   const {data} = props.route.params;
 
   /**
-   * @type {ComponentState<number>}
+   * @type {React.MutableRefObject<number>}
    */
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndex = useRef(0);
 
   /**
-   * @type {ComponentState<Questions[]>}
+   * @type {React.MutableRefObject<Questions[]>}
    */
-  const [questions, setQuestions] = useState();
-
-  /**
-   * @type {ComponentState<boolean>}
-   */
-  const [isLoading, setIsLoading] = useState(false);
+  const questions = useRef();
 
   /**
    * @type {React.MutableRefObject<Date>}
@@ -48,12 +43,12 @@ const GameScreen = props => {
    * @param {string} item
    */
   const onItemSelected = item => {
-    if (item === questions[currentIndex].correctAnswer) {
+    if (item === questions.current[currentIndex.current].correctAnswer) {
       numberOfCorrectAnswers.current++;
     }
 
-    if (currentIndex + 1 !== data.numOfQuestions) {
-      setCurrentIndex(prev => prev + 1);
+    if (currentIndex.current + 1 !== data.numOfQuestions) {
+      currentIndex.current = currentIndex.current + 1;
     } else {
       const gameEndTime = new Date();
 
@@ -72,7 +67,6 @@ const GameScreen = props => {
   };
 
   const getData = useCallback(async () => {
-    setIsLoading(true);
     var questionResult;
     switch (data.gameType) {
       case GameTypes.guessTheCapital:
@@ -101,47 +95,60 @@ const GameScreen = props => {
         break;
     }
 
-    setQuestions(questionResult);
-    setIsLoading(false);
-    gameStartTime.current = new Date();
+    return questionResult;
   }, [data]);
 
-  useEffect(() => {
-    getData();
-  }, [data, getData]);
+  /**
+   * @param {Questions[]} resultData
+   * @returns {JSX.Element}
+   */
+  const createGameView = resultData => {
+    questions.current = resultData;
+    console.log(resultData);
+    gameStartTime.current = new Date();
+
+    return (
+      <View
+        style={{
+          ...CommonStyles.styles.screen,
+          ...CommonStyles.styles.centered,
+        }}>
+        {data.gameType === GameTypes.guessTheCapital && questions.current && (
+          <GuessTheCapitalGame
+            data={{
+              options: questions.current[currentIndex.current].options,
+              question: questions.current[currentIndex.current].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+        {data.gameType === GameTypes.guessTheFlag && questions.current && (
+          <GuessTheFlagGame
+            data={{
+              options: questions.current[currentIndex.current].options,
+              question: questions.current[currentIndex.current].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+        {data.gameType === GameTypes.guessTheNeighbour && questions.current && (
+          <GuessTheNeighbourGame
+            data={{
+              options: questions.current[currentIndex.current].options,
+              question: questions.current[currentIndex.current].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+      </View>
+    );
+  };
 
   return (
-    <View
-      style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
-      {isLoading && !questions && <LoadingIndicator />}
-      {data.gameType === GameTypes.guessTheCapital && questions && (
-        <GuessTheCapitalGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-      {data.gameType === GameTypes.guessTheFlag && questions && (
-        <GuessTheFlagGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-      {data.gameType === GameTypes.guessTheNeighbour && questions && (
-        <GuessTheNeighbourGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-    </View>
+    <GenericComponent
+      loadData={getData}
+      onDataRecieved={resultData => createGameView(resultData)}
+    />
   );
 };
 

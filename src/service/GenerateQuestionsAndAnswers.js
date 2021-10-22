@@ -11,7 +11,7 @@ import {getRandomPickedCountries} from './Utils';
  * @param {number} questionNumber
  * @param {(c: Country) => string} getAnswerValue
  * @param {(c: Country) => string} getQuestionValue
- * @returns {Promise<Questions[]>}
+ * @returns {Promise<SuccessResponseType<Questions[]>| ErrorResponseType>}
  */
 export const generateQuestionsAndAnswers = async (
   region,
@@ -20,7 +20,7 @@ export const generateQuestionsAndAnswers = async (
   getQuestionValue,
 ) => {
   const countriesOfRegionResult = await getRegionCountries(region);
-  if (countriesOfRegionResult.success) {
+  if (countriesOfRegionResult.success === true) {
     const randomPickedCountriesCorrectAnswers = getRandomPickedCountries(
       countriesOfRegionResult.data,
       questionNumber,
@@ -60,23 +60,23 @@ export const generateQuestionsAndAnswers = async (
       questions.push(question);
     }
 
-    return questions;
+    return {success: true, data: questions};
+  } else {
+    return {success: false, message: countriesOfRegionResult.message};
   }
-
-  return [];
 };
 
 /**
  * @param {string} region
  * @param {number} questionNumber
- * @returns {Promise<Questions[]>}
+ * @returns {Promise<SuccessResponseType<Questions[]>|ErrorResponseType>}
  */
 export const generateGuessTheNeighbourQuestions = async (
   region,
   questionNumber,
 ) => {
   const countriesOfRegionResult = await getRegionCountries(region);
-  if (countriesOfRegionResult.success) {
+  if (countriesOfRegionResult.success === true) {
     const randomPickedCountriesCorrectAnswers = getRandomPickedCountries(
       countriesOfRegionResult.data,
       questionNumber,
@@ -132,8 +132,8 @@ export const generateGuessTheNeighbourQuestions = async (
       questions.push(question);
     }
 
-    return questions;
+    return {success: true, data: questions};
+  } else {
+    return {success: false, message: countriesOfRegionResult.message};
   }
-
-  return [];
 };

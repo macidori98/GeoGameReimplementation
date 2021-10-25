@@ -30,7 +30,7 @@ export const DetailLabel = {
 
 export const GameTypesObjects = [
   {id: 'guessTheCapital', name: 'Guess the capital'},
-  {id: 'guessTheNeighbour', name: 'Guess the neighbor'},
+  {id: 'guessTheNeighbour', name: 'Guess the neighbour'},
   {id: 'guessTheFlag', name: 'Guess the flag'},
 ];
 

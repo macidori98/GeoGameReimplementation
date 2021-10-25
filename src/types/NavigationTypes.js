@@ -12,7 +12,7 @@
  */
 
 /**
- * @typedef {{Statistics: undefined, Gaming: {data: GameData}, StatDetails: {data: StatisticsData}, GameConfig: GameConfigModalProps}} GameNavigationParamList
+ * @typedef {{Statistics: undefined, Gaming: {data: GameData}, StatDetails: {data: StatisticsData}}} GameNavigationParamList
  */
 
 /**
@@ -53,5 +53,9 @@
  */
 
 /**
- * @typedef {{MainScreens: undefined, Modal: {onStartGame: (data: GameData) => void}}} MainNavigationParamList
+ * @typedef {import("@react-navigation/stack").StackScreenProps<MainNavigationParamList, 'EndGameModal'>} StatisticDetailsModalProps
+ */
+
+/**
+ * @typedef {{MainScreens: undefined, GameConfigModal: GameConfigModalProps, EndGameModal: {data: StatisticsData, onBack: () => void}}} MainNavigationParamList
  */

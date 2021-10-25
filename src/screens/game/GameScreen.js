@@ -15,7 +15,12 @@ import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch} from 'react-redux';
 
 /**
- * @param {GameScreenProps} props
+ * @param {import('@react-navigation/core').CompositeScreenProps<
+ *            import('@react-navigation/native-stack').NativeStackScreenProps<GameNavigationParamList, 'Gaming'>,
+ *            import('@react-navigation/core').CompositeScreenProps<
+ *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<BottomTabBarParamList>,
+ *                import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>>
+ *        >} props
  * @returns {JSX.Element}
  */
 const GameScreen = props => {
@@ -73,8 +78,11 @@ const GameScreen = props => {
 
       dispatch(statisticsActions.savePlayedGameData(gameData));
 
-      props.navigation.replace('StatDetails', {
+      props.navigation.navigate('EndGameModal', {
         data: gameData,
+        onBack: () => {
+          props.navigation.navigate('Statistics');
+        },
       });
     }
   };

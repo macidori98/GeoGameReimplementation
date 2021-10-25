@@ -53,7 +53,7 @@ const StatisticsScreen = props => {
       <View style={CommonStyles.styles.centered}>
         <TouchableItem
           onPress={() => {
-            props.navigation.navigate('Modal', {
+            props.navigation.navigate('GameConfigModal', {
               onStartGame: data => {
                 props.navigation.goBack();
                 props.navigation.navigate('Gaming', {data: data});

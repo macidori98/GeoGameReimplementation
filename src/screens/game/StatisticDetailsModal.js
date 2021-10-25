@@ -4,6 +4,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import TouchableItem from '~/components/common/TouchableItem';
 import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
 import GameDetailsItem from '~/components/game/GameDetailsItem';
+import {HelperButtonsLabel} from '~/constants/ConstantValues';
 
 /**
  * @param {StatisticDetailsModalProps} props
@@ -18,9 +19,8 @@ const StatisticDetailsModal = props => {
         <TouchableItem
           onPress={() => {
             props.route.params.onBack();
-            //props.navigation.navigate('MainScreens');
           }}>
-          <ShadowedTextContainer title="Back" />
+          <ShadowedTextContainer title={HelperButtonsLabel.back} />
         </TouchableItem>
       </View>
     </View>

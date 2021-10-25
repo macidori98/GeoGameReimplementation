@@ -5,7 +5,7 @@ import TouchableItem from '~/components/common/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension} from '~/theme/Dimen';
 import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
-import {ConfigLabels} from '~/constants/ConstantValues';
+import {ConfigLabels, NoGameYet} from '~/constants/ConstantValues';
 import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch, useSelector} from 'react-redux';
 import CustomText from '~/components/common/CustomText';
@@ -76,8 +76,8 @@ const StatisticsScreen = props => {
         ))}
       {datas.length === 0 && (
         <View style={CommonStyles.styles.centered}>
-          <CustomText text="No game pleyed yet." size={FontSizes.large} />
-          <CustomText text="Let's play one!" size={FontSizes.large} />
+          <CustomText text={NoGameYet.noGamePlayed} size={FontSizes.large} />
+          <CustomText text={NoGameYet.letsPlay} size={FontSizes.large} />
         </View>
       )}
     </ScrollView>

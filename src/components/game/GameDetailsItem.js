@@ -1,5 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
+import {GameDetailsLabel} from '~/constants/ConstantValues';
 import FontSizes from '~/theme/FontSizes';
 import CustomText from '../common/CustomText';
 
@@ -12,12 +13,12 @@ const GameDetailsItem = props => {
   return (
     <View>
       <CustomText
-        text={`Correct answers number: ${data.correctAns}`}
+        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.correctAns}`}
         size={FontSizes.large}
       />
-      <CustomText text={`Date: ${data.date}`} />
-      <CustomText text={`Time: ${data.time}`} />
-      <CustomText text={`Duration: ${data.duration}`} />
+      <CustomText text={`${GameDetailsLabel.date} ${data.date}`} />
+      <CustomText text={`${GameDetailsLabel.time} ${data.time}`} />
+      <CustomText text={`${GameDetailsLabel.duration} ${data.duration}`} />
     </View>
   );
 };

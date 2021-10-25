@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {GameDetailsLabel} from '~/constants/ConstantValues';
 import {
   MarginDimension,
   PaddingDimension,
@@ -15,10 +16,12 @@ const StatisticsItem = props => {
   const {data} = props;
   return (
     <View style={styles.container}>
-      <CustomText text={`Correct answers number: ${data.correctAns}`} />
-      <CustomText text={`Date: ${data.date}`} />
-      <CustomText text={`Time: ${data.time}`} />
-      <CustomText text={`Duration: ${data.duration}`} />
+      <CustomText
+        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.correctAns}`}
+      />
+      <CustomText text={`${GameDetailsLabel.date} ${data.date}`} />
+      <CustomText text={`${GameDetailsLabel.time} ${data.time}`} />
+      <CustomText text={`${GameDetailsLabel.duration} ${data.duration}`} />
     </View>
   );
 };

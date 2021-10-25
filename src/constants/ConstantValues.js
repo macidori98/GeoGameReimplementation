@@ -52,10 +52,28 @@ export const ConfigLabels = {
   numberOfQuestions: 'Select number of questions',
   startGame: 'Start game',
   configGame: 'Config game',
-  closeConfigGame: 'Close',
 };
 
 export const CommonRadioButtonProps = {
   selected: false,
   labelStyle: {color: Colors.black},
+};
+
+export const NoGameYet = {
+  noGamePlayed: 'No game pleyed yet.',
+  letsPlay: "Let's play one!",
+};
+
+export const HelperButtonsLabel = {
+  retry: 'Retry!',
+  cancel: 'Cancel',
+  back: 'Back',
+  close: 'Close',
+};
+
+export const GameDetailsLabel = {
+  numOfCorrectAnswers: 'Correct answers number:',
+  date: 'Date:',
+  time: 'Time:',
+  duration: 'Duration:',
 };

@@ -14,8 +14,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import ShadowedTextContainer from '../../components/common/ShadowedTextContainer';
 
 /**
- *
- * @param {GameConfigProps} props
+ * @param {GameConfigModalProps} props
  * @returns {JSX.Element}
  */
 const GameConfigModal = props => {

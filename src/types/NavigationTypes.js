@@ -8,7 +8,7 @@
  */
 
 /**
- * @typedef {{onStartGame: (data: GameData) => void}} GameConfigModalProps
+ * @typedef {{onStartGame: (data: GameData) => void}} GameConfig
  */
 
 /**
@@ -25,10 +25,6 @@
 
 /**
  * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'Gaming'>} GameScreenProps
- */
-
-/**
- * @typedef {import("@react-navigation/stack").StackScreenProps<GameNavigationParamList, 'GameConfig'>} GameConfigProps
  */
 
 /**
@@ -57,5 +53,9 @@
  */
 
 /**
- * @typedef {{MainScreens: undefined, GameConfigModal: GameConfigModalProps, EndGameModal: {data: StatisticsData, onBack: () => void}}} MainNavigationParamList
+ * @typedef {import("@react-navigation/stack").StackScreenProps<MainNavigationParamList, 'GameConfigModal'>} GameConfigModalProps
+ */
+
+/**
+ * @typedef {{MainScreens: undefined, GameConfigModal: GameConfig, EndGameModal: {data: StatisticsData, onBack: () => void}}} MainNavigationParamList
  */

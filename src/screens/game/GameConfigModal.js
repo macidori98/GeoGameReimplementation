@@ -4,6 +4,7 @@ import {
   CommonRadioButtonProps,
   ConfigLabels,
   GameTypesObjects,
+  HelperButtonsLabel,
   NumberOfQuestions,
   Regions,
 } from '~/constants/ConstantValues';
@@ -143,7 +144,7 @@ const GameConfigModal = props => {
                     ).id,
                   });
                 }}>
-                <ShadowedTextContainer title={ConfigLabels.startGame} />
+                <ShadowedTextContainer title={HelperButtonsLabel.startGame} />
               </TouchableItem>
             </View>
           )}
@@ -153,7 +154,7 @@ const GameConfigModal = props => {
               onPress={() => {
                 props.navigation.goBack();
               }}>
-              <ShadowedTextContainer title={ConfigLabels.closeConfigGame} />
+              <ShadowedTextContainer title={HelperButtonsLabel.close} />
             </TouchableItem>
           </View>
         </View>

@@ -50,7 +50,6 @@ export const ConfigLabels = {
   region: 'Select region',
   gameType: 'Select game type',
   numberOfQuestions: 'Select number of questions',
-  startGame: 'Start game',
   configGame: 'Config game',
 };
 
@@ -69,6 +68,7 @@ export const HelperButtonsLabel = {
   cancel: 'Cancel',
   back: 'Back',
   close: 'Close',
+  startGame: 'Start game',
 };
 
 export const GameDetailsLabel = {

@@ -19,16 +19,18 @@ export const shuffle = arr => {
  * @returns {string}
  */
 export const getDurationString = seconds => {
+  console.log(seconds);
   var minutes = Math.floor(seconds / 60);
   seconds = seconds % 60;
   minutes = minutes % 60;
 
   const indexOfDot = seconds.toString().indexOf('.');
+  const twoDecimalsIndex = 3;
 
   var stringSec =
     seconds.toString().substr(0, indexOfDot).length === 2
-      ? `${seconds}`
-      : `0${seconds}`;
+      ? `${seconds.toString().substr(0, indexOfDot + twoDecimalsIndex)}`
+      : `0${seconds.toString().substr(0, indexOfDot + twoDecimalsIndex)}`;
   var minutesString =
     minutes.toString().length === 2 ? `${minutes}` : `0${minutes}`;
 

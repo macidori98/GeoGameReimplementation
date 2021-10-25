@@ -14,7 +14,7 @@ const GuessTheNeighbourGame = props => {
     <View>
       <Text style={styles.question}>
         {
-          GameTypesObjects.find(item => item.id === GameTypes.guessTheCapital)
+          GameTypesObjects.find(item => item.id === GameTypes.guessTheNeighbour)
             .name
         }{' '}
         of {data.question}

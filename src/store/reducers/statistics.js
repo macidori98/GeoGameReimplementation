@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case GET_PLAYED_GAMES_DATA:
       return {...state, games: action.data};
     case SAVE_PLAYED_GAME_DATA:
-      return {...state, games: [...state.games, action.data]};
+      return {...state, games: [action.data, ...state.games]};
     default:
       return initialState;
   }

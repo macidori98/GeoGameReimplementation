@@ -16,7 +16,7 @@ export const getPlayedGamesData = () => {
     if (playedGamesData.success === true) {
       dispatch({
         type: GET_PLAYED_GAMES_DATA,
-        data: [...playedGamesData.data],
+        data: [...playedGamesData.data.reverse()],
       });
     }
   };

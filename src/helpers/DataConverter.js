@@ -1,4 +1,5 @@
 import {DetailLabel} from '~/constants/ConstantValues';
+import {formatNumber} from './Utils';
 
 /**
  * @param {CountryDetailsType} details
@@ -23,7 +24,7 @@ export const convertDataForSectionList = details => {
    */
   const areaData = {
     typeIdentifier: 'text',
-    text: details.countryDetails.area.toString(),
+    text: formatNumber(details.countryDetails.area),
   };
 
   /**
@@ -31,7 +32,7 @@ export const convertDataForSectionList = details => {
    */
   const populationData = {
     typeIdentifier: 'text',
-    text: details.countryDetails.population.toString(),
+    text: formatNumber(details.countryDetails.population),
   };
 
   /**

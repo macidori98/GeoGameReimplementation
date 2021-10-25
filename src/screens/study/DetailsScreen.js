@@ -12,6 +12,7 @@ import GenericComponent from '~/components/common/GenericComponent';
 import {convertDataForSectionList} from '~/helpers/DataConverter';
 import CustomText from '~/components/common/CustomText';
 import CountryCard from '~/components/study/CountryCard';
+import Colors from '~/theme/Colors';
 
 /**
  * @param {DetailsScreenProps} props
@@ -149,6 +150,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     padding: 10,
     alignItems: 'center',
+    backgroundColor: Colors.greyish,
   },
 });
 

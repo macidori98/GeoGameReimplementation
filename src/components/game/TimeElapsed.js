@@ -23,8 +23,8 @@ const TimeElapsed = props => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>Time elapsed:</Text>
       <Text style={styles.text}>
-        <Text>Time elapsed: </Text>
         {moment(time - props.startTime).format('mm:ss')}
       </Text>
     </View>

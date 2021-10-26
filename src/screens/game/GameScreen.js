@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Button, StyleSheet, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
@@ -15,6 +15,7 @@ import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch} from 'react-redux';
 import TimeElapsed from '~/components/game/TimeElapsed';
 import {MarginDimension} from '~/theme/Dimen';
+import FontSizes from '~/theme/FontSizes';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -134,11 +135,24 @@ const GameScreen = props => {
 
   return (
     <>
-      <View>
+      <View style={styles.rowContainer}>
         {questions && (
-          <TimeElapsed startTime={gameStartTime.current.getTime()} />
+          <>
+            <View style={CommonStyles.styles.screen}>
+              <View style={styles.paginationContainer}>
+                <Text style={styles.text}>Page:</Text>
+                <Text style={styles.text}>
+                  {currentIndex + 1}/{props.route.params.data.numOfQuestions}
+                </Text>
+              </View>
+            </View>
+            <View style={CommonStyles.styles.screen}>
+              <TimeElapsed startTime={gameStartTime.current.getTime()} />
+            </View>
+          </>
         )}
       </View>
+
       <View
         style={{
           ...CommonStyles.styles.screen,
@@ -173,32 +187,34 @@ const GameScreen = props => {
           />
         )}
       </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          disabled={currentIndex - 1 !== -1 ? false : true}
-          title="Back"
-          onPress={() => {
-            setCurrentIndex(prev => prev - 1);
-          }}
-        />
-        <Button
-          disabled={
-            currentIndex + 1 !== props.route.params.data.numOfQuestions
-              ? false
-              : true
-          }
-          title="Next"
-          onPress={() => {
-            setCurrentIndex(prev => prev + 1);
-          }}
-        />
-        <Button
-          title="Submit"
-          onPress={() => {
-            onEndGame();
-          }}
-        />
-      </View>
+      {questions && (
+        <View style={styles.buttonContainer}>
+          <Button
+            disabled={currentIndex - 1 !== -1 ? false : true}
+            title="Back"
+            onPress={() => {
+              setCurrentIndex(prev => prev - 1);
+            }}
+          />
+          <Button
+            disabled={
+              currentIndex + 1 !== props.route.params.data.numOfQuestions
+                ? false
+                : true
+            }
+            title="Next"
+            onPress={() => {
+              setCurrentIndex(prev => prev + 1);
+            }}
+          />
+          <Button
+            title="Submit"
+            onPress={() => {
+              onEndGame();
+            }}
+          />
+        </View>
+      )}
     </>
   );
 };
@@ -208,6 +224,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: MarginDimension.medium,
+  },
+  paginationContainer: {
+    marginTop: MarginDimension.large,
+    marginLeft: MarginDimension.extraLarge,
+  },
+  text: {
+    fontSize: FontSizes.medium,
+  },
+  rowContainer: {
+    flexDirection: 'row',
   },
 });
 

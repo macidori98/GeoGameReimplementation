@@ -21,7 +21,6 @@ export const shuffle = arr => {
  * @returns {string}
  */
 export const getDurationString = seconds => {
-  console.log(seconds);
   var minutes = Math.floor(seconds / 60);
   seconds = seconds % 60;
   minutes = minutes % 60;
@@ -61,7 +60,6 @@ const formatNumberForAndroid = number => {
   }
 
   while (parseInt((number / 1000).toString(), 10) !== 0) {
-    console.log(number);
     const rest = number % 1000;
     number = parseInt((number / 1000).toString(), 10);
     if (number.toString().length > 3) {

@@ -13,6 +13,7 @@ import {
 import * as CommonStyles from '~/theme/CommonStyles';
 import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch} from 'react-redux';
+import TimeElapsed from '~/components/game/TimeElapsed';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -117,9 +118,9 @@ const GameScreen = props => {
         break;
     }
 
+    gameStartTime.current = new Date();
     setQuestions(questionResult);
     setIsLoading(false);
-    gameStartTime.current = new Date();
   }, [data]);
 
   useEffect(() => {
@@ -127,37 +128,47 @@ const GameScreen = props => {
   }, [data, getData]);
 
   return (
-    <View
-      style={{...CommonStyles.styles.screen, ...CommonStyles.styles.centered}}>
-      {isLoading && !questions && <LoadingIndicator />}
-      {data.gameType === GameTypes.guessTheCapital && questions && (
-        <GuessTheCapitalGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-      {data.gameType === GameTypes.guessTheFlag && questions && (
-        <GuessTheFlagGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-      {data.gameType === GameTypes.guessTheNeighbour && questions && (
-        <GuessTheNeighbourGame
-          data={{
-            options: questions[currentIndex].options,
-            question: questions[currentIndex].question,
-          }}
-          onItemSelected={onItemSelected}
-        />
-      )}
-    </View>
+    <>
+      <View>
+        {questions && (
+          <TimeElapsed startTime={gameStartTime.current.getTime()} />
+        )}
+      </View>
+      <View
+        style={{
+          ...CommonStyles.styles.screen,
+          ...CommonStyles.styles.centered,
+        }}>
+        {isLoading && !questions && <LoadingIndicator />}
+        {data.gameType === GameTypes.guessTheCapital && questions && (
+          <GuessTheCapitalGame
+            data={{
+              options: questions[currentIndex].options,
+              question: questions[currentIndex].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+        {data.gameType === GameTypes.guessTheFlag && questions && (
+          <GuessTheFlagGame
+            data={{
+              options: questions[currentIndex].options,
+              question: questions[currentIndex].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+        {data.gameType === GameTypes.guessTheNeighbour && questions && (
+          <GuessTheNeighbourGame
+            data={{
+              options: questions[currentIndex].options,
+              question: questions[currentIndex].question,
+            }}
+            onItemSelected={onItemSelected}
+          />
+        )}
+      </View>
+    </>
   );
 };
 

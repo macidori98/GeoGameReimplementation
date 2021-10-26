@@ -1,6 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
 import {Dimensions, Image, StyleSheet, View, SectionList} from 'react-native';
 import * as RNLocalize from 'react-native-localize';
+import {
+  Collapse,
+  CollapseHeader,
+  CollapseBody,
+} from 'accordion-collapse-react-native';
 import TimeZone from '~/components/study/TimeZone';
 import TouchableItem from '~/components/common/TouchableItem';
 import {DetailLabel} from '~/constants/ConstantValues';
@@ -76,42 +81,69 @@ const DetailsScreen = props => {
                 </>
               );
             case 'timezones':
-              return <TimeZone timezones={item.timezones} />;
-            case 'neighbour':
               return (
-                <>
-                  {item.borders.length > 0 ? (
-                    item.borders.map(i => (
-                      <TouchableItem
-                        key={i.code}
-                        onPress={() => {
-                          props.navigation.navigate('Details', {
-                            countryName: i.name,
-                            countryCode: i.code,
-                          });
-                        }}>
-                        <CountryCard country={i} />
-                      </TouchableItem>
-                    ))
-                  ) : (
-                    <View
-                      key={item.typeIdentifier}
-                      style={styles.borderTextContainer}>
+                <Collapse>
+                  <CollapseHeader>
+                    <View style={styles.titleContainer}>
                       <CustomText
-                        text={DetailLabel.noBorder}
-                        size={FontSizes.medium}
+                        text={DetailLabel.timezones}
+                        size={FontSizes.large}
                       />
                     </View>
-                  )}
-                </>
+                  </CollapseHeader>
+                  <CollapseBody>
+                    <TimeZone timezones={item.timezones} />
+                  </CollapseBody>
+                </Collapse>
+              );
+            case 'neighbour':
+              return (
+                <Collapse>
+                  <CollapseHeader>
+                    <View style={styles.titleContainer}>
+                      <CustomText
+                        text={DetailLabel.borders}
+                        size={FontSizes.large}
+                      />
+                    </View>
+                  </CollapseHeader>
+                  <CollapseBody>
+                    {item.borders.length > 0 ? (
+                      item.borders.map(i => (
+                        <TouchableItem
+                          key={i.code}
+                          onPress={() => {
+                            props.navigation.navigate('Details', {
+                              countryName: i.name,
+                              countryCode: i.code,
+                            });
+                          }}>
+                          <CountryCard country={i} />
+                        </TouchableItem>
+                      ))
+                    ) : (
+                      <View
+                        key={item.typeIdentifier}
+                        style={styles.borderTextContainer}>
+                        <CustomText
+                          text={DetailLabel.noBorder}
+                          size={FontSizes.medium}
+                        />
+                      </View>
+                    )}
+                  </CollapseBody>
+                </Collapse>
               );
           }
         }}
-        renderSectionHeader={({section: {title}}) => (
-          <View style={styles.titleContainer}>
-            <CustomText text={title} size={FontSizes.large} />
-          </View>
-        )}
+        renderSectionHeader={({section: {title}}) =>
+          title !== DetailLabel.timezones &&
+          title !== DetailLabel.borders && (
+            <View style={styles.titleContainer}>
+              <CustomText text={title} size={FontSizes.large} />
+            </View>
+          )
+        }
       />
     </View>
   );

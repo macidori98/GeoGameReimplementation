@@ -8,8 +8,8 @@ const DATABASE_KEY = 'dbKey';
 export const saveDataLocally = async newGame => {
   var gamesListResponse = await readDataFromLocal();
   if (gamesListResponse.success === true) {
-    var gamesList = gamesListResponse.data;
-    gamesList != null ? gamesList.push(newGame) : (gamesList = []);
+    var gamesList = gamesListResponse.data ?? [];
+    gamesList.push(newGame);
 
     try {
       const jsonValue = JSON.stringify(gamesList);

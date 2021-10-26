@@ -44,12 +44,11 @@ const StatisticsScreen = props => {
 
   useEffect(() => {
     if (statisticsState.games.length !== 0) {
-      console.log(statisticsState.games);
       setData(statisticsState.games);
     }
   }, [statisticsState.games]);
 
-  const createStatisticsView = () => (
+  return (
     <ScrollView>
       <View style={CommonStyles.styles.centered}>
         <TouchableItem
@@ -83,8 +82,6 @@ const StatisticsScreen = props => {
       )}
     </ScrollView>
   );
-
-  return <>{createStatisticsView()}</>;
 };
 
 const styles = StyleSheet.create({

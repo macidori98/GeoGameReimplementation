@@ -79,7 +79,6 @@ const GameScreen = props => {
   };
 
   const onEndGame = () => {
-    console.log(givenAnswers.current);
     const gameEndTime = new Date();
 
     const seconds =

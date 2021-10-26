@@ -57,4 +57,9 @@ export const gameComponentStyles = StyleSheet.create({
     fontSize: FontSizes.medium,
     fontWeight: 'bold',
   },
+  centeredScreenWithBorder: {
+    ...styles.centered,
+    ...styles.screen,
+    margin: MarginDimension.medium,
+  },
 });

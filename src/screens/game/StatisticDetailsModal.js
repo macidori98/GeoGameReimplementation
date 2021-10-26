@@ -32,8 +32,7 @@ const StatisticDetailsModal = props => {
 
 const styles = StyleSheet.create({
   container: {
-    ...CommonStyles.styles.centered,
-    ...CommonStyles.styles.screen,
+    ...CommonStyles.gameComponentStyles.centeredScreenWithBorder,
   },
 });
 

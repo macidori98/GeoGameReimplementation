@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {View} from 'react-native';
+import {Button, StyleSheet, View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
@@ -14,6 +14,7 @@ import * as CommonStyles from '~/theme/CommonStyles';
 import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch} from 'react-redux';
 import TimeElapsed from '~/components/game/TimeElapsed';
+import {MarginDimension} from '~/theme/Dimen';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -65,27 +66,31 @@ const GameScreen = props => {
     if (currentIndex + 1 !== data.numOfQuestions) {
       setCurrentIndex(prev => prev + 1);
     } else {
-      const gameEndTime = new Date();
-
-      const seconds =
-        (gameEndTime.getTime() - gameStartTime.current.getTime()) / 1000;
-
-      const gameData = {
-        correctAns: numberOfCorrectAnswers.current,
-        date: gameStartTime.current.toDateString(),
-        time: gameStartTime.current.toTimeString().substr(0, 8),
-        duration: getDurationString(seconds),
-      };
-
-      dispatch(statisticsActions.savePlayedGameData(gameData));
-
-      props.navigation.navigate('EndGameModal', {
-        data: gameData,
-        onBack: () => {
-          props.navigation.navigate('Statistics');
-        },
-      });
+      onEndGame();
     }
+  };
+
+  const onEndGame = () => {
+    const gameEndTime = new Date();
+
+    const seconds =
+      (gameEndTime.getTime() - gameStartTime.current.getTime()) / 1000;
+
+    const gameData = {
+      correctAns: numberOfCorrectAnswers.current,
+      date: gameStartTime.current.toDateString(),
+      time: gameStartTime.current.toTimeString().substr(0, 8),
+      duration: getDurationString(seconds),
+    };
+
+    dispatch(statisticsActions.savePlayedGameData(gameData));
+
+    props.navigation.navigate('EndGameModal', {
+      data: gameData,
+      onBack: () => {
+        props.navigation.navigate('Statistics');
+      },
+    });
   };
 
   const getData = useCallback(async () => {
@@ -168,8 +173,42 @@ const GameScreen = props => {
           />
         )}
       </View>
+      <View style={styles.buttonContainer}>
+        <Button
+          disabled={currentIndex - 1 !== -1 ? false : true}
+          title="Back"
+          onPress={() => {
+            setCurrentIndex(prev => prev - 1);
+          }}
+        />
+        <Button
+          disabled={
+            currentIndex + 1 !== props.route.params.data.numOfQuestions
+              ? false
+              : true
+          }
+          title="Next"
+          onPress={() => {
+            setCurrentIndex(prev => prev + 1);
+          }}
+        />
+        <Button
+          title="Submit"
+          onPress={() => {
+            onEndGame();
+          }}
+        />
+      </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: MarginDimension.medium,
+  },
+});
 
 export default GameScreen;

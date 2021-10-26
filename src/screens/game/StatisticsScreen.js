@@ -5,7 +5,7 @@ import TouchableItem from '~/components/common/TouchableItem';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension} from '~/theme/Dimen';
 import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
-import {ConfigLabels, NoGameYet} from '~/constants/ConstantValues';
+import {HelperButtonsLabel, NoGameYet} from '~/constants/ConstantValues';
 import * as statisticsActions from '~/store/actions/statistics';
 import {useDispatch, useSelector} from 'react-redux';
 import CustomText from '~/components/common/CustomText';
@@ -60,7 +60,7 @@ const StatisticsScreen = props => {
               },
             });
           }}>
-          <ShadowedTextContainer title={ConfigLabels.configGame} />
+          <ShadowedTextContainer title={HelperButtonsLabel.startGame} />
         </TouchableItem>
       </View>
       {datas.length > 0 &&

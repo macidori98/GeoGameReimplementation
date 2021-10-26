@@ -28,7 +28,7 @@ const StatisticsScreen = props => {
   );
 
   /**
-   * @type {ComponentState<StatisticsData[]>}
+   * @type {ComponentState<StatisticsDataWithQuestions[]>}
    */
   const [datas, setData] = useState([]);
 
@@ -44,6 +44,7 @@ const StatisticsScreen = props => {
 
   useEffect(() => {
     if (statisticsState.games.length !== 0) {
+      console.log(statisticsState.games);
       setData(statisticsState.games);
     }
   }, [statisticsState.games]);
@@ -65,7 +66,7 @@ const StatisticsScreen = props => {
       </View>
       {datas.length > 0 &&
         datas.map((item, index) => (
-          <View style={styles.itemContainer} key={item.date + index}>
+          <View style={styles.itemContainer} key={item.data.date + index}>
             <TouchableItem
               onPress={() => {
                 props.navigation.navigate('StatDetails', {data: item});

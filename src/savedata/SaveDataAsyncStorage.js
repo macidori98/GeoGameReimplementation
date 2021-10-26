@@ -2,8 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const DATABASE_KEY = 'dbKey';
 /**
- * @param {StatisticsData} newGame
- * @returns {Promise<SuccessResponseType<StatisticsData>|ErrorResponseType>}
+ * @param {StatisticsDataWithQuestions} newGame
+ * @returns {Promise<SuccessResponseType<StatisticsDataWithQuestions>|ErrorResponseType>}
  */
 export const saveDataLocally = async newGame => {
   var gamesListResponse = await readDataFromLocal();
@@ -24,13 +24,13 @@ export const saveDataLocally = async newGame => {
 };
 
 /**
- * @returns {Promise<SuccessResponseType<StatisticsData[]>|ErrorResponseType>}
+ * @returns {Promise<SuccessResponseType<StatisticsDataWithQuestions[]>|ErrorResponseType>}
  */
 export const readDataFromLocal = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem(DATABASE_KEY);
     /**
-     * @type {StatisticsData[]}
+     * @type {StatisticsDataWithQuestions[]}
      */
     return {
       success: true,

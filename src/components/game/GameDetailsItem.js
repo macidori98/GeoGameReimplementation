@@ -1,25 +1,32 @@
 import React from 'react';
-import {View} from 'react-native';
-import {GameDetailsLabel} from '~/constants/ConstantValues';
+import {ScrollView} from 'react-native';
+import {GameDetailsLabel, GameTypes} from '~/constants/ConstantValues';
 import FontSizes from '~/theme/FontSizes';
 import CustomText from '../common/CustomText';
+import GameStatisticsFlag from './GameStatisticFlag';
+import GameStatisticsText from './GameStatisticText';
 
 /**
- * @param {{data: StatisticsData}} props
+ * @param {{data: StatisticsDataWithQuestions}} props
  * @returns {JSX.Element}
  */
 const GameDetailsItem = props => {
   const {data} = props;
   return (
-    <View>
+    <ScrollView>
       <CustomText
-        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.correctAns}`}
+        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.data.correctAns}`}
         size={FontSizes.large}
       />
-      <CustomText text={`${GameDetailsLabel.date} ${data.date}`} />
-      <CustomText text={`${GameDetailsLabel.time} ${data.time}`} />
-      <CustomText text={`${GameDetailsLabel.duration} ${data.duration}`} />
-    </View>
+      <CustomText text={`${GameDetailsLabel.date} ${data.data.date}`} />
+      <CustomText text={`${GameDetailsLabel.time} ${data.data.time}`} />
+      <CustomText text={`${GameDetailsLabel.duration} ${data.data.duration}`} />
+      {data.type === GameTypes.guessTheFlag ? (
+        <GameStatisticsFlag questions={data.questions} />
+      ) : (
+        <GameStatisticsText questions={data.questions} />
+      )}
+    </ScrollView>
   );
 };
 

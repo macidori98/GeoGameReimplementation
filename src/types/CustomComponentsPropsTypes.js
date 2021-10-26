@@ -27,7 +27,7 @@
  */
 
 /**
- * @typedef {{data: StatisticsData}} StatisticsItemProps
+ * @typedef {{data: StatisticsDataWithQuestions}} StatisticsItemProps
  */
 
 /**

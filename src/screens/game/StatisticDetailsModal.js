@@ -5,6 +5,7 @@ import TouchableItem from '~/components/common/TouchableItem';
 import ShadowedTextContainer from '~/components/common/ShadowedTextContainer';
 import GameDetailsItem from '~/components/game/GameDetailsItem';
 import {HelperButtonsLabel} from '~/constants/ConstantValues';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 /**
  * @param {StatisticDetailsModalProps} props
@@ -13,17 +14,19 @@ import {HelperButtonsLabel} from '~/constants/ConstantValues';
 const StatisticDetailsModal = props => {
   const {data} = props.route.params;
   return (
-    <View style={styles.container}>
-      <GameDetailsItem data={data} />
+    <SafeAreaView style={styles.container}>
       <View>
-        <TouchableItem
-          onPress={() => {
-            props.route.params.onBack();
-          }}>
-          <ShadowedTextContainer title={HelperButtonsLabel.back} />
-        </TouchableItem>
+        <GameDetailsItem data={data} />
+        <View style={CommonStyles.styles.centered}>
+          <TouchableItem
+            onPress={() => {
+              props.route.params.onBack();
+            }}>
+            <ShadowedTextContainer title={HelperButtonsLabel.back} />
+          </TouchableItem>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

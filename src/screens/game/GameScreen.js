@@ -54,12 +54,19 @@ const GameScreen = props => {
    */
   const numberOfCorrectAnswers = useRef(0);
 
+  /**
+   * @type {React.MutableRefObject<QuestionStatistic[]>}
+   */
+  const givenAnswers = useRef([]);
+
   const dispatch = useDispatch();
 
   /**
    * @param {string} item
    */
   const onItemSelected = item => {
+    givenAnswers.current[currentIndex].givenAnswer = item;
+
     if (item === questions[currentIndex].correctAnswer) {
       numberOfCorrectAnswers.current++;
     }
@@ -72,16 +79,24 @@ const GameScreen = props => {
   };
 
   const onEndGame = () => {
+    console.log(givenAnswers.current);
     const gameEndTime = new Date();
 
     const seconds =
       (gameEndTime.getTime() - gameStartTime.current.getTime()) / 1000;
 
+    /**
+     * @type {StatisticsDataWithQuestions}
+     */
     const gameData = {
-      correctAns: numberOfCorrectAnswers.current,
-      date: gameStartTime.current.toDateString(),
-      time: gameStartTime.current.toTimeString().substr(0, 8),
-      duration: getDurationString(seconds),
+      data: {
+        correctAns: numberOfCorrectAnswers.current,
+        date: gameStartTime.current.toDateString(),
+        time: gameStartTime.current.toTimeString().substr(0, 8),
+        duration: getDurationString(seconds),
+      },
+      questions: givenAnswers.current,
+      type: GameTypes[data.gameType],
     };
 
     dispatch(statisticsActions.savePlayedGameData(gameData));
@@ -96,6 +111,10 @@ const GameScreen = props => {
 
   const getData = useCallback(async () => {
     setIsLoading(true);
+
+    /**
+     * @type {Questions[]}
+     */
     var questionResult;
     switch (data.gameType) {
       case GameTypes.guessTheCapital:
@@ -122,6 +141,15 @@ const GameScreen = props => {
         break;
       default:
         break;
+    }
+
+    for (const item of questionResult) {
+      givenAnswers.current.push({
+        correctAnswer: item.correctAnswer,
+        givenAnswer: '',
+        question: GameTypes[data.gameType],
+        questionEnding: item.question,
+      });
     }
 
     gameStartTime.current = new Date();

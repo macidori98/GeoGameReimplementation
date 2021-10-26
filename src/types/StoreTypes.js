@@ -1,5 +1,5 @@
 /**
- * @typedef {{games: StatisticsData []}} StatisticsStateObj
+ * @typedef {{games: StatisticsDataWithQuestions[]}} StatisticsStateObj
  */
 
 /**

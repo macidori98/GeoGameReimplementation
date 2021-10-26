@@ -12,7 +12,7 @@
  */
 
 /**
- * @typedef {{Statistics: undefined, Gaming: {data: GameData}, StatDetails: {data: StatisticsData}}} GameNavigationParamList
+ * @typedef {{Statistics: undefined, Gaming: {data: GameData}, StatDetails: {data: StatisticsDataWithQuestions}}} GameNavigationParamList
  */
 
 /**
@@ -57,5 +57,5 @@
  */
 
 /**
- * @typedef {{MainScreens: undefined, GameConfigModal: GameConfig, EndGameModal: {data: StatisticsData, onBack: () => void}}} MainNavigationParamList
+ * @typedef {{MainScreens: undefined, GameConfigModal: GameConfig, EndGameModal: {data: StatisticsDataWithQuestions, onBack: () => void}}} MainNavigationParamList
  */

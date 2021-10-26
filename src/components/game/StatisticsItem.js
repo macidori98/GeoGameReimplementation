@@ -17,11 +17,11 @@ const StatisticsItem = props => {
   return (
     <View style={styles.container}>
       <CustomText
-        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.correctAns}`}
+        text={`${GameDetailsLabel.numOfCorrectAnswers} ${data.data.correctAns}`}
       />
-      <CustomText text={`${GameDetailsLabel.date} ${data.date}`} />
-      <CustomText text={`${GameDetailsLabel.time} ${data.time}`} />
-      <CustomText text={`${GameDetailsLabel.duration} ${data.duration}`} />
+      <CustomText text={`${GameDetailsLabel.date} ${data.data.date}`} />
+      <CustomText text={`${GameDetailsLabel.time} ${data.data.time}`} />
+      <CustomText text={`${GameDetailsLabel.duration} ${data.data.duration}`} />
     </View>
   );
 };

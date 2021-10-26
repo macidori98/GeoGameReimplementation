@@ -23,7 +23,7 @@ export const getPlayedGamesData = () => {
 };
 
 /**
- * @param {StatisticsData} data
+ * @param {StatisticsDataWithQuestions} data
  * @returns {(dispatch: any) => Promise<void>}
  */
 export const savePlayedGameData = data => {

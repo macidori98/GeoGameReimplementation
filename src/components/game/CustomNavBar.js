@@ -8,7 +8,7 @@ import {MarginDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
 /**
- * @param {{onBack: () => void, title: string}} props
+ * @param {CustomNavBarProps} props
  * @returns {JSX.Element}
  */
 const CustomNavBar = props => {
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontSize: FontSizes.medium,
+    fontWeight: '600',
   },
   rowCenteredItem: {
     flex: 1,

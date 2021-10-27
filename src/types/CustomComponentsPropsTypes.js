@@ -45,3 +45,19 @@
 /**
  * @typedef {{data: CurrentQuestion, onItemSelected: Function}} GuessGameProps
  */
+
+/**
+ * @typedef {{onBack: () => void, title: string}} CustomNavBarProps
+ */
+
+/**
+ * @typedef {{data: StatisticsDataWithQuestions}} GameDetailsItemProps
+ */
+
+/**
+ * @typedef {{questions: QuestionStatistic[]}} GameStatisticsProps
+ */
+
+/**
+ * @typedef {{startTime: number}} TimeElapsedProps
+ */

@@ -12,7 +12,7 @@ import CustomText from '../common/CustomText';
 
 /**
  *
- * @param {{questions: QuestionStatistic[]}} props
+ * @param {GameStatisticsProps} props
  * @returns {JSX.Element}
  */
 const GameStatisticsText = props => {

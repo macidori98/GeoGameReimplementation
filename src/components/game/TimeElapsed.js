@@ -5,7 +5,7 @@ import {MarginDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
 
 /**
- * @param {{startTime: number}} props
+ * @param {TimeElapsedProps} props
  * @returns {JSX.Element}
  */
 const TimeElapsed = props => {

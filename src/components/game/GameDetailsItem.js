@@ -7,7 +7,7 @@ import GameStatisticsFlag from './GameStatisticFlag';
 import GameStatisticsText from './GameStatisticText';
 
 /**
- * @param {{data: StatisticsDataWithQuestions}} props
+ * @param {GameDetailsItemProps} props
  * @returns {JSX.Element}
  */
 const GameDetailsItem = props => {

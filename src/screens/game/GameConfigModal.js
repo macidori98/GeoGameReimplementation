@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
   ConfigLabels,
@@ -14,8 +13,7 @@ import TouchableItem from '../../components/common/TouchableItem';
 import GameConfigElement from '../../components/game/GameConfigElement';
 import * as CommonStyles from '~/theme/CommonStyles';
 import ShadowedTextContainer from '../../components/common/ShadowedTextContainer';
-import Colors from '~/theme/Colors';
-import FontSizes from '~/theme/FontSizes';
+import CustomNavBar from '~/components/game/CustomNavBar';
 
 /**
  * @param {GameConfigModalProps} props
@@ -118,27 +116,12 @@ const GameConfigModal = props => {
   return (
     <>
       <View style={CommonStyles.styles.screen}>
-        <View style={styles.navContainer}>
-          <View style={styles.rowItem}>
-            <TouchableItem
-              onPress={() => {
-                props.navigation.goBack();
-              }}>
-              <View style={styles.backButtonContainer}>
-                <Ionicons
-                  name="arrow-back-outline"
-                  size={30}
-                  color={Colors.darkPink}
-                />
-                <Text style={styles.text}>{HelperButtonsLabel.back}</Text>
-              </View>
-            </TouchableItem>
-          </View>
-          <View style={styles.rowCenteredItem}>
-            <Text style={styles.title}>{ConfigLabels.configGame}</Text>
-          </View>
-          <View style={styles.rowItem} />
-        </View>
+        <CustomNavBar
+          onBack={() => {
+            props.navigation.goBack();
+          }}
+          title={ConfigLabels.configGame}
+        />
         <ScrollView>
           <View style={styles.container}>
             {configurationData.map(item => (
@@ -196,34 +179,6 @@ const styles = StyleSheet.create({
   centeredButton: {
     flex: 1,
     ...CommonStyles.styles.centered,
-  },
-  navContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: MarginDimension.small,
-  },
-  rowItem: {
-    flex: 1,
-    paddingRight: 10,
-  },
-  text: {
-    fontSize: FontSizes.medium,
-    color: Colors.darkPink,
-    fontWeight: '200',
-  },
-  backButtonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: FontSizes.medium,
-  },
-  rowCenteredItem: {
-    flex: 1,
-    paddingRight: 10,
-    alignItems: 'center',
   },
 });
 

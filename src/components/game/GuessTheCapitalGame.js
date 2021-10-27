@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {GameTypes, GameTypesObjects} from '~/constants/ConstantValues';
+import Colors from '~/theme/Colors';
 import {gameComponentStyles} from '~/theme/CommonStyles';
 
 /**
@@ -9,7 +10,7 @@ import {gameComponentStyles} from '~/theme/CommonStyles';
  * @returns {JSX.Element}
  */
 const GuessTheCapitalGame = props => {
-  const {data, onItemSelected} = props;
+  const {data, onItemSelected, givenAnswer} = props;
 
   return (
     <View>
@@ -30,7 +31,16 @@ const GuessTheCapitalGame = props => {
             <TouchableOpacity
               style={styles.listItem}
               onPress={() => onItemSelected(item)}>
-              <Text style={styles.centeredText}>{item}</Text>
+              <Text
+                style={{
+                  ...styles.centeredText,
+                  color:
+                    givenAnswer !== '' && givenAnswer === item
+                      ? Colors.darkBlue
+                      : Colors.white,
+                }}>
+                {item}
+              </Text>
             </TouchableOpacity>
           )}
         />

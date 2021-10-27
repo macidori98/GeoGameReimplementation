@@ -69,6 +69,8 @@ export const HelperButtonsLabel = {
   back: 'Back',
   close: 'Close',
   startGame: 'Start game',
+  next: 'Next',
+  submit: 'Submit',
 };
 
 export const GameDetailsLabel = {

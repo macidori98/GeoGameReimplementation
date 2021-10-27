@@ -4,7 +4,7 @@ import LoadingIndicator from '~/components/common/LoadingIndicator';
 import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
 import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
 import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
-import {GameTypes} from '~/constants/ConstantValues';
+import {GameTypes, HelperButtonsLabel} from '~/constants/ConstantValues';
 import {getDurationString} from '~/helpers/Utils';
 import {
   generateGuessTheNeighbourQuestions,
@@ -193,6 +193,7 @@ const GameScreen = props => {
               question: questions[currentIndex].question,
             }}
             onItemSelected={onItemSelected}
+            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
           />
         )}
         {data.gameType === GameTypes.guessTheFlag && questions && (
@@ -202,6 +203,7 @@ const GameScreen = props => {
               question: questions[currentIndex].question,
             }}
             onItemSelected={onItemSelected}
+            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
           />
         )}
         {data.gameType === GameTypes.guessTheNeighbour && questions && (
@@ -211,6 +213,7 @@ const GameScreen = props => {
               question: questions[currentIndex].question,
             }}
             onItemSelected={onItemSelected}
+            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
           />
         )}
       </View>
@@ -218,7 +221,7 @@ const GameScreen = props => {
         <View style={styles.buttonContainer}>
           <Button
             disabled={currentIndex - 1 !== -1 ? false : true}
-            title="Back"
+            title={HelperButtonsLabel.back}
             onPress={() => {
               setCurrentIndex(prev => prev - 1);
             }}
@@ -229,13 +232,13 @@ const GameScreen = props => {
                 ? false
                 : true
             }
-            title="Next"
+            title={HelperButtonsLabel.next}
             onPress={() => {
               setCurrentIndex(prev => prev + 1);
             }}
           />
           <Button
-            title="Submit"
+            title={HelperButtonsLabel.submit}
             onPress={() => {
               onEndGame();
             }}

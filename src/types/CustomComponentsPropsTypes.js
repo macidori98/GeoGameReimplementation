@@ -43,7 +43,7 @@
  */
 
 /**
- * @typedef {{data: CurrentQuestion, onItemSelected: Function, givenAnswer: string}} GuessGameProps
+ * @typedef {{data: CurrentQuestion, onItemSelected: Function, givenAnswer: string, children: JSX.Element}} GuessGameProps
  */
 
 /**

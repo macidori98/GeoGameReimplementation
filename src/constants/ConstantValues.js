@@ -28,6 +28,12 @@ export const DetailLabel = {
   loading: 'Loading...',
 };
 
+export const GameTypesValues = {
+  guessTheCapital: 'Guess the capital',
+  guessTheNeighbour: 'Guess the neighbour',
+  guessTheFlag: 'Guess the flag',
+};
+
 export const GameTypesObjects = [
   {id: 'guessTheCapital', name: 'Guess the capital'},
   {id: 'guessTheNeighbour', name: 'Guess the neighbour'},

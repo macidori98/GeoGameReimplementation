@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Button, Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import LoadingIndicator from '~/components/common/LoadingIndicator';
-import GuessTheCapitalGame from '~/components/game/GuessTheCapitalGame';
-import GuessTheFlagGame from '~/components/game/GuessTheFlagGame';
-import GuessTheNeighbourGame from '~/components/game/GuessTheNeighbourGame';
-import {GameTypes, HelperButtonsLabel} from '~/constants/ConstantValues';
+import {
+  GameTypes,
+  GameTypesValues,
+  HelperButtonsLabel,
+} from '~/constants/ConstantValues';
 import {getDurationString} from '~/helpers/Utils';
 import {
   generateGuessTheNeighbourQuestions,
@@ -16,6 +17,7 @@ import {useDispatch} from 'react-redux';
 import TimeElapsed from '~/components/game/TimeElapsed';
 import {MarginDimension} from '~/theme/Dimen';
 import FontSizes from '~/theme/FontSizes';
+import Game from '~/components/game/Game';
 
 /**
  * @param {import('@react-navigation/core').CompositeScreenProps<
@@ -161,7 +163,7 @@ const GameScreen = props => {
   }, [data, getData]);
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.rowContainer}>
         {questions && (
           <>
@@ -179,73 +181,71 @@ const GameScreen = props => {
           </>
         )}
       </View>
-
       <View
         style={{
           ...CommonStyles.styles.screen,
           ...CommonStyles.styles.centered,
         }}>
         {isLoading && !questions && <LoadingIndicator />}
-        {data.gameType === GameTypes.guessTheCapital && questions && (
-          <GuessTheCapitalGame
+        {questions && (
+          <Game
             data={{
               options: questions[currentIndex].options,
               question: questions[currentIndex].question,
             }}
             onItemSelected={onItemSelected}
-            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
-          />
-        )}
-        {data.gameType === GameTypes.guessTheFlag && questions && (
-          <GuessTheFlagGame
-            data={{
-              options: questions[currentIndex].options,
-              question: questions[currentIndex].question,
-            }}
-            onItemSelected={onItemSelected}
-            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
-          />
-        )}
-        {data.gameType === GameTypes.guessTheNeighbour && questions && (
-          <GuessTheNeighbourGame
-            data={{
-              options: questions[currentIndex].options,
-              question: questions[currentIndex].question,
-            }}
-            onItemSelected={onItemSelected}
-            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}
-          />
+            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}>
+            <>
+              {data.gameType === GameTypes.guessTheFlag && (
+                <>
+                  <Text style={styles.question}>
+                    {GameTypesValues[data.gameType]}
+                  </Text>
+                  <Image
+                    resizeMode={'cover'}
+                    style={styles.image}
+                    source={{
+                      uri: `${questions[currentIndex].question}`,
+                    }}
+                  />
+                </>
+              )}
+              {data.gameType !== GameTypes.guessTheFlag && (
+                <Text style={styles.question}>{`${
+                  GameTypesValues[data.gameType]
+                } of ${questions[currentIndex].question}`}</Text>
+              )}
+            </>
+          </Game>
         )}
       </View>
-      {questions && (
-        <View style={styles.buttonContainer}>
-          <Button
-            disabled={currentIndex - 1 !== -1 ? false : true}
-            title={HelperButtonsLabel.back}
-            onPress={() => {
-              setCurrentIndex(prev => prev - 1);
-            }}
-          />
-          <Button
-            disabled={
-              currentIndex + 1 !== props.route.params.data.numOfQuestions
-                ? false
-                : true
-            }
-            title={HelperButtonsLabel.next}
-            onPress={() => {
-              setCurrentIndex(prev => prev + 1);
-            }}
-          />
-          <Button
-            title={HelperButtonsLabel.submit}
-            onPress={() => {
-              onEndGame();
-            }}
-          />
-        </View>
-      )}
-    </>
+      <View style={styles.buttonContainer}>
+        <Button
+          disabled={currentIndex - 1 !== -1 ? false : true}
+          title={HelperButtonsLabel.back}
+          onPress={() => {
+            setCurrentIndex(prev => prev - 1);
+          }}
+        />
+        <Button
+          disabled={
+            currentIndex + 1 !== props.route.params.data.numOfQuestions
+              ? false
+              : true
+          }
+          title={HelperButtonsLabel.next}
+          onPress={() => {
+            setCurrentIndex(prev => prev + 1);
+          }}
+        />
+        <Button
+          title={HelperButtonsLabel.submit}
+          onPress={() => {
+            onEndGame();
+          }}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -265,6 +265,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
   },
+  ...CommonStyles.gameComponentStyles,
 });
 
 export default GameScreen;

@@ -1,10 +1,9 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
-import {GameDetailsLabel, GameTypes} from '~/constants/ConstantValues';
+import {GameDetailsLabel} from '~/constants/ConstantValues';
 import FontSizes from '~/theme/FontSizes';
 import CustomText from '../common/CustomText';
-import GameStatisticsFlag from './GameStatisticFlag';
-import GameStatisticsText from './GameStatisticText';
+import GameStatistics from './GameStatistic';
 
 /**
  * @param {GameDetailsItemProps} props
@@ -21,11 +20,8 @@ const GameDetailsItem = props => {
       <CustomText text={`${GameDetailsLabel.date} ${data.data.date}`} />
       <CustomText text={`${GameDetailsLabel.time} ${data.data.time}`} />
       <CustomText text={`${GameDetailsLabel.duration} ${data.data.duration}`} />
-      {data.type === GameTypes.guessTheFlag ? (
-        <GameStatisticsFlag questions={data.questions} />
-      ) : (
-        <GameStatisticsText questions={data.questions} />
-      )}
+
+      <GameStatistics questions={data.questions} />
     </ScrollView>
   );
 };

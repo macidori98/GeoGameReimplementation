@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {GameTypes, GameTypesObjects} from '~/constants/ConstantValues';
+import {Image, StyleSheet, Text, View} from 'react-native';
+import {GameTypes, GameTypesValues} from '~/constants/ConstantValues';
 import Colors from '~/theme/Colors';
+import {gameComponentStyles} from '~/theme/CommonStyles';
 import {
   MarginDimension,
   PaddingDimension,
@@ -15,7 +16,7 @@ import CustomText from '../common/CustomText';
  * @param {GameStatisticsProps} props
  * @returns {JSX.Element}
  */
-const GameStatisticsText = props => {
+const GameStatistics = props => {
   return (
     <View style={{marginTop: MarginDimension.extraLarge}}>
       {props.questions.map(item => (
@@ -36,13 +37,29 @@ const GameStatisticsText = props => {
                   ? Colors.greenish
                   : Colors.greyish,
             }}>
-            <CustomText
-              size={FontSizes.medium}
-              text={`${
-                GameTypesObjects.find(i => i.id === GameTypes[item.question])
-                  .name
-              } of ${item.questionEnding}`}
-            />
+            {item.question === GameTypes.guessTheFlag && (
+              <>
+                <CustomText
+                  size={FontSizes.medium}
+                  text={`${GameTypesValues[item.question]}`}
+                />
+                <Image
+                  resizeMode={'cover'}
+                  style={styles.image}
+                  source={{uri: item.questionEnding}}
+                />
+              </>
+            )}
+            {item.question !== GameTypes.guessTheFlag && (
+              <>
+                <CustomText
+                  size={FontSizes.medium}
+                  text={`${GameTypesValues[item.question]} of ${
+                    item.questionEnding
+                  }`}
+                />
+              </>
+            )}
           </View>
           <Text>Correct answer: {item.correctAnswer}</Text>
           <Text>Given answer: {item.givenAnswer}</Text>
@@ -61,8 +78,10 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     borderBottomWidth: 2,
-    marginBottom: MarginDimension.medium,
+    paddingBottom: MarginDimension.large,
+    marginBottom: MarginDimension.small,
   },
+  ...gameComponentStyles,
 });
 
-export default GameStatisticsText;
+export default GameStatistics;

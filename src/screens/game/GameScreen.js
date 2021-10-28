@@ -163,89 +163,102 @@ const GameScreen = props => {
   }, [data, getData]);
 
   return (
-    <ScrollView>
-      <View style={styles.rowContainer}>
-        {questions && (
-          <>
-            <View style={CommonStyles.styles.screen}>
-              <View style={styles.paginationContainer}>
-                <Text style={styles.text}>Page:</Text>
-                <Text style={styles.text}>
-                  {currentIndex + 1}/{props.route.params.data.numOfQuestions}
-                </Text>
-              </View>
-            </View>
-            <View style={CommonStyles.styles.screen}>
-              <TimeElapsed startTime={gameStartTime.current.getTime()} />
-            </View>
-          </>
-        )}
-      </View>
-      <View
-        style={{
-          ...CommonStyles.styles.screen,
-          ...CommonStyles.styles.centered,
-        }}>
-        {isLoading && !questions && <LoadingIndicator />}
-        {questions && (
-          <Game
-            data={{
-              options: questions[currentIndex].options,
-              question: questions[currentIndex].question,
-            }}
-            onItemSelected={onItemSelected}
-            givenAnswer={givenAnswers.current[currentIndex].givenAnswer}>
-            <>
-              {data.gameType === GameTypes.guessTheFlag && (
+    <>
+      {isLoading && !questions && (
+        <View
+          style={{
+            ...CommonStyles.styles.screen,
+            ...CommonStyles.styles.centered,
+          }}>
+          <LoadingIndicator />
+        </View>
+      )}
+      {!isLoading && questions && (
+        <ScrollView>
+          <View style={styles.rowContainer}>
+            {questions && (
+              <>
+                <View style={CommonStyles.styles.screen}>
+                  <View style={styles.paginationContainer}>
+                    <Text style={styles.text}>Page:</Text>
+                    <Text style={styles.text}>
+                      {currentIndex + 1}/
+                      {props.route.params.data.numOfQuestions}
+                    </Text>
+                  </View>
+                </View>
+                <View style={CommonStyles.styles.screen}>
+                  <TimeElapsed startTime={gameStartTime.current.getTime()} />
+                </View>
+              </>
+            )}
+          </View>
+          <View
+            style={{
+              ...CommonStyles.styles.screen,
+              ...CommonStyles.styles.centered,
+            }}>
+            {questions && (
+              <Game
+                data={{
+                  options: questions[currentIndex].options,
+                  question: questions[currentIndex].question,
+                }}
+                onItemSelected={onItemSelected}
+                givenAnswer={givenAnswers.current[currentIndex].givenAnswer}>
                 <>
-                  <Text style={styles.question}>
-                    {GameTypesValues[data.gameType]}
-                  </Text>
-                  <Image
-                    resizeMode={'cover'}
-                    style={styles.image}
-                    source={{
-                      uri: `${questions[currentIndex].question}`,
-                    }}
-                  />
+                  {data.gameType === GameTypes.guessTheFlag && (
+                    <>
+                      <Text style={styles.question}>
+                        {GameTypesValues[data.gameType]}
+                      </Text>
+                      <Image
+                        resizeMode={'cover'}
+                        style={styles.image}
+                        source={{
+                          uri: `${questions[currentIndex].question}`,
+                        }}
+                      />
+                    </>
+                  )}
+                  {data.gameType !== GameTypes.guessTheFlag && (
+                    <Text style={styles.question}>{`${
+                      GameTypesValues[data.gameType]
+                    } of ${questions[currentIndex].question}`}</Text>
+                  )}
                 </>
-              )}
-              {data.gameType !== GameTypes.guessTheFlag && (
-                <Text style={styles.question}>{`${
-                  GameTypesValues[data.gameType]
-                } of ${questions[currentIndex].question}`}</Text>
-              )}
-            </>
-          </Game>
-        )}
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          disabled={currentIndex - 1 !== -1 ? false : true}
-          title={HelperButtonsLabel.back}
-          onPress={() => {
-            setCurrentIndex(prev => prev - 1);
-          }}
-        />
-        <Button
-          disabled={
-            currentIndex + 1 !== props.route.params.data.numOfQuestions
-              ? false
-              : true
-          }
-          title={HelperButtonsLabel.next}
-          onPress={() => {
-            setCurrentIndex(prev => prev + 1);
-          }}
-        />
-        <Button
-          title={HelperButtonsLabel.submit}
-          onPress={() => {
-            onEndGame();
-          }}
-        />
-      </View>
-    </ScrollView>
+              </Game>
+            )}
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              disabled={currentIndex - 1 !== -1 ? false : true}
+              title={HelperButtonsLabel.back}
+              onPress={() => {
+                setCurrentIndex(prev => prev - 1);
+              }}
+            />
+            <Button
+              disabled={
+                currentIndex + 1 !== props.route.params.data.numOfQuestions
+                  ? false
+                  : true
+              }
+              title={HelperButtonsLabel.next}
+              onPress={() => {
+                setCurrentIndex(prev => prev + 1);
+              }}
+            />
+            <Button
+              title={HelperButtonsLabel.submit}
+              onPress={() => {
+                onEndGame();
+              }}
+            />
+          </View>
+        </ScrollView>
+      )}
+    </>
   );
 };
 

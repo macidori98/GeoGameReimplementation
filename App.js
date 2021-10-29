@@ -3,7 +3,7 @@ import ReduxThunk from 'redux-thunk';
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {MainNavigation} from '~/navigation/MainNavigation';
+import {MainMainNavigator, MainNavigation} from '~/navigation/MainNavigation';
 import Colors from '~/theme/Colors';
 import statisticsReducer from '~/store/reducers/statistics';
 
@@ -28,7 +28,7 @@ const App = () => {
             notification: Colors.white,
           },
         }}>
-        <MainNavigation />
+        <MainMainNavigator />
       </NavigationContainer>
     </Provider>
   );

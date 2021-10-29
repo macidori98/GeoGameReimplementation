@@ -1,15 +1,12 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {GameTypes, GameTypesValues} from '~/constants/ConstantValues';
+import {StyleSheet, Text, View} from 'react-native';
 import Colors from '~/theme/Colors';
-import {gameComponentStyles} from '~/theme/CommonStyles';
 import {
   MarginDimension,
   PaddingDimension,
   RadiusDimension,
 } from '~/theme/Dimen';
-import FontSizes from '~/theme/FontSizes';
-import CustomText from '../common/CustomText';
+import GameStatisticsQuestionItem from './GameStatisticsQuestionItem';
 
 /**
  *
@@ -37,29 +34,7 @@ const GameStatistics = props => {
                   ? Colors.greenish
                   : Colors.greyish,
             }}>
-            {item.question === GameTypes.guessTheFlag && (
-              <>
-                <CustomText
-                  size={FontSizes.medium}
-                  text={`${GameTypesValues[item.question]}`}
-                />
-                <Image
-                  resizeMode={'cover'}
-                  style={styles.image}
-                  source={{uri: item.questionEnding}}
-                />
-              </>
-            )}
-            {item.question !== GameTypes.guessTheFlag && (
-              <>
-                <CustomText
-                  size={FontSizes.medium}
-                  text={`${GameTypesValues[item.question]} of ${
-                    item.questionEnding
-                  }`}
-                />
-              </>
-            )}
+            <GameStatisticsQuestionItem item={item} />
           </View>
           <Text>Correct answer: {item.correctAnswer}</Text>
           <Text>Given answer: {item.givenAnswer}</Text>
@@ -81,7 +56,6 @@ const styles = StyleSheet.create({
     paddingBottom: MarginDimension.large,
     marginBottom: MarginDimension.small,
   },
-  ...gameComponentStyles,
 });
 
 export default GameStatistics;

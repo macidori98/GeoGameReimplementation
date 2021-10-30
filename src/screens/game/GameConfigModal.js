@@ -13,7 +13,7 @@ import TouchableItem from '../../components/common/TouchableItem';
 import GameConfigElement from '../../components/game/GameConfigElement';
 import * as CommonStyles from '~/theme/CommonStyles';
 import ShadowedTextContainer from '../../components/common/ShadowedTextContainer';
-import CustomNavBar from '~/components/game/CustomNavBar';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 /**
  * @param {GameConfigModalProps} props
@@ -114,14 +114,8 @@ const GameConfigModal = props => {
   ];
 
   return (
-    <>
-      <View style={CommonStyles.styles.screen}>
-        <CustomNavBar
-          onBack={() => {
-            props.navigation.goBack();
-          }}
-          title={ConfigLabels.configGame}
-        />
+    <SafeAreaView>
+      <View>
         <ScrollView>
           <View style={styles.container}>
             {configurationData.map(item => (
@@ -168,7 +162,7 @@ const GameConfigModal = props => {
           </View>
         </ScrollView>
       </View>
-    </>
+    </SafeAreaView>
   );
 };
 

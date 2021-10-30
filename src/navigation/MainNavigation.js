@@ -41,7 +41,7 @@ const MainStack = createNativeStackNavigator();
 
 export const MainMainNavigator = () => {
   return (
-    <MainStack.Navigator>
+    <MainStack.Navigator screenOptions={{headerShown: false}}>
       <MainStack.Screen component={MainNavigation} name="Main" />
     </MainStack.Navigator>
   );

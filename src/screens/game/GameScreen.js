@@ -105,10 +105,13 @@ const GameScreen = props => {
 
     dispatch(statisticsActions.savePlayedGameData(gameData));
 
-    props.navigation.navigate('EndGameModal', {
-      data: gameData,
-      onBack: () => {
-        props.navigation.navigate('Statistics');
+    props.navigation.navigate('ModalScreens', {
+      screen: 'EndGameModal',
+      params: {
+        data: gameData,
+        onBack: () => {
+          props.navigation.navigate('Statistics');
+        },
       },
     });
   };

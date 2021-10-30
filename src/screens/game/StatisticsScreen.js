@@ -56,13 +56,14 @@ const StatisticsScreen = props => {
       <View style={CommonStyles.styles.centered}>
         <TouchableItem
           onPress={() => {
-            props.navigation.navigate('EndGameModal', {
-              data: {
-                data: {correctAns: 3, date: '', duration: '', time: ''},
-                questions: [],
-                type: '',
+            props.navigation.navigate('ModalScreens', {
+              screen: 'GameConfigModal',
+              params: {
+                onStartGame: data => {
+                  props.navigation.goBack();
+                  props.navigation.navigate('Gaming', {data: data});
+                },
               },
-              onBack: () => {},
             });
           }}>
           <ShadowedTextContainer title={HelperButtonsLabel.startGame} />

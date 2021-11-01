@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import NavigationBar from 'react-native-navbar';
 import {
   CommonRadioButtonProps,
   ConfigLabels,
@@ -113,8 +114,20 @@ const GameConfigModal = props => {
     },
   ];
 
+  const leftButtonConfig = {
+    title: HelperButtonsLabel.back,
+    handler: () => props.navigation.goBack(),
+  };
+
+  const titleConfig = {
+    title: ConfigLabels.configGame,
+  };
+
   return (
     <SafeAreaView>
+      <View style={styles.container}>
+        <NavigationBar title={titleConfig} leftButton={leftButtonConfig} />
+      </View>
       <View>
         <ScrollView>
           <View style={styles.container}>

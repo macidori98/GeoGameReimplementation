@@ -1,4 +1,5 @@
 import {DetailLabel} from '~/constants/ConstantValues';
+import {formatNumber} from './Utils';
 
 /**
  * @param {CountryDetailsType} details
@@ -23,7 +24,7 @@ export const convertDataForSectionList = details => {
    */
   const areaData = {
     typeIdentifier: 'text',
-    text: details.countryDetails.area.toString(),
+    text: formatNumber(details.countryDetails.area),
   };
 
   /**
@@ -31,7 +32,7 @@ export const convertDataForSectionList = details => {
    */
   const populationData = {
     typeIdentifier: 'text',
-    text: details.countryDetails.population.toString(),
+    text: formatNumber(details.countryDetails.population),
   };
 
   /**
@@ -53,8 +54,8 @@ export const convertDataForSectionList = details => {
   /**
    * @type {BaseExchangeCombined}
    */
-  const exchnageData = {
-    typeIdentifier: 'exchnage',
+  const exchangeData = {
+    typeIdentifier: 'exchange',
     exchanges: details.exchangeRates,
   };
 
@@ -63,7 +64,7 @@ export const convertDataForSectionList = details => {
     {title: DetailLabel.capital, data: [capitalData]},
     {title: DetailLabel.area, data: [areaData]},
     {title: DetailLabel.population, data: [populationData]},
-    {title: DetailLabel.currency, data: [exchnageData]},
+    {title: DetailLabel.currency, data: [exchangeData]},
     {title: DetailLabel.timezones, data: [timezonesData]},
     {title: DetailLabel.borders, data: [neighbourData]},
   ];

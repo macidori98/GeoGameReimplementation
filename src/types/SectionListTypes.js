@@ -19,7 +19,7 @@
  */
 
 /**
- * @typedef {object} exchangeRates
+ * @typedef {object} ExchangeRates
  * @property {Exchange[]} exchanges
  */
 
@@ -40,7 +40,7 @@
  */
 
 /**
- * @typedef {Base<'exchnage'> & exchangeRates} BaseExchangeCombined
+ * @typedef {Base<'exchange'> & ExchangeRates} BaseExchangeCombined
  */
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Headers} from '~/constants/ConstantValues';
 import CountryListScreen from '~/screens/study/CountryListScreen';
 import DetailsScreen from '~/screens/study/DetailsScreen';
@@ -8,7 +8,7 @@ import RegionListScreen from '~/screens/study/RegionListScreen';
 /**
  * @type {CreateNativeStackNavigatorType<StudyNavigationParamList>}
  */
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export const StudyNavigation = () => {
   return (

@@ -27,5 +27,37 @@
  */
 
 /**
- * @typedef {{data: string}} StatisticsItemProps
+ * @typedef {{data: StatisticsDataWithQuestions}} StatisticsItemProps
+ */
+
+/**
+ * @typedef {{label: string, onPress: (buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void, radioButtons: import('react-native-radio-buttons-group').RadioButtonProps[]}} GameConfigElementProps
+ */
+
+/**
+ * @typedef {{region: string, numOfQuestions: number, gameType: string}} GameData
+ */
+
+/**
+ * @typedef {{buttons: import('react-native-radio-buttons-group').RadioButtonProps[], text: string, onPress: (buttons: import('react-native-radio-buttons-group').RadioButtonProps[]) => void}} GameConfigElementModel
+ */
+
+/**
+ * @typedef {{data: CurrentQuestion, onItemSelected: Function, givenAnswer: string, children: JSX.Element}} GuessGameProps
+ */
+
+/**
+ * @typedef {{onBack: () => void, title: string}} CustomNavBarProps
+ */
+
+/**
+ * @typedef {{data: StatisticsDataWithQuestions}} GameDetailsItemProps
+ */
+
+/**
+ * @typedef {{questions: QuestionStatistic[]}} GameStatisticsProps
+ */
+
+/**
+ * @typedef {{startTime: number}} TimeElapsedProps
  */

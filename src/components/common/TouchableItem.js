@@ -1,5 +1,6 @@
 import React from 'react';
 import {Pressable} from 'react-native';
+import Colors from '~/theme/Colors';
 import {RadiusDimension} from '~/theme/Dimen';
 
 /**
@@ -11,7 +12,7 @@ const TouchableItem = props => {
   return (
     <Pressable
       style={({pressed}) => [
-        {backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white'},
+        {backgroundColor: pressed ? 'rgb(210, 230, 255)' : Colors.white},
         {borderRadius: RadiusDimension.large},
       ]}
       onPress={props.onPress}>

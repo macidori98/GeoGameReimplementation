@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {MarginDimension} from '~/theme/Dimen';
-import CustomText from './CustomText';
+import CustomText from '../common/CustomText';
 
 /**
  * @param {DetailRowProps} props

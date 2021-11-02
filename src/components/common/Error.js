@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import {HelperButtonsLabel} from '~/constants/ConstantValues';
 import * as CommonStyles from '~/theme/CommonStyles';
 import {
   HeightDimension,
@@ -18,7 +19,7 @@ const Error = props => {
       <Text style={styles.text}>Something went wrong! Sorryyy </Text>
       <Text style={styles.text}>{props.message}</Text>
       <Button
-        title="Retry"
+        title={HelperButtonsLabel.retry}
         onPress={() => {
           props.onRetry();
         }}

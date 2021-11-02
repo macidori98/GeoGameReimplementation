@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {Platform, ScrollView, StyleSheet, View} from 'react-native';
 import {
   CommonRadioButtonProps,
   ConfigLabels,
@@ -13,7 +13,10 @@ import TouchableItem from '../../components/common/TouchableItem';
 import GameConfigElement from '../../components/game/GameConfigElement';
 import * as CommonStyles from '~/theme/CommonStyles';
 import ShadowedTextContainer from '../../components/common/ShadowedTextContainer';
-import CustomNavBar from '~/components/game/CustomNavBar';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
+import CustomHeaderButton from '~/components/common/CustomHeaderButton';
+import 'react-native-gesture-handler';
 
 /**
  * @param {GameConfigModalProps} props
@@ -21,6 +24,7 @@ import CustomNavBar from '~/components/game/CustomNavBar';
  */
 const GameConfigModal = props => {
   const {onStartGame} = props.route.params;
+  const {navigation} = props;
 
   /**
    * @type {ComponentState<import('react-native-radio-buttons-group').RadioButtonProps[]>}
@@ -46,6 +50,23 @@ const GameConfigModal = props => {
    * @type {ComponentState<boolean>}
    */
   const [isButtonVisible, setIsButtonVisible] = useState(false);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () =>
+        Platform.OS === 'ios' ? (
+          <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+            <Item
+              title="Back"
+              iconName={'chevron-back-outline'}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </HeaderButtons>
+        ) : null,
+    });
+  }, [navigation]);
 
   useEffect(() => {
     const areAllDataSelected = () => {
@@ -114,14 +135,8 @@ const GameConfigModal = props => {
   ];
 
   return (
-    <>
-      <View style={CommonStyles.styles.screen}>
-        <CustomNavBar
-          onBack={() => {
-            props.navigation.goBack();
-          }}
-          title={ConfigLabels.configGame}
-        />
+    <SafeAreaView>
+      <View>
         <ScrollView>
           <View style={styles.container}>
             {configurationData.map(item => (
@@ -168,7 +183,7 @@ const GameConfigModal = props => {
           </View>
         </ScrollView>
       </View>
-    </>
+    </SafeAreaView>
   );
 };
 

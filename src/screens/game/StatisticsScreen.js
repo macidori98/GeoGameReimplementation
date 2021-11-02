@@ -16,7 +16,10 @@ import FontSizes from '~/theme/FontSizes';
  *            import('@react-navigation/native-stack').NativeStackScreenProps<GameNavigationParamList, 'Statistics'>,
  *            import('@react-navigation/core').CompositeScreenProps<
  *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<BottomTabBarParamList>,
- *                import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>>
+ *                import('@react-navigation/core').CompositeScreenProps<
+ *                  import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>,
+ *                  import('@react-navigation/native-stack').NativeStackScreenProps<ModalScreensParamList>>
+ *                >
  *        >} props
  * @returns {JSX.Element}
  */
@@ -53,10 +56,13 @@ const StatisticsScreen = props => {
       <View style={CommonStyles.styles.centered}>
         <TouchableItem
           onPress={() => {
-            props.navigation.navigate('GameConfigModal', {
-              onStartGame: data => {
-                props.navigation.goBack();
-                props.navigation.navigate('Gaming', {data: data});
+            props.navigation.navigate('ModalScreens', {
+              screen: 'GameConfigModal',
+              params: {
+                onStartGame: data => {
+                  props.navigation.goBack();
+                  props.navigation.navigate('Gaming', {data: data});
+                },
               },
             });
           }}>

@@ -24,7 +24,10 @@ import Game from '~/components/game/Game';
  *            import('@react-navigation/native-stack').NativeStackScreenProps<GameNavigationParamList, 'Gaming'>,
  *            import('@react-navigation/core').CompositeScreenProps<
  *                import('@react-navigation/bottom-tabs').BottomTabScreenProps<BottomTabBarParamList>,
- *                import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>>
+ *                import('@react-navigation/core').CompositeScreenProps<
+ *                  import('@react-navigation/native-stack').NativeStackScreenProps<MainNavigationParamList>,
+ *                  import('@react-navigation/native-stack').NativeStackScreenProps<ModalScreensParamList>>
+ *                >
  *        >} props
  * @returns {JSX.Element}
  */
@@ -102,10 +105,13 @@ const GameScreen = props => {
 
     dispatch(statisticsActions.savePlayedGameData(gameData));
 
-    props.navigation.navigate('EndGameModal', {
-      data: gameData,
-      onBack: () => {
-        props.navigation.navigate('Statistics');
+    props.navigation.navigate('ModalScreens', {
+      screen: 'EndGameModal',
+      params: {
+        data: gameData,
+        onBack: () => {
+          props.navigation.navigate('Statistics');
+        },
       },
     });
   };

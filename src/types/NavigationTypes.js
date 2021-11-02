@@ -49,13 +49,17 @@
  */
 
 /**
- * @typedef {import("@react-navigation/stack").StackScreenProps<MainNavigationParamList, 'EndGameModal'>} StatisticDetailsModalProps
+ * @typedef {import("@react-navigation/stack").StackScreenProps<ModalScreensParamList, 'EndGameModal'>} StatisticDetailsModalProps
  */
 
 /**
- * @typedef {import("@react-navigation/stack").StackScreenProps<MainNavigationParamList, 'GameConfigModal'>} GameConfigModalProps
+ * @typedef {import("@react-navigation/stack").StackScreenProps<ModalScreensParamList, 'GameConfigModal'>} GameConfigModalProps
  */
 
 /**
- * @typedef {{MainScreens: undefined, GameConfigModal: GameConfig, EndGameModal: {data: StatisticsDataWithQuestions, onBack: () => void}}} MainNavigationParamList
+ * @typedef {{MainScreens: undefined, ModalScreens: import("@react-navigation/core").NavigatorScreenParams<ModalScreensParamList>}} MainNavigationParamList
+ */
+
+/**
+ * @typedef {{GameConfigModal: GameConfig, EndGameModal: {data: StatisticsDataWithQuestions, onBack: () => void}}} ModalScreensParamList
  */

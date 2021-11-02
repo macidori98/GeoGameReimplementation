@@ -57,7 +57,7 @@
  */
 
 /**
- * @typedef {{MainScreens: undefined, ModalScreens: undefined}} MainNavigationParamList
+ * @typedef {{MainScreens: undefined, ModalScreens: import("@react-navigation/core").NavigatorScreenParams<ModalScreensParamList>}} MainNavigationParamList
  */
 
 /**

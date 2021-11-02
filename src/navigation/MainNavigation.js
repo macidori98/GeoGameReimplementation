@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {BottomTabNavigaton} from './BottomNavigation';
 import GameConfigModal from '~/screens/game/GameConfigModal';
 import StatisticDetailsModal from '~/screens/game/StatisticDetailsModal';
+import {ConfigLabels} from '~/constants/ConstantValues';
 
 /**
  * @type {CreateNativeStackNavigatorType<MainNavigationParamList>}
@@ -25,12 +26,19 @@ const ModalStack = createNativeStackNavigator();
 
 export const ModalNavigation = () => {
   return (
-    <ModalStack.Navigator screenOptions={{headerShown: false}}>
+    <ModalStack.Navigator screenOptions={{}}>
       <ModalStack.Group screenOptions={{presentation: 'modal'}}>
-        <ModalStack.Screen component={GameConfigModal} name="GameConfigModal" />
+        <ModalStack.Screen
+          component={GameConfigModal}
+          name="GameConfigModal"
+          options={{
+            headerTitle: ConfigLabels.configGame,
+          }}
+        />
         <ModalStack.Screen
           component={StatisticDetailsModal}
           name="EndGameModal"
+          options={{headerTitle: ''}}
         />
       </ModalStack.Group>
     </ModalStack.Navigator>

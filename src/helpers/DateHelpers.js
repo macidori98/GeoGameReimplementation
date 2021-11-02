@@ -8,12 +8,7 @@ export const currentMillisToTimezoneMillis = function (
   timezoneOffset,
 ) {
   var date = new Date(currentMillis);
-  var currentDate = Date();
-  var offset = currentDate.substring(
-    currentDate.length - 12,
-    currentDate.length - 9,
-  );
-  return date.setHours(
-    date.getHours() + (timezoneOffset - parseInt(offset, 10)),
-  );
+  var currentDate = new Date();
+  var offset = currentDate.getTimezoneOffset() / 60;
+  return date.setHours(date.getHours() + (timezoneOffset + offset));
 };
